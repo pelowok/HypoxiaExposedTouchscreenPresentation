@@ -1,25 +1,24 @@
 package screens
 {
 	
-	import events.NavigationEvent;
-	
 	import starling.display.Button;
 	import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.events.Event;
 	import starling.filters.BlurFilter;
-	
-	public class Home extends Sprite
+		
+	public class MainMenu extends Sprite
 	{
 		
-		private var bg:Button;
-		private var footer:Button;
-		private var title1:Button;
-		private var title2:Button;
-		private var logo:Button;
+		private var bg:Image;
+		private var footer:Image;
+		private var btn1:Button;
+		private var btn2:Button;
+		private var logo:Image;
 		
-		public function Home()
+		public function MainMenu()
 		{
+			
 			super();
 			
 			this.addEventListener(starling.events.Event.ADDED_TO_STAGE, onAddedToStage);
@@ -29,6 +28,7 @@ package screens
 		private function onAddedToStage(e:Event):void
 		{
 			
+			this.removeEventListener(starling.events.Event.ADDED_TO_STAGE, onAddedToStage);
 			trace(e.target + " added to stage.");
 			drawScreen();
 			
@@ -40,43 +40,32 @@ package screens
 			// For each object in drawScreen,
 			// position value should be the same
 			// in drawScreen() and initialize()
-			bg = new Button(Assets.getTexture("MainBG"),"",Assets.getTexture("MainBG"));
+			bg = new Image(Assets.getTexture("MainBG"));
 			bg.x = 0;
 			bg.y = 0;
 			this.addChild(bg);
 			
-			footer = new Button(Assets.getTexture("Footer"),"",Assets.getTexture("Footer"));
+			footer = new Image(Assets.getTexture("Footer"));
 			footer.x = 0;
 			footer.y = 979;
 			this.addChild(footer);
 			
-			title1 = new Button(Assets.getTexture("SeeWhatsLurking"));
-			title1.x = 800;
-			title1.y = 400;
-			this.addChild(title1);
+			btn1 = new Button(Assets.getTexture("MainButton1a"),"",Assets.getTexture("MainButton1b"));
+			btn1.x = 400;
+			btn1.y = 400;
+			this.addChild(btn1);
 			
-			title2 = new Button(Assets.getTexture("TapToBegin"));
-			title2.x = 800;
-			title2.y = 600;
-			this.addChild(title2);
+			btn2 = new Button(Assets.getTexture("MainButton2a"),"",Assets.getTexture("MainButton2b"));
+			btn2.x = 800;
+			btn2.y = 400;
+			this.addChild(btn2);
 			
-			logo = new Button(Assets.getTexture("HypoxiaExposedLogo"));
-			logo.x = 200;
-			logo.y = 300;
+			logo = new Image(Assets.getTexture("HypoxiaExposedLogo"));
+			logo.x = 50;
+			logo.y = 50;
+			logo.scaleX = 0.5;
+			logo.scaleY = 0.5;
 			this.addChild(logo);
-			
-			// The Home class extends starling.Sprite, and is the parent to 
-			//    title2 starling.Button class instance. Button TRIGGERED events
-			//    can be listened for by Sprites (altthough they can not trigger
-			//    them), and the event can bubble.
-			this.addEventListener(Event.TRIGGERED, onHomeScreenClick);
-			
-		}
-		
-		private function onHomeScreenClick(e:Event):void
-		{
-			
-			this.DispatchEvent(new NavigationEvent(NavigationEvent.CHANGE_SCREEN,true,{id: "mainscreen"}));
 			
 		}
 		
@@ -91,19 +80,19 @@ package screens
 			bg.y = 0;
 			footer.x = 0;
 			footer.y = 979;
-			title1.x = 800;
-			title1.y = 400;
-			title2.x = 800;
-			title2.y = 600;
+			btn1.x = 400;
+			btn1.y = 400;
+			btn2.x = 800;
+			btn2.y = 400;
 			logo.x = 200;
 			logo.y = 300;
 			
 			// Start listening to events
-			this.addEventListener(Event.ENTER_FRAME, homeAnimation);
+			this.addEventListener(Event.ENTER_FRAME, mainAnimation);
 			
 		}
 		
-		private function homeAnimation(e:Event):void
+		private function mainAnimation(e:Event):void
 		{
 			
 			// Start animations			
@@ -111,7 +100,6 @@ package screens
 			var speed:Number = 0.0006;
 			
 			bg.alpha = 0.7 + (Math.cos(currentDate.getTime() * speed) * 0.3);
-			title1.alpha = (bg.alpha * -1) + 1.4;
 			logo.alpha = (bg.alpha * -1) + 1.4;			
 			
 			var derivedAlpha:Number = (1 - bg.alpha);
@@ -123,11 +111,10 @@ package screens
 			var delta: Number = 0.7 + (Math.cos(currentDate.getTime() * (speed * 4)) * 0.3);
 			var blur2:BlurFilter = new BlurFilter(delta, delta, 1);
 			
-			title2.filter = blur2;
+			btn1.filter = blur2;
+			btn2.filter = blur2;
 			
 			
 		}
-		
-		
 	}
 }

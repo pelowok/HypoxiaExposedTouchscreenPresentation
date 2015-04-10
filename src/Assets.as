@@ -21,6 +21,19 @@ package
 		[Embed(source="../assets/homescreen/TapToBegin.png")]
 		public static const TapToBegin:Class;
 		
+		[Embed(source="../assets/mainmenuscreen/button01.png")]
+		public static const MainButton01a:Class;
+		
+		[Embed(source="../assets/mainmenuscreen/button01tap.png")]
+		public static const MainButton01b:Class;
+		
+		[Embed(source="../assets/mainmenuscreen/button02.png")]
+		public static const MainButton02a:Class;
+		
+		[Embed(source="../assets/mainmenuscreen/button02tap.png")]
+		public static const MainButton02b:Class;
+
+		
 		private static var gameTextures:Dictionary = new Dictionary();	
 		
 		public static function getTexture(name:String):Texture
