@@ -1,6 +1,5 @@
 package screens
 {
-	
 	import com.greensock.TweenLite;
 	
 	import events.NavigationEvent;
@@ -9,17 +8,28 @@ package screens
 	import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.events.Event;
-		
-	public class MainMenu extends Sprite
+	
+	public class Screen10 extends Sprite
 	{
 		
-		private var btn1:Button;
-		private var btn2:Button;
+		private var bg:Image;
+		private var btn1a:Button;
+		private var btn2a:Button;
+		private var btn3a:Button;
+		private var btn1b:Button;
+		private var btn2b:Button;
+		private var btn3b:Button;
+		private var btnNext:Button;
+		private var nav1:Button;
+		private var nav2:Button;
+		private var nav3:Button;
+		private var super1:Button;
+		private var super2:Button;
+		private var super3:Button;
 		private var logo:Button;
 		
-		public function MainMenu()
+		public function Screen10()
 		{
-			
 			super();
 			
 			this.addEventListener(starling.events.Event.ADDED_TO_STAGE, onAddedToStage);
@@ -42,21 +52,49 @@ package screens
 			// position value should be the same
 			// in drawScreen() and initialize()
 			
-			btn1 = new Button(Assets.getTexture("MainButton01a"),"",Assets.getTexture("MainButton01b"));
-			btn1.x = 400;
-			btn1.y = 400;
-			this.addChild(btn1);
+			bg = new Image(Assets.getTexture("Screen10BG"));
+			bg.x = 0;
+			bg.y = 100;
+			this.addChild(bg);
 			
-			btn2 = new Button(Assets.getTexture("MainButton02a"),"",Assets.getTexture("MainButton02b"));
-			btn2.x = 800;
-			btn2.y = 400;
-			this.addChild(btn2);
+			btn1a = new Button(Assets.getTexture("Screen10Nav1a"));
+			btn1a.x = 371;
+			btn1a.y = 575;
+			this.addChild(btn1a);
+			
+			btn2a = new Button(Assets.getTexture("Screen10Nav2a"));
+			btn2a.x = 767;
+			btn2a.y = 575;
+			this.addChild(btn2a);
+			
+			btn3a = new Button(Assets.getTexture("Screen10Nav3a"));
+			btn3a.x = 1163;
+			btn3a.y = 575;
+			this.addChild(btn3a);
+			
+			btn1b = new Button(Assets.getTexture("Screen10Nav1b"));
+			btn1b.x = 371;
+			btn1b.y = 575;
+			btn1b.visible = false;
+			this.addChild(btn1b);
+			
+			btn2b = new Button(Assets.getTexture("Screen10Nav2b"));
+			btn2b.x = 767;
+			btn2b.y = 575;
+			btn2b.visible = false;
+			this.addChild(btn2b);
+			
+			btn3b = new Button(Assets.getTexture("Screen10Nav3b"));
+			btn3b.x = 1163;
+			btn3b.y = 575;
+			btn3b.visible = false;
+			this.addChild(btn3b);
 			
 			logo = new Button(Assets.getTexture("HypoxiaExposedLogo"));
 			logo.x = 50;
 			logo.y = 50;
-			logo.scaleX = 0.5;
-			logo.scaleY = 0.5;
+			logo.scaleX = 0.25;
+			logo.scaleY = 0.25;
 			this.addChild(logo);
 			
 		}
@@ -67,10 +105,11 @@ package screens
 			
 			this.visible = true;
 			
+
+			
 			// Start listening to events
-			this.addEventListener(Event.ENTER_FRAME, mainAnimation);
+			this.addEventListener(Event.ENTER_FRAME, screenAnimation);
 			logo.addEventListener(Event.TRIGGERED, onLogoTriggered);
-			btn1.addEventListener(Event.TRIGGERED, onBtn1Triggered);
 			
 			// Tween screen to visible
 			TweenLite.to(this, 2, {alpha:1});
@@ -84,14 +123,7 @@ package screens
 			
 		}
 		
-		private function onBtn1Triggered():void
-		{
-			
-			this.dispatchEvent(new NavigationEvent(NavigationEvent.CHANGE_SCREEN,true,{id: "screen10"}));
-			
-		}
-		
-		private function mainAnimation(e:Event):void
+		private function screenAnimation(e:Event):void
 		{
 			
 			// Start animations			
@@ -100,7 +132,7 @@ package screens
 			var n:Number = 0.7 + (Math.cos(currentDate.getTime() * speed) * 0.3);
 			
 			logo.alpha = (n * -1) + 1.4;			
-				
+			
 		}
 		
 		public function disposeTemporarily():void
@@ -116,7 +148,7 @@ package screens
 			if(this.hasEventListener(Event.ENTER_FRAME))
 			{
 				
-				this.removeEventListener(Event.ENTER_FRAME, mainAnimation);
+				this.removeEventListener(Event.ENTER_FRAME, screenAnimation);
 				
 			}
 			
@@ -127,6 +159,5 @@ package screens
 				
 			}
 		}
-		
 	}
 }

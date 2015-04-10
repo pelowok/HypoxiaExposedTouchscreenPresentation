@@ -6,12 +6,14 @@ package
 
 	public class Assets
 	{
+		// Assets for all screens
 		[Embed(source="../assets/bg/mainBG.jpg")]
 		public static const MainBG:Class;
 		
 		[Embed(source="../assets/footerscreen/footer.png")]
 		public static const Footer:Class;
 		
+		// Home screen assets
 		[Embed(source="../assets/homescreen/HypoxiaExposedLogo.png")]
 		public static const HypoxiaExposedLogo:Class;
 		
@@ -21,6 +23,7 @@ package
 		[Embed(source="../assets/homescreen/TapToBegin.png")]
 		public static const TapToBegin:Class;
 		
+		// Assets for Main Menu
 		[Embed(source="../assets/mainmenuscreen/button01.png")]
 		public static const MainButton01a:Class;
 		
@@ -32,6 +35,42 @@ package
 		
 		[Embed(source="../assets/mainmenuscreen/button02tap.png")]
 		public static const MainButton02b:Class;
+		
+		// Assets for 1.0 Tumor Hypoxia
+		[Embed(source="../assets/1-0_tumor/1-0bg.png")]
+		public static const Screen10BG:Class;
+		
+		[Embed(source="../assets/1-0_tumor/1-0ref.png")]
+		public static const Screen10Ref:Class;
+		
+		[Embed(source="../assets/1-0_tumor/navPop1a.png")]
+		public static const Screen10Nav1a:Class;
+		
+		[Embed(source="../assets/1-0_tumor/navPop1b.png")]
+		public static const Screen10Nav1b:Class;
+		
+		[Embed(source="../assets/1-0_tumor/navPop2a.png")]
+		public static const Screen10Nav2a:Class;
+		
+		[Embed(source="../assets/1-0_tumor/navPop2b.png")]
+		public static const Screen10Nav2b:Class;
+		
+		[Embed(source="../assets/1-0_tumor/navPop3a.png")]
+		public static const Screen10Nav3a:Class;
+		
+		[Embed(source="../assets/1-0_tumor/navPop3b.png")]
+		public static const Screen10Nav3b:Class;
+		
+		// Assets for 1.1
+		
+		
+		// Assets for 1.2
+		
+		
+		// Assets for 2.0
+		
+		
+		// Assets for form
 
 		
 		private static var gameTextures:Dictionary = new Dictionary();	

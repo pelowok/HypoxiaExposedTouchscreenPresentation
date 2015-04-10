@@ -1,6 +1,5 @@
 package screens
 {
-	
 	import com.greensock.TweenLite;
 	
 	import events.NavigationEvent;
@@ -8,19 +7,17 @@ package screens
 	import starling.display.Button;
 	import starling.display.Sprite;
 	import starling.events.Event;
-	import starling.filters.BlurFilter;
 	
-	public class Home extends Sprite
+	public class BackGround extends Sprite
 	{
-
-		private var title1:Button;
-		private var title2:Button;
-		private var logo:Button;
 		
-		public function Home()
+		private var bg:Button;
+		private var footer:Button;
+		
+		public function BackGround()
 		{
 			super();
-			
+		
 			this.addEventListener(starling.events.Event.ADDED_TO_STAGE, onAddedToStage);
 			
 		}
@@ -39,31 +36,25 @@ package screens
 			// For each object in drawScreen,
 			// position value should be the same
 			// in drawScreen() and initialize()
+			bg = new Button(Assets.getTexture("MainBG"),"",Assets.getTexture("MainBG"));
+			bg.x = 0;
+			bg.y = 0;
+			this.addChild(bg);
 			
-			title1 = new Button(Assets.getTexture("SeeWhatsLurking"));
-			title1.x = 800;
-			title1.y = 400;
-			this.addChild(title1);
-			
-			title2 = new Button(Assets.getTexture("TapToBegin"));
-			title2.x = 800;
-			title2.y = 600;
-			this.addChild(title2);
-			
-			logo = new Button(Assets.getTexture("HypoxiaExposedLogo"));
-			logo.x = 200;
-			logo.y = 300;
-			this.addChild(logo);
+			footer = new Button(Assets.getTexture("Footer"),"",Assets.getTexture("Footer"));
+			footer.x = 0;
+			footer.y = 979;
+			this.addChild(footer);
 			
 			// This class extends starling.Sprite, and is the parent to 
 			//    title2 starling.Button class instance. Button TRIGGERED events
 			//    can be listened for by Sprites (altthough they can not trigger
 			//    them), and the event can bubble.
-			this.addEventListener(Event.TRIGGERED, onHomeScreenClick);
+			this.addEventListener(Event.TRIGGERED, onScreenClick);
 			
 		}
 		
-		private function onHomeScreenClick(e:Event):void
+		private function onScreenClick(e:Event):void
 		{
 			
 			this.dispatchEvent(new NavigationEvent(NavigationEvent.CHANGE_SCREEN,true,{id: "mainmenuscreen"}));
@@ -77,37 +68,27 @@ package screens
 			this.visible = true;
 			
 			// Start listening to events
-			this.addEventListener(Event.ENTER_FRAME, homeAnimation);
+			this.addEventListener(Event.ENTER_FRAME, bgAnimation);
 			
 			// Tween screen to visible
 			TweenLite.to(this, 2, {alpha:1});
 			
 		}
 		
-		private function homeAnimation(e:Event):void
+		private function bgAnimation(e:Event):void
 		{
 			
 			// Start animations			
 			var currentDate:Date = new Date();
 			var speed:Number = 0.0006;
 			
-			var n:Number = 0.7 + (Math.cos(currentDate.getTime() * speed) * 0.3);
-			title1.alpha = (n * -1) + 1.4;
-			logo.alpha = (n * -1) + 1.4;			
-			
-			var derivedAlpha:Number = (1 - n);
-			
-			// var delta:Number = (bg.alpha - 0.4) * 2;
-			var delta: Number = 0.7 + (Math.cos(currentDate.getTime() * (speed * 4)) * 0.3);
-			var blur2:BlurFilter = new BlurFilter(delta, delta, 1);
-			
-			title2.filter = blur2;
+			bg.alpha = 0.7 + (Math.cos(currentDate.getTime() * speed) * 0.3);
 	
 		}
 		
 		public function disposeTemporarily():void
 		{
-			TweenLite.to(this, 2, {alpha:0, onComplete:cleanUp});
+			TweenLite.to(this, 4, {alpha:0, onComplete:cleanUp});
 		}
 		
 		private function cleanUp():void
@@ -116,7 +97,7 @@ package screens
 			
 			// Remove unneeded objects and listeners
 			if(this.hasEventListener(Event.ENTER_FRAME)){
-				this.removeEventListener(Event.ENTER_FRAME, homeAnimation);
+				this.removeEventListener(Event.ENTER_FRAME, bgAnimation);
 			}
 		}
 		
