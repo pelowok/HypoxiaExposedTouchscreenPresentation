@@ -1,6 +1,8 @@
 package screens
 {
 	
+	import com.greensock.TweenLite;
+	
 	import events.NavigationEvent;
 	
 	import starling.display.Button;
@@ -76,7 +78,7 @@ package screens
 		private function onHomeScreenClick(e:Event):void
 		{
 			
-			this.DispatchEvent(new NavigationEvent(NavigationEvent.CHANGE_SCREEN,true,{id: "mainscreen"}));
+			this.dispatchEvent(new NavigationEvent(NavigationEvent.CHANGE_SCREEN,true,{id: "mainmenuscreen"}));
 			
 		}
 		
@@ -126,6 +128,21 @@ package screens
 			title2.filter = blur2;
 			
 			
+		}
+		
+		public function disposeTemporarily():void
+		{
+			TweenLite.to(this, 4, {alpha:0, onComplete:cleanUp});
+		}
+		
+		private function cleanUp():void
+		{
+			this.visible = false;
+			
+			// Remove unneeded objects and listeners
+			if(this.hasEventListener(Event.ENTER_FRAME)){
+				this.removeEventListener(Event.ENTER_FRAME, homeAnimation);
+			}
 		}
 		
 		

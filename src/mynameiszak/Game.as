@@ -8,6 +8,8 @@ package mynameiszak
 	import starling.display.Sprite;
 	import starling.events.Event;
 	
+	import com.greensock.TweenLite;
+	
 	public class Game extends Sprite
 	{
 		
@@ -26,17 +28,10 @@ package mynameiszak
 			// Signal to debugger that the Starling framework is now available
 			trace("starling framework initialized");
 			
-			LoadHomeScreen();
-			
-		}
-		
-		private function LoadHomeScreen():void {
-			
-			trace("Loading external assets..");
-			
 			this.addEventListener(events.NavigationEvent.CHANGE_SCREEN, onChangeScreen);
 			
 			screenMain = new MainMenu();
+			screenMain.disposeTemporarily();
 			this.addChild(screenMain);
 			
 			screenHome = new Home();
@@ -47,12 +42,33 @@ package mynameiszak
 		
 		private function onChangeScreen(e:NavigationEvent):void
 		{
-			switch(e.params.id)
+			
+			trace(e.data.id + " was called from function onChangeScreen.");
+			
+			switch(e.data.id)
 			{
-				case "mainscreen";
+				case "mainmenuscreen":
+					
+					trace("function onChangeScreen called the main menu");
+					
+					
+					// Tween out the old screen
+					screenHome.disposeTemporarily();
+					
+					// Add the new screen
+					screenMain.initialize();	
+					
+					// On complete tween out, destroy the old screen and its listeners
+					trace("Change Screen was called from " + e.target + ". Is this a valid destruction target?");
+					
+
 				break;
 				
+				default:
+					trace("changeScreen function hit default value. Release the hounds.");
+					break;
 			}
+				
 		}
 	}
 }

@@ -1,6 +1,8 @@
 package screens
 {
 	
+	import com.greensock.TweenLite;
+	
 	import starling.display.Button;
 	import starling.display.Image;
 	import starling.display.Sprite;
@@ -50,12 +52,12 @@ package screens
 			footer.y = 979;
 			this.addChild(footer);
 			
-			btn1 = new Button(Assets.getTexture("MainButton1a"),"",Assets.getTexture("MainButton1b"));
+			btn1 = new Button(Assets.getTexture("MainButton01a"),"",Assets.getTexture("MainButton01b"));
 			btn1.x = 400;
 			btn1.y = 400;
 			this.addChild(btn1);
 			
-			btn2 = new Button(Assets.getTexture("MainButton2a"),"",Assets.getTexture("MainButton2b"));
+			btn2 = new Button(Assets.getTexture("MainButton02a"),"",Assets.getTexture("MainButton02b"));
 			btn2.x = 800;
 			btn2.y = 400;
 			this.addChild(btn2);
@@ -74,6 +76,8 @@ package screens
 			// Call this function each time a Screen is made active.
 			
 			this.visible = true;
+			// Tween in the screen
+			TweenLite.to(this, 4, {alpha:1});
 			
 			// Reset objects to initial positions
 			bg.x = 0;
@@ -116,5 +120,15 @@ package screens
 			
 			
 		}
+		
+		public function disposeTemporarily():void
+		{
+			
+			this.visible = false;
+			
+			// Delete the unneeded objects and listeners
+			
+		}
+		
 	}
 }
