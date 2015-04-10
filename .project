@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>HypoxiaExposedTouchscreenPresentation</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>com.adobe.flexbuilder.project.flexbuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>com.adobe.flexbuilder.project.apollobuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>com.adobe.flexbuilder.project.apollonature</nature>
+		<nature>com.adobe.flexbuilder.project.actionscriptnature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>[source path] GreenSock-AS3</name>
+			<type>2</type>
+			<location>D:/GoogleDrive/AS3/GreenSock-AS3</location>
+		</link>
+		<link>
+			<name>[source path] Hi-ReS-Stats-master-src</name>
+			<type>2</type>
+			<location>C:/Users/zp/Downloads/Hi-ReS-Stats-master/Hi-ReS-Stats-master/src</location>
+		</link>
+		<link>
+			<name>[source path] starling-src</name>
+			<type>2</type>
+			<location>C:/Users/zp/Downloads/Gamua-Starling-Framework-v1.6-0-gc414de1/Gamua-Starling-Framework-c414de1/starling/src</location>
+		</link>
+	</linkedResources>
+</projectDescription>
