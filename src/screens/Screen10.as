@@ -74,19 +74,19 @@ package screens
 			
 			btn1b = new Button(Assets.getTexture("Screen10Nav1b"));
 			btn1b.x = 371;
-			btn1b.y = 575;
+			btn1b.y = 435;
 			btn1b.visible = false;
 			this.addChild(btn1b);
 			
 			btn2b = new Button(Assets.getTexture("Screen10Nav2b"));
 			btn2b.x = 767;
-			btn2b.y = 575;
+			btn2b.y = 435;
 			btn2b.visible = false;
 			this.addChild(btn2b);
 			
 			btn3b = new Button(Assets.getTexture("Screen10Nav3b"));
 			btn3b.x = 1163;
-			btn3b.y = 575;
+			btn3b.y = 435;
 			btn3b.visible = false;
 			this.addChild(btn3b);
 			
@@ -104,15 +104,64 @@ package screens
 			// Call this function each time a Screen is made active.
 			
 			this.visible = true;
-			
+			btn1a.visible = true;
+			btn1b.visible = false;
+			btn2a.visible = true;
+			btn2b.visible = false;
+			btn3a.visible = true;
+			btn3b.visible = false;
 
 			
 			// Start listening to events
 			this.addEventListener(Event.ENTER_FRAME, screenAnimation);
 			logo.addEventListener(Event.TRIGGERED, onLogoTriggered);
+			btn1a.addEventListener(Event.TRIGGERED, toggleBtn);
+			btn1b.addEventListener(Event.TRIGGERED, toggleBtn);
+			btn2a.addEventListener(Event.TRIGGERED, toggleBtn);
+			btn2b.addEventListener(Event.TRIGGERED, toggleBtn);
+			btn3a.addEventListener(Event.TRIGGERED, toggleBtn);
+			btn3b.addEventListener(Event.TRIGGERED, toggleBtn);
+			
 			
 			// Tween screen to visible
 			TweenLite.to(this, 2, {alpha:1});
+			
+		}
+		
+		private function toggleBtn(e:Event):void
+		{
+			
+			switch (e.currentTarget)
+			{
+				case btn1a:
+					btn1a.visible = !btn1a.visible;
+					btn1b.visible = !btn1b.visible;
+				break;
+				case btn1b:
+					btn1a.visible = !btn1a.visible;
+					btn1b.visible = !btn1b.visible;
+				break;
+				case btn2a:
+					btn2a.visible = !btn2a.visible;
+					btn2b.visible = !btn2b.visible;
+				break;
+				case btn2b:
+					btn2a.visible = !btn2a.visible;
+					btn2b.visible = !btn2b.visible;
+				break;
+				case btn3a:
+					btn3a.visible = !btn3a.visible;
+					btn3b.visible = !btn3b.visible;
+				break;
+				case btn3b:
+					btn3a.visible = !btn3a.visible;
+					btn3b.visible = !btn3b.visible;
+				break;
+				default:
+					trace(e.target);
+				break;
+		
+			}
 			
 		}
 		
