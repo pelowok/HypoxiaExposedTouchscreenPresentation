@@ -5,6 +5,7 @@
       <compilerSourcePathEntry kind="1" linkType="1" path="C:/Users/zp/Downloads/Gamua-Starling-Framework-v1.6-0-gc414de1/Gamua-Starling-Framework-c414de1/starling/src"/>
       <compilerSourcePathEntry kind="1" linkType="1" path="C:/Users/zp/Downloads/Hi-ReS-Stats-master/Hi-ReS-Stats-master/src"/>
       <compilerSourcePathEntry kind="1" linkType="1" path="D:/GoogleDrive/AS3/GreenSock-AS3"/>
+      <compilerSourcePathEntry kind="1" linkType="1" path="C:/Users/zp/Downloads/feathers-2.1.1/source/feathers"/>
     </compilerSourcePath>
     <libraryPath defaultLinkType="0">
       <libraryPathEntry kind="4" path="">
@@ -51,6 +52,10 @@
       <airSettings airCertificatePath="D:/GoogleDrive/AS3/certificates/mynameiszak.p12" airTimestamp="true" anePathSet="true" version="1">
         <airExcludes/>
         <anePaths/>
+        <newLaunchParams/>
+        <modifiedLaunchParams/>
+        <newPackagingParams/>
+        <modifiedPackagingParams/>
       </airSettings>
       <actionScriptSettings version="1"/>
     </buildTarget>

@@ -71,7 +71,39 @@ package
 		
 		
 		// Assets for form
+		
+		
+		// Assets for nav
+		[Embed(source="../assets/nav/navNext.png")]
+		public static const NavNext:Class;
+	/*	
+		[Embed(source="../assets/nav/navPrev.png")]
+		public static const NavPrev:Class;
+	*/
+		[Embed(source="../assets/nav/sideNav1.png")]
+		public static const SideNav1a:Class;
 
+		[Embed(source="../assets/nav/sideNav1tap.png")]
+		public static const SideNav1b:Class;
+		
+		[Embed(source="../assets/nav/sideNav2.png")]
+		public static const SideNav2a:Class;
+		
+		[Embed(source="../assets/nav/sideNav2tap.png")]
+		public static const SideNav2b:Class;
+		
+		[Embed(source="../assets/nav/sideNav3.png")]
+		public static const SideNav3a:Class;
+		
+		[Embed(source="../assets/nav/sideNav3tap.png")]
+		public static const SideNav3b:Class;
+		
+		[Embed(source="../assets/nav/subNav.png")]
+		public static const SubNava:Class;
+		
+		[Embed(source="../assets/nav/subNavtap.png")]
+		public static const SubNavb:Class;
+		
 		
 		private static var gameTextures:Dictionary = new Dictionary();	
 		

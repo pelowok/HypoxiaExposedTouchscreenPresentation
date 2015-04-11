@@ -28,6 +28,7 @@ package mynameiszak
 			this.addEventListener(starling.events.Event.ADDED_TO_STAGE, onAddedToStage);
 		}
 		
+		
 		private function onAddedToStage(e:Event):void{
 			
 			// Signal to debugger that the Starling framework is now available

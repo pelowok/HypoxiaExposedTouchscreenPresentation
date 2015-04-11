@@ -54,7 +54,7 @@ package screens
 			
 			logo = new Button(Assets.getTexture("HypoxiaExposedLogo"));
 			logo.x = 50;
-			logo.y = 50;
+			logo.y = 10;
 			logo.scaleX = 0.5;
 			logo.scaleY = 0.5;
 			this.addChild(logo);
