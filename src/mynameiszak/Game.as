@@ -1,6 +1,8 @@
 package mynameiszak
 {
 	
+	import flash.display.Bitmap;
+	import flash.utils.Dictionary;
 	import flash.utils.getQualifiedClassName;
 	
 	import events.NavigationEvent;
@@ -12,6 +14,7 @@ package mynameiszak
 	
 	import starling.display.Sprite;
 	import starling.events.Event;
+	import starling.textures.Texture;
 	
 	public class Game extends Sprite
 	{
@@ -40,34 +43,59 @@ package mynameiszak
 			screenBG.alpha = 0;
 			this.addChild(screenBG);
 			screenBG.initialize();
+			Assets.gameScreens.push([screenBG, BackGround, "background"]);
 			
 			screen10 = new Screen10();
 			screen10.alpha = 0;
 			screen10.disposeTemporarily();
 			this.addChild(screen10);
+			Assets.gameScreens.push([screen10, Screen10, "screen10"]);
 			
 			screenMain = new MainMenu();
 			screenMain.alpha = 0;
 			screenMain.disposeTemporarily();
 			this.addChild(screenMain);
+			Assets.gameScreens.push([screenMain, MainMenu, "mainmenuscreen"]);
 			
 			screenHome = new Home();
 			screenHome.alpha = 0;
 			this.addChild(screenHome);
 			screenHome.initialize();
-
+			Assets.gameScreens.push([screenHome, Home, "homescreen"]);
 			
 		}
 		
 		private function onChangeScreen(e:NavigationEvent):void
 		{
 			
+			var arr:Array = Assets.gameScreens;
 			var obj:Object = e.target;
 			var c:Class = Class(obj.constructor);
 			
 			trace(e.data.id + " was called from function onChangeScreen by class: " + c + ".");
 			
+			// Array checking begins at 1 to skip over BackGround, which is always active
+			for(var i:int=1; i<arr.length; i++)
+			{
+				// Find active screen first, so visible can
+				//   be used to determine which one it is
+				if (arr[i][0].visible)
+				{
+					// This screen is being called to visible = false
+					trace("active screen is " + arr[i][0]);
+				}
+				
+				if(arr[i][2] == e.data.id)
+				{
+					// This screen is being called into visibility
+					trace("Call in this screen : " + arr[i]);
+				}
+				
+				
+				
+			}
 			
+			/*
 			switch(e.data.id)
 			{
 				case "homescreen":
@@ -106,7 +134,7 @@ package mynameiszak
 					trace("changeScreen function hit default value. Release the hounds.");
 					break;
 			}
-				
+		*/		
 		}
 		
 	}

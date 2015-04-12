@@ -80,7 +80,7 @@ package screens
 			this.addEventListener(Event.ENTER_FRAME, homeAnimation);
 			
 			// Tween screen to visible
-			TweenLite.to(this, 2, {alpha:1});
+			TweenLite.to(this, 0.5, {alpha:1});
 			
 		}
 		
@@ -107,7 +107,7 @@ package screens
 		
 		public function disposeTemporarily():void
 		{
-			TweenLite.to(this, 2, {alpha:0, onComplete:cleanUp});
+			TweenLite.to(this, 0.5, {alpha:0, onComplete:cleanUp});
 		}
 		
 		private function cleanUp():void

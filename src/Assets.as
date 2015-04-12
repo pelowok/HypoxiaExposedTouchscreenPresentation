@@ -105,6 +105,7 @@ package
 		public static const SubNavb:Class;
 		
 		
+		public static var gameScreens:Array = new Array();
 		private static var gameTextures:Dictionary = new Dictionary();	
 		
 		public static function getTexture(name:String):Texture
@@ -121,5 +122,7 @@ package
 			return gameTextures[name];
 			
 		}
+		
+		
 	}
 }

@@ -18,21 +18,19 @@ package screens
 	{
 		
 		private var bg:Image;
-		private var btn1a:Button;
-		private var btn2a:Button;
-		private var btn3a:Button;
+
 		private var btn1b:Button;
 		private var btn2b:Button;
 		private var btn3b:Button;
+		
 		private var btnNext:Button;
-		private var subnav1:Button;
-		private var subnav2:Button;
-		private var subnav3:Button;
 
 		private var ref:Button;
 		private var footer:Image;
 		private var logo:Button;
 		
+		private var basenav:TabBar;
+		private var pagenav:TabBar;
 		private var sidenav:TabBar;
 		
 		public function Screen10()
@@ -64,39 +62,28 @@ package screens
 			bg.y = 100;
 			this.addChild(bg);
 			
-			btn1a = new Button(Assets.getTexture("Screen10Nav1a"));
-			btn1a.x = 371;
-			btn1a.y = 575;
-			this.addChild(btn1a);
+			this.addChild(AddBaseNav());
 			
-			btn2a = new Button(Assets.getTexture("Screen10Nav2a"));
-			btn2a.x = 767;
-			btn2a.y = 575;
-			this.addChild(btn2a);
+			this.addChild(AddPageNav());
 			
-			btn3a = new Button(Assets.getTexture("Screen10Nav3a"));
-			btn3a.x = 1163;
-			btn3a.y = 575;
-			this.addChild(btn3a);
-			
-			btn1b = new Button(Assets.getTexture("Screen10Nav1b"));
+			btn1b = new Button(Assets.getTexture("Screen10Nav1b"),"",Assets.getTexture("Screen10Nav1b"));
 			btn1b.x = 371;
 			btn1b.y = 435;
 			btn1b.visible = false;
 			this.addChild(btn1b);
 			
-			btn2b = new Button(Assets.getTexture("Screen10Nav2b"));
+			btn2b = new Button(Assets.getTexture("Screen10Nav2b"),"",Assets.getTexture("Screen10Nav2b"));
 			btn2b.x = 767;
 			btn2b.y = 435;
 			btn2b.visible = false;
 			this.addChild(btn2b);
 			
-			btn3b = new Button(Assets.getTexture("Screen10Nav3b"));
+			btn3b = new Button(Assets.getTexture("Screen10Nav3b"),"",Assets.getTexture("Screen10Nav3b"));
 			btn3b.x = 1163;
 			btn3b.y = 435;
 			btn3b.visible = false;
 			this.addChild(btn3b);
-			
+
 			logo = new Button(Assets.getTexture("HypoxiaExposedLogo"));
 			logo.x = 50;
 			logo.y = 10;
@@ -109,17 +96,77 @@ package screens
 			footer.y = 979;
 			this.addChild(footer);
 			
+			this.addChild(AddSideNav());
+			
+			// Ref object has to be on top of everything
 			ref = new Button(Assets.getTexture("Screen10Ref"),"",Assets.getTexture("Screen10Ref"));
 			ref.x = 5;
 			ref.y = 1080;
 			ref.visible = false;
 			this.addChild(ref);
-			
-			this.addChild(AddTabBar());
 		
 		}
 		
-		private function AddTabBar():TabBar{
+		private function AddBaseNav():TabBar{
+			
+			basenav = new TabBar();
+			
+			basenav.dataProvider = new ListCollection(
+				[
+					{ 	label:"",
+						defaultIcon: new Image( Assets.getTexture("SubNava") ),
+						hoverIcon: new Image( Assets.getTexture("SubNavb") ),
+						downIcon: new Image( Assets.getTexture("SubNavb") ),
+						defaultSelectedIcon: new Image( Assets.getTexture("SubNavb") )
+					},
+					{	label:"",
+						defaultIcon: new Image( Assets.getTexture("SubNava") ),
+						hoverIcon: new Image( Assets.getTexture("SubNavb") ),
+						downIcon: new Image( Assets.getTexture("SubNavb") ),
+						defaultSelectedIcon: new Image( Assets.getTexture("SubNavb") )
+					},
+					{	label:"",
+						defaultIcon: new Image( Assets.getTexture("SubNava") ),
+						hoverIcon: new Image( Assets.getTexture("SubNavb") ),
+						downIcon: new Image( Assets.getTexture("SubNavb") ),
+						defaultSelectedIcon: new Image( Assets.getTexture("SubNavb") )
+					},
+				]);
+			
+			basenav.x = 900;
+			basenav.y = 855;
+			basenav.gap = 35;
+			
+			return(basenav);
+			
+		}
+		
+		private function AddPageNav():TabBar{
+			
+			pagenav = new TabBar();
+			
+			pagenav.dataProvider = new ListCollection(
+				[
+					{ 	label:"",
+						defaultIcon: new Image( Assets.getTexture("Screen10Nav1a") )
+					},
+					{	label:"",
+						defaultIcon: new Image( Assets.getTexture("Screen10Nav2a") )
+					},
+					{	label:"",
+						defaultIcon: new Image( Assets.getTexture("Screen10Nav3a") )
+					},
+				]);
+			
+			pagenav.x = 371;
+			pagenav.y = 575;
+			pagenav.gap = 10;
+			
+			return(pagenav);
+			
+		}
+		
+		private function AddSideNav():TabBar{
 			
 			sidenav = new TabBar();
 			
@@ -158,13 +205,11 @@ package screens
 			// Call this function each time a Screen is made active.
 			
 			this.visible = true;
-			
-			btn1a.visible = true;
-			btn1b.visible = false;
-			btn2a.visible = true;
-			btn2b.visible = false;
-			btn3a.visible = true;
-			btn3b.visible = false;
+
+			togglePageButtons(-1);
+
+			pagenav.visible = true;
+			DeselectPageNav();
 			
 			sidenav.visible = true;
 			DeselectSideNav();
@@ -181,19 +226,25 @@ package screens
 			this.addEventListener(Event.ENTER_FRAME, screenAnimation);
 			
 			logo.addEventListener(Event.TRIGGERED, onLogoTriggered);
+
+			btn1b.addEventListener(Event.TRIGGERED, DeselectPageNav);
+			btn2b.addEventListener(Event.TRIGGERED, DeselectPageNav);
+			btn3b.addEventListener(Event.TRIGGERED, DeselectPageNav);
+		
+			basenav.addEventListener(Event.CHANGE, toggleBaseNav);
+			pagenav.addEventListener(Event.CHANGE, togglePageNav);
+			sidenav.addEventListener(Event.CHANGE, toggleSideNav);	
 			
-			btn1a.addEventListener(Event.TRIGGERED, toggleBtn);
-			btn1b.addEventListener(Event.TRIGGERED, toggleBtn);
-			btn2a.addEventListener(Event.TRIGGERED, toggleBtn);
-			btn2b.addEventListener(Event.TRIGGERED, toggleBtn);
-			btn3a.addEventListener(Event.TRIGGERED, toggleBtn);
-			btn3b.addEventListener(Event.TRIGGERED, toggleBtn);
-			
-			sidenav.addEventListener(Event.CHANGE, toggleSideNav);			
 			
 			// Tween screen to visible
-			TweenLite.to(this, 2, {alpha:1});
+			TweenLite.to(this, 0.5, {alpha:1});
 			
+		}
+		
+		private function DeselectPageNav():void
+		{
+			pagenav.selectedIndex = -1;
+			togglePageButtons(-1);
 		}
 		
 		private function DeselectSideNav():void
@@ -201,41 +252,69 @@ package screens
 			sidenav.selectedIndex = -1;
 		}
 		
-		private function toggleBtn(e:Event):void
+		private function togglePageButtons(i:int):void
 		{
 			
-			switch (e.currentTarget)
+			switch (i)
 			{
-				case btn1a:
-					btn1b.visible = !btn1b.visible;
-					btn2b.visible = false;
-					btn3b.visible = false;
-				break;
-				case btn1b:
-					btn1b.visible = !btn1b.visible;
-				break;
-				case btn2a:
-					btn2b.visible = !btn2b.visible;
-					btn1b.visible = false;
-					btn3b.visible = false;
-				break;
-				case btn2b:
-					btn2b.visible = !btn2b.visible;
-				break;
-				case btn3a:
-					btn3b.visible = !btn3b.visible;
+				case -1:
 					btn1b.visible = false;
 					btn2b.visible = false;
+					btn3b.visible = false;
+					break;
+				case 0:
+					btn1b.visible = !btn1b.visible;
 				break;
-				case btn3b:
+				case 1:
+					btn2b.visible = !btn2b.visible;
+				break;
+				case 2:
 					btn3b.visible = !btn3b.visible;
 				break;
 				default:
-					trace(e.target);
+					trace("ERROR THROWN: tabs.selectedIndex passed to togglePageButtons was :" + i);
 				break;
 		
 			}
 			
+		}
+		
+		
+		private function toggleBaseNav(e:Event):void
+		{
+			
+			var tabs:TabBar = TabBar( e.currentTarget );
+			trace( "  -->selectedIndex:", tabs.selectedIndex );
+			switch (tabs.selectedIndex)
+			{
+				case 0:
+					
+					break;
+				case 1:
+					
+					break;
+				case 2:
+					
+					break;
+				default:
+					trace("ERROR THROWN: tabs.selectedIndex in toggleSideNav was :" + tabs.selectedIndex);
+					break;
+			}
+			
+		}
+		
+		private function togglePageNav(e:Event):void
+		{
+			
+			var tabs:TabBar = TabBar( e.currentTarget );
+			trace( "  -->selectedIndex:", tabs.selectedIndex );
+
+			// Close any open Page Navs
+			togglePageButtons(-1);
+			
+			// Open new Page Nav
+			togglePageButtons(tabs.selectedIndex);
+
 		}
 		
 		private function toggleSideNav(e:Event):void
@@ -251,7 +330,7 @@ package screens
 				case 1:
 					
 					ref.visible = true;
-					TweenLite.to(ref, 0.7, {alpha: 1, y: 709, onComplete: AddRefListener});
+					TweenLite.to(ref, 0.7, {alpha: 1, y: 0, onComplete: AddRefListener});
 
 				break;
 				case 2:
@@ -275,7 +354,6 @@ package screens
 			TweenLite.to(ref, 0.7, {alpha: 0, y: 1080, onComplete: DeselectSideNav});
 
 		}
-
 		
 		private function onLogoTriggered():void
 		{
@@ -298,7 +376,7 @@ package screens
 		
 		public function disposeTemporarily():void
 		{
-			TweenLite.to(this, 2, {alpha:0, onComplete:cleanUp});
+			TweenLite.to(this, 0.5, {alpha:0, onComplete:cleanUp});
 		}
 		
 		private function cleanUp():void
