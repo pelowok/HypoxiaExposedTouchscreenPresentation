@@ -29,7 +29,7 @@ package screens
 		private var subnav2:Button;
 		private var subnav3:Button;
 
-		private var ref:Image;
+		private var ref:Button;
 		private var footer:Image;
 		private var logo:Button;
 		
@@ -109,9 +109,9 @@ package screens
 			footer.y = 979;
 			this.addChild(footer);
 			
-			ref = new Image(Assets.getTexture("Screen10Ref"));
-			ref.x = 0;
-			ref.y = 819;
+			ref = new Button(Assets.getTexture("Screen10Ref"),"",Assets.getTexture("Screen10Ref"));
+			ref.x = 5;
+			ref.y = 1080;
 			ref.visible = false;
 			this.addChild(ref);
 			
@@ -167,12 +167,16 @@ package screens
 			btn3b.visible = false;
 			
 			sidenav.visible = true;
-			sidenav.selectedIndex = -1;
+			DeselectSideNav();
 			
 			footer.visible = true;
-			ref.visible = false;
-
 			
+			// ref can move so reset it's alpha and position
+			ref.alpha = 0;
+			ref.x = 5;
+			ref.y = 1080;
+			ref.visible = false;
+				
 			// Start listening to events
 			this.addEventListener(Event.ENTER_FRAME, screenAnimation);
 			
@@ -185,21 +189,16 @@ package screens
 			btn3a.addEventListener(Event.TRIGGERED, toggleBtn);
 			btn3b.addEventListener(Event.TRIGGERED, toggleBtn);
 			
-			sidenav.addEventListener(Event.CHANGE, toggleSideNav);
-			
-			ref.addEventListener(Event.TRIGGERED, toggleRef);
-			
+			sidenav.addEventListener(Event.CHANGE, toggleSideNav);			
 			
 			// Tween screen to visible
 			TweenLite.to(this, 2, {alpha:1});
 			
 		}
 		
-		private function toggleRef(e:Event):void
+		private function DeselectSideNav():void
 		{
-			
-			ref.visible = !ref.visible;
-				
+			sidenav.selectedIndex = -1;
 		}
 		
 		private function toggleBtn(e:Event):void
@@ -251,25 +250,32 @@ package screens
 				break;
 				case 1:
 					
-					var tb:ToggleButton = sidenav.getChildAt(1) as ToggleButton;
-					tb.isEnabled = true;
-					
-					if(ref.visible)
-					{
-						tabs.selectedItem = -1;
-					}
-					
-					toggleRef(e);
+					ref.visible = true;
+					TweenLite.to(ref, 0.7, {alpha: 1, y: 709, onComplete: AddRefListener});
+
 				break;
 				case 2:
 					
 				break;
 				default:
 					trace("ERROR THROWN: tabs.selectedIndex in toggleSideNav was :" + tabs.selectedIndex);
-				
+				break;
 			}
 			
 		}
+		
+		private function AddRefListener():void{
+			ref.addEventListener(Event.TRIGGERED, HideRef);
+		}
+		
+		private function HideRef(e:Event):void
+		{
+			
+			ref.removeEventListener(Event.TRIGGERED, HideRef);
+			TweenLite.to(ref, 0.7, {alpha: 0, y: 1080, onComplete: DeselectSideNav});
+
+		}
+
 		
 		private function onLogoTriggered():void
 		{
