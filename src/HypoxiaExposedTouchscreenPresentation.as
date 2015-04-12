@@ -6,6 +6,7 @@ package
 	import net.hires.debug.Stats;
 	
 	import starling.core.Starling;
+
 	
 	import mynameiszak.Game;
 	

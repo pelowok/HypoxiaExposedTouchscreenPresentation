@@ -4,10 +4,15 @@ package screens
 	
 	import events.NavigationEvent;
 	
+	import feathers.controls.TabBar;
+	import feathers.controls.ToggleButton;
+	import feathers.data.ListCollection;
+	
 	import starling.display.Button;
 	import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.events.Event;
+
 	
 	public class Screen10 extends Sprite
 	{
@@ -23,15 +28,12 @@ package screens
 		private var subnav1:Button;
 		private var subnav2:Button;
 		private var subnav3:Button;
-		private var sidenav1a:Button;
-		private var sidenav2a:Button;
-		private var sidenav3a:Button;
-		private var sidenav1b:Button;
-		private var sidenav2b:Button;
-		private var sidenav3b:Button;
+
 		private var ref:Image;
 		private var footer:Image;
 		private var logo:Button;
+		
+		private var sidenav:TabBar;
 		
 		public function Screen10()
 		{
@@ -102,39 +104,6 @@ package screens
 			logo.scaleY = 0.25;
 			this.addChild(logo);
 			
-			sidenav1a = new Button(Assets.getTexture("SideNav1a"));
-			sidenav1a.x = 1500;
-			sidenav1a.y = 15;
-			this.addChild(sidenav1a);
-			
-			sidenav2a = new Button(Assets.getTexture("SideNav2a"));
-			sidenav2a.x = 1615;
-			sidenav2a.y = 15;
-			this.addChild(sidenav2a);
-			
-			sidenav3a = new Button(Assets.getTexture("SideNav3a"));
-			sidenav3a.x = 1730;
-			sidenav3a.y = 15;
-			this.addChild(sidenav3a);
-			
-			sidenav1b = new Button(Assets.getTexture("SideNav1b"));
-			sidenav1b.x = 1500;
-			sidenav1b.y = 15;
-			sidenav1b.visible = false;
-			this.addChild(sidenav1b);
-			
-			sidenav2b = new Button(Assets.getTexture("SideNav2b"));
-			sidenav2b.x = 1615;
-			sidenav2b.y = 15;
-			sidenav2b.visible = false;
-			this.addChild(sidenav2b);
-			
-			sidenav3b = new Button(Assets.getTexture("SideNav3b"));
-			sidenav3b.x = 1730;
-			sidenav3b.y = 15;
-			sidenav3b.visible = false;
-			this.addChild(sidenav3b);
-			
 			footer = new Image(Assets.getTexture("Footer"));
 			footer.x = 0;
 			footer.y = 979;
@@ -142,10 +111,46 @@ package screens
 			
 			ref = new Image(Assets.getTexture("Screen10Ref"));
 			ref.x = 0;
-			ref.y = 1819;
+			ref.y = 819;
 			ref.visible = false;
 			this.addChild(ref);
 			
+			this.addChild(AddTabBar());
+		
+		}
+		
+		private function AddTabBar():TabBar{
+			
+			sidenav = new TabBar();
+			
+			sidenav.dataProvider = new ListCollection(
+				[
+					{ 	label:"",
+						defaultIcon: new Image( Assets.getTexture("SideNav1a") ),
+						hoverIcon: new Image( Assets.getTexture("SideNav1b") ),
+						downIcon: new Image( Assets.getTexture("SideNav1b") ),
+						defaultSelectedIcon: new Image( Assets.getTexture("SideNav1b") )
+					},
+					{	label:"",
+						defaultIcon: new Image( Assets.getTexture("SideNav2a") ),
+						hoverIcon: new Image( Assets.getTexture("SideNav2b") ),
+						downIcon: new Image( Assets.getTexture("SideNav2b") ),
+						defaultSelectedIcon: new Image( Assets.getTexture("SideNav2b") )
+					},
+					{	label:"",
+						defaultIcon: new Image( Assets.getTexture("SideNav3a") ),
+						hoverIcon: new Image( Assets.getTexture("SideNav3b") ),
+						downIcon: new Image( Assets.getTexture("SideNav3b") ),
+						defaultSelectedIcon: new Image( Assets.getTexture("SideNav3b") )
+					},
+				]);
+			
+			sidenav.x = 1500;
+			sidenav.y = 10;
+			sidenav.gap = 2;
+			
+			return(sidenav);
+
 		}
 		
 		public function initialize():void{
@@ -161,12 +166,8 @@ package screens
 			btn3a.visible = true;
 			btn3b.visible = false;
 			
-			sidenav1a.visible = true;
-			sidenav1b.visible = false;
-			sidenav2a.visible = true;
-			sidenav2b.visible = false;
-			sidenav3a.visible = true;
-			sidenav3b.visible = false;
+			sidenav.visible = true;
+			sidenav.selectedIndex = -1;
 			
 			footer.visible = true;
 			ref.visible = false;
@@ -184,12 +185,7 @@ package screens
 			btn3a.addEventListener(Event.TRIGGERED, toggleBtn);
 			btn3b.addEventListener(Event.TRIGGERED, toggleBtn);
 			
-			sidenav1a.addEventListener(Event.TRIGGERED, toggleSideNav);
-			sidenav1b.addEventListener(Event.TRIGGERED, toggleSideNav);
-			sidenav2a.addEventListener(Event.TRIGGERED, toggleSideNav);
-			sidenav2b.addEventListener(Event.TRIGGERED, toggleSideNav);
-			sidenav3a.addEventListener(Event.TRIGGERED, toggleSideNav);
-			sidenav3b.addEventListener(Event.TRIGGERED, toggleSideNav);
+			sidenav.addEventListener(Event.CHANGE, toggleSideNav);
 			
 			ref.addEventListener(Event.TRIGGERED, toggleRef);
 			
@@ -246,35 +242,30 @@ package screens
 		private function toggleSideNav(e:Event):void
 		{
 			
-			switch (e.currentTarget)
+			var tabs:TabBar = TabBar( e.currentTarget );
+			trace( "  -->selectedIndex:", tabs.selectedIndex );
+			switch (tabs.selectedIndex)
 			{
-				case sidenav1a:
-					sidenav1b.visible = !sidenav1b.visible;
-					sidenav2b.visible = false;
-					sidenav3b.visible = false;
-					break;
-				case sidenav1b:
-					sidenav1b.visible = !sidenav1b.visible;
-					break;
-				case sidenav2a:
-					sidenav2b.visible = !sidenav2b.visible;
-					sidenav1b.visible = false;
-					sidenav3b.visible = false;
-					break;
-				case sidenav2b:
-					sidenav2b.visible = !sidenav2b.visible;
-					break;
-				case sidenav3a:
-					sidenav3b.visible = !sidenav3b.visible;
-					sidenav1b.visible = false;
-					sidenav2b.visible = false;
-					break;
-				case sidenav3b:
-					sidenav3b.visible = !sidenav3b.visible;
-					break;
+				case 0:
+					
+				break;
+				case 1:
+					
+					var tb:ToggleButton = sidenav.getChildAt(1) as ToggleButton;
+					tb.isEnabled = true;
+					
+					if(ref.visible)
+					{
+						tabs.selectedItem = -1;
+					}
+					
+					toggleRef(e);
+				break;
+				case 2:
+					
+				break;
 				default:
-					trace(e.target);
-					break;
+					trace("ERROR THROWN: tabs.selectedIndex in toggleSideNav was :" + tabs.selectedIndex);
 				
 			}
 			

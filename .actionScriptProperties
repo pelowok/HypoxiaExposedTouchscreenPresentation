@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <actionScriptProperties analytics="false" mainApplicationPath="HypoxiaExposedTouchscreenPresentation.as" projectUUID="1cda95f3-2128-4d5d-a1de-ae51bcae3500" version="11">
   <compiler additionalCompilerArguments="-locale en_US -swf-version=17 -default-frame-rate=60" advancedTelemetry="true" autoRSLOrdering="true" copyDependentFiles="true" fteInMXComponents="false" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="false" htmlHistoryManagement="false" htmlPlayerVersionCheck="true" includeNetmonSwc="false" outputFolderPath="bin-debug" removeUnusedRSL="true" sourceFolderPath="src" strict="true" targetPlayerVersion="0.0.0" useApolloConfig="true" useDebugRSLSwfs="true" useFlashSDK="true" verifyDigests="true" warn="true">
-    <compilerSourcePath>
-      <compilerSourcePathEntry kind="1" linkType="1" path="C:/Users/zp/Downloads/Gamua-Starling-Framework-v1.6-0-gc414de1/Gamua-Starling-Framework-c414de1/starling/src"/>
-      <compilerSourcePathEntry kind="1" linkType="1" path="C:/Users/zp/Downloads/Hi-ReS-Stats-master/Hi-ReS-Stats-master/src"/>
-      <compilerSourcePathEntry kind="1" linkType="1" path="D:/GoogleDrive/AS3/GreenSock-AS3"/>
-      <compilerSourcePathEntry kind="1" linkType="1" path="C:/Users/zp/Downloads/feathers-2.1.1/source/feathers"/>
-    </compilerSourcePath>
+    <compilerSourcePath/>
     <libraryPath defaultLinkType="0">
       <libraryPathEntry kind="4" path="">
         <excludedEntries>
@@ -35,6 +30,7 @@
           <libraryPathEntry kind="3" linkType="1" path="${PROJECT_FRAMEWORKS}/libs/automation_agent.swc" useDefaultLinkType="false"/>
         </excludedEntries>
       </libraryPathEntry>
+      <libraryPathEntry kind="3" linkType="1" path="D:/GoogleDrive/AS3/_feathers/feathers-2.1.1/swc/feathers.swc" useDefaultLinkType="false"/>
     </libraryPath>
     <sourceAttachmentPath/>
   </compiler>
