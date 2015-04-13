@@ -7,11 +7,12 @@ package screens
 	import starling.display.Button;
 	import starling.display.Sprite;
 	import starling.events.Event;
+	import starling.display.Image;
 	
 	public class BackGround extends Sprite
 	{
 		
-		private var bg:Button;
+		private var bg:Image;
 		private var footer:Button;
 		
 		public function BackGround()
@@ -36,7 +37,8 @@ package screens
 			// For each object in drawScreen,
 			// position value should be the same
 			// in drawScreen() and initialize()
-			bg = new Button(Assets.getTexture("MainBG"),"",Assets.getTexture("MainBG"));
+		
+			bg = new Image(Assets.getTexture("MainBG"));
 			bg.x = 0;
 			bg.y = 0;
 			this.addChild(bg);
@@ -45,20 +47,7 @@ package screens
 			footer.x = 0;
 			footer.y = 979;
 			this.addChild(footer);
-			
-			// This class extends starling.Sprite, and is the parent to 
-			//    title2 starling.Button class instance. Button TRIGGERED events
-			//    can be listened for by Sprites (altthough they can not trigger
-			//    them), and the event can bubble.
-			this.addEventListener(Event.TRIGGERED, onScreenClick);
-			
-		}
 		
-		private function onScreenClick(e:Event):void
-		{
-			
-			this.dispatchEvent(new NavigationEvent(NavigationEvent.CHANGE_SCREEN,true,{id: "mainmenuscreen"}));
-			
 		}
 		
 		public function initialize():void{
@@ -84,23 +73,7 @@ package screens
 			
 			bg.alpha = 0.7 + (Math.cos(currentDate.getTime() * speed) * 0.3);
 	
-		}
-		
-		public function disposeTemporarily():void
-		{
-			TweenLite.to(this, 0.5, {alpha:0, onComplete:cleanUp});
-		}
-		
-		private function cleanUp():void
-		{
-			this.visible = false;
-			
-			// Remove unneeded objects and listeners
-			if(this.hasEventListener(Event.ENTER_FRAME)){
-				this.removeEventListener(Event.ENTER_FRAME, bgAnimation);
-			}
-		}
-		
+		}	
 		
 	}
 }

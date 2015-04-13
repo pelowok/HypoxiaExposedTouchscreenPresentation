@@ -11,6 +11,10 @@ package mynameiszak
 	import screens.Home;
 	import screens.MainMenu;
 	import screens.Screen10;
+	import screens.Screen11;
+	import screens.Screen12;
+	import screens.Screen20;
+	import screens.ScreenRegister;
 	
 	import starling.display.Sprite;
 	import starling.events.Event;
@@ -23,6 +27,10 @@ package mynameiszak
 		private var screenHome:Home;
 		private var screenMain:MainMenu;
 		private var screen10:Screen10;
+		private var screen11:Screen11;
+		private var screen12:Screen12;
+		private var screen20:Screen20;
+		private var screenRegister:ScreenRegister;
 		
 		public function Game()
 		{
@@ -45,24 +53,48 @@ package mynameiszak
 			screenBG.initialize();
 			Assets.gameScreens.push([screenBG, BackGround, "background"]);
 			
+			screenHome = new Home();
+			screenHome.alpha = 0;
+			this.addChild(screenHome);
+			screenHome.initialize();
+			Assets.gameScreens.push([screenHome, Home, "homescreen"]);		
+
+			screenMain = new MainMenu();
+			screenMain.alpha = 0;
+			screenMain.disposeTemporarily();
+			this.addChild(screenMain);
+			Assets.gameScreens.push([screenMain, MainMenu, "mainmenuscreen"]);
+
 			screen10 = new Screen10();
 			screen10.alpha = 0;
 			screen10.disposeTemporarily();
 			this.addChild(screen10);
 			Assets.gameScreens.push([screen10, Screen10, "screen10"]);
 			
-			screenMain = new MainMenu();
-			screenMain.alpha = 0;
-			screenMain.disposeTemporarily();
-			this.addChild(screenMain);
-			Assets.gameScreens.push([screenMain, MainMenu, "mainmenuscreen"]);
+			screen11 = new Screen11();
+			screen11.alpha = 0;
+			screen11.disposeTemporarily();
+			this.addChild(screen11);
+			Assets.gameScreens.push([screen11, Screen11, "screen11"]);
 			
-			screenHome = new Home();
-			screenHome.alpha = 0;
-			this.addChild(screenHome);
-			screenHome.initialize();
-			Assets.gameScreens.push([screenHome, Home, "homescreen"]);
+			screen12 = new Screen12();
+			screen12.alpha = 0;
+			screen12.disposeTemporarily();
+			this.addChild(screen12);
+			Assets.gameScreens.push([screen12, Screen12, "screen12"]);
 			
+			screen20 = new Screen20();
+			screen20.alpha = 0;
+			screen20.disposeTemporarily();
+			this.addChild(screen20);
+			Assets.gameScreens.push([screen20, Screen20, "screen20"]);
+			
+			screenRegister = new ScreenRegister();
+			screenRegister.alpha = 0;
+			screenRegister.disposeTemporarily();
+			this.addChild(screenRegister);
+			Assets.gameScreens.push([screenRegister, ScreenRegister, "screenregister"])
+				
 		}
 		
 		private function onChangeScreen(e:NavigationEvent):void

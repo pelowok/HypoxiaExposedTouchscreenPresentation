@@ -16,6 +16,7 @@ package screens
 		private var title1:Button;
 		private var title2:Button;
 		private var logo:Button;
+		private var hitscreen:Button;
 		
 		public function Home()
 		{
@@ -54,6 +55,9 @@ package screens
 			logo.x = 200;
 			logo.y = 300;
 			this.addChild(logo);
+			
+			hitscreen = new Button(Assets.getTexture("HitScreen"));
+			this.addChild(hitscreen);
 			
 			// This class extends starling.Sprite, and is the parent to 
 			//    title2 starling.Button class instance. Button TRIGGERED events

@@ -42,12 +42,12 @@ package screens
 			// position value should be the same
 			// in drawScreen() and initialize()
 			
-			btn1 = new Button(Assets.getTexture("MainButton01a"),"",Assets.getTexture("MainButton01b"));
+			btn1 = new Button(Assets.getTexture("MainButton01a"),"",Assets.getTexture("MainButton01a"));
 			btn1.x = 400;
 			btn1.y = 400;
 			this.addChild(btn1);
 			
-			btn2 = new Button(Assets.getTexture("MainButton02a"),"",Assets.getTexture("MainButton02b"));
+			btn2 = new Button(Assets.getTexture("MainButton02a"),"",Assets.getTexture("MainButton02a"));
 			btn2.x = 800;
 			btn2.y = 400;
 			this.addChild(btn2);
@@ -68,9 +68,9 @@ package screens
 			this.visible = true;
 			
 			// Start listening to events
-			this.addEventListener(Event.ENTER_FRAME, mainAnimation);
 			logo.addEventListener(Event.TRIGGERED, onLogoTriggered);
 			btn1.addEventListener(Event.TRIGGERED, onBtn1Triggered);
+			btn2.addEventListener(Event.TRIGGERED, onBtn2Triggered);
 			
 			// Tween screen to visible
 			TweenLite.to(this, 0.5, {alpha:1});
@@ -90,17 +90,12 @@ package screens
 			this.dispatchEvent(new NavigationEvent(NavigationEvent.CHANGE_SCREEN,true,{id: "screen10"}));
 			
 		}
-		
-		private function mainAnimation(e:Event):void
+
+		private function onBtn2Triggered():void
 		{
 			
-			// Start animations			
-			var currentDate:Date = new Date();
-			var speed:Number = 0.0006;
-			var n:Number = 0.7 + (Math.cos(currentDate.getTime() * speed) * 0.3);
+			this.dispatchEvent(new NavigationEvent(NavigationEvent.CHANGE_SCREEN,true,{id: "screen20"}));
 			
-			logo.alpha = (n * -1) + 1.4;			
-				
 		}
 		
 		public function disposeTemporarily():void
@@ -113,13 +108,6 @@ package screens
 			this.visible = false;
 			
 			// Remove unneeded objects and listeners
-			if(this.hasEventListener(Event.ENTER_FRAME))
-			{
-				
-				this.removeEventListener(Event.ENTER_FRAME, mainAnimation);
-				
-			}
-			
 			if(logo.hasEventListener(Event.TRIGGERED))
 			{
 				

@@ -12,19 +12,19 @@ package screens
 	import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.events.Event;
-
 	
-	public class Screen10 extends Sprite
+	
+	public class Screen20 extends Sprite
 	{
 		
 		private var bg:Image;
-
+		
 		private var btn1b:Button;
 		private var btn2b:Button;
 		private var btn3b:Button;
 		
 		private var btnNext:Button;
-
+		
 		private var ref:Button;
 		private var footer:Image;
 		private var logo:Button;
@@ -33,7 +33,7 @@ package screens
 		private var pagenav:TabBar;
 		private var sidenav:TabBar;
 		
-		public function Screen10()
+		public function Screen20()
 		{
 			super();
 			
@@ -84,12 +84,6 @@ package screens
 			btn3b.visible = false;
 			this.addChild(btn3b);
 			
-			btnNext = new Button(Assets.getTexture("NavNext"),"",Assets.getTexture("NavNext"));
-			btnNext.x = 1800;
-			btnNext.y = 610;
-			btnNext.visible = false;
-			this.addChild(btnNext);
-
 			logo = new Button(Assets.getTexture("HypoxiaExposedLogo"));
 			logo.x = 50;
 			logo.y = 10;
@@ -110,7 +104,7 @@ package screens
 			ref.y = 1080;
 			ref.visible = false;
 			this.addChild(ref);
-		
+			
 		}
 		
 		private function AddBaseNav():TabBar{
@@ -203,7 +197,7 @@ package screens
 			sidenav.gap = 2;
 			
 			return(sidenav);
-
+			
 		}
 		
 		public function initialize():void{
@@ -211,19 +205,14 @@ package screens
 			// Call this function each time a Screen is made active.
 			
 			this.visible = true;
-
+			
 			togglePageButtons(-1);
-
+			
 			pagenav.visible = true;
 			DeselectPageNav();
 			
 			sidenav.visible = true;
 			DeselectSideNav();
-			
-			basenav.visible = true;
-			basenav.selectedIndex = 0;
-			
-			btnNext.visible = true;
 			
 			footer.visible = true;
 			
@@ -232,21 +221,20 @@ package screens
 			ref.x = 5;
 			ref.y = 1080;
 			ref.visible = false;
-				
+			
 			// Start listening to events
 			this.addEventListener(Event.ENTER_FRAME, screenAnimation);
 			
 			logo.addEventListener(Event.TRIGGERED, onLogoTriggered);
-
+			
 			btn1b.addEventListener(Event.TRIGGERED, DeselectPageNav);
 			btn2b.addEventListener(Event.TRIGGERED, DeselectPageNav);
 			btn3b.addEventListener(Event.TRIGGERED, DeselectPageNav);
-		
+			
 			basenav.addEventListener(Event.CHANGE, toggleBaseNav);
 			pagenav.addEventListener(Event.CHANGE, togglePageNav);
 			sidenav.addEventListener(Event.CHANGE, toggleSideNav);	
 			
-			btnNext.addEventListener(Event.TRIGGERED, CallScreen21);
 			
 			// Tween screen to visible
 			TweenLite.to(this, 0.5, {alpha:1});
@@ -276,17 +264,17 @@ package screens
 					break;
 				case 0:
 					btn1b.visible = !btn1b.visible;
-				break;
+					break;
 				case 1:
 					btn2b.visible = !btn2b.visible;
-				break;
+					break;
 				case 2:
 					btn3b.visible = !btn3b.visible;
-				break;
+					break;
 				default:
 					trace("ERROR THROWN: tabs.selectedIndex passed to togglePageButtons was :" + i);
-				break;
-		
+					break;
+				
 			}
 			
 		}
@@ -300,13 +288,13 @@ package screens
 			switch (tabs.selectedIndex)
 			{
 				case 0:
-					// do nothing, we're already here
+					
 					break;
 				case 1:
-					this.dispatchEvent(new NavigationEvent(NavigationEvent.CHANGE_SCREEN,true,{id: "screen11"}));
+					
 					break;
 				case 2:
-					this.dispatchEvent(new NavigationEvent(NavigationEvent.CHANGE_SCREEN,true,{id: "screen12"}));
+					
 					break;
 				default:
 					trace("ERROR THROWN: tabs.selectedIndex in toggleSideNav was :" + tabs.selectedIndex);
@@ -320,13 +308,13 @@ package screens
 			
 			var tabs:TabBar = TabBar( e.currentTarget );
 			trace( "  -->selectedIndex:", tabs.selectedIndex );
-
+			
 			// Close any open Page Navs
 			togglePageButtons(-1);
 			
 			// Open new Page Nav
 			togglePageButtons(tabs.selectedIndex);
-
+			
 		}
 		
 		private function toggleSideNav(e:Event):void
@@ -340,21 +328,21 @@ package screens
 					
 					this.dispatchEvent(new NavigationEvent(NavigationEvent.CHANGE_SCREEN,true,{id: "mainmenuscreen"}));
 					
-				break;
+					break;
 				case 1:
 					
 					ref.visible = true;
 					TweenLite.to(ref, 0.7, {alpha: 1, y: 0, onComplete: AddRefListener});
-
-				break;
+					
+					break;
 				case 2:
 					
 					this.dispatchEvent(new NavigationEvent(NavigationEvent.CHANGE_SCREEN,true,{id: "screenregister"}));
 					
-				break;
+					break;
 				default:
 					trace("ERROR THROWN: tabs.selectedIndex in toggleSideNav was :" + tabs.selectedIndex);
-				break;
+					break;
 			}
 			
 		}
@@ -368,7 +356,7 @@ package screens
 			
 			ref.removeEventListener(Event.TRIGGERED, HideRef);
 			TweenLite.to(ref, 0.7, {alpha: 0, y: 1080, onComplete: DeselectSideNav});
-
+			
 		}
 		
 		private function onLogoTriggered():void
@@ -387,12 +375,6 @@ package screens
 			var n:Number = 0.7 + (Math.cos(currentDate.getTime() * speed) * 0.3);
 			
 			logo.alpha = (n * -1) + 1.4;			
-			
-		}
-		
-		private function CallScreen21(e:Event):void{
-			
-			this.dispatchEvent(new NavigationEvent(NavigationEvent.CHANGE_SCREEN,true,{id: "screen20"}));
 			
 		}
 		

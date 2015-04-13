@@ -13,6 +13,9 @@ package
 		[Embed(source="../assets/footerscreen/footer.png")]
 		public static const Footer:Class;
 		
+		[Embed(source="../assets/bg/hitscreen.png")]
+		public static const HitScreen:Class;
+		
 		// Home screen assets
 		[Embed(source="../assets/homescreen/HypoxiaExposedLogo.png")]
 		public static const HypoxiaExposedLogo:Class;
