@@ -77,64 +77,32 @@ package mynameiszak
 			// Array checking begins at 1 to skip over BackGround, which is always active
 			for(var i:int=1; i<arr.length; i++)
 			{
-				// Find active screen first, so visible can
-				//   be used to determine which one it is
-				if (arr[i][0].visible)
+				// Find active screen
+				if (arr[i][0] == obj)
 				{
 					// This screen is being called to visible = false
-					trace("active screen is " + arr[i][0]);
+					// trace("active screen is " + obj);
+					if(obj["disposeTemporarily"] is Function)
+					{
+						obj.disposeTemporarily();
+					}
 				}
 				
 				if(arr[i][2] == e.data.id)
 				{
 					// This screen is being called into visibility
-					trace("Call in this screen : " + arr[i]);
+					var objInit:Object = arr[i][0];
+					
+					// trace("Call in this screen : " + arr[i]);
+					if(objInit["initialize"] is Function)
+					{
+						objInit.initialize();
+						
+					}
 				}
-				
-				
-				
+	
 			}
-			
-			/*
-			switch(e.data.id)
-			{
-				case "homescreen":
 					
-					if(c is MainMenu){
-						screenMain.disposeTemporarily();
-					}
-					if(c is Screen10){
-						screen10.disposeTemporarily();
-					}
-					screenHome.initialize();
-					
-				break;
-				
-				case "mainmenuscreen":
-					
-					// Tween out the old screen
-					screenHome.disposeTemporarily();
-					
-					// Add the new screen
-					screenMain.initialize();	
-
-				break;
-				
-				case "screen10":
-					
-					// Tween out the old screen
-					screenMain.disposeTemporarily();
-					
-					// Add the new screen
-					screen10.initialize();	
-					
-				break;
-				
-				default:
-					trace("changeScreen function hit default value. Release the hounds.");
-					break;
-			}
-		*/		
 		}
 		
 	}
