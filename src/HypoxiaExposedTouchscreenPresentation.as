@@ -16,15 +16,13 @@ package
 	{
 		
 		private var stats:Stats;
-		private var myStarling:Starling;
+		public var myStarling:Starling;
 		
 		public function HypoxiaExposedTouchscreenPresentation()
 		{
 			
 			LaunchMain();
-			
-			
-			
+
 		}
 		
 		private function LaunchMain():void

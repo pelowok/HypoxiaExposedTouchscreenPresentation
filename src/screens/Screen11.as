@@ -21,9 +21,11 @@ package screens
 		
 		private var btn1b:Button;
 		private var btn2b:Button;
-		private var btn3b:Button;
+		private var btnPlay:Button;
+		private var btnVideo:Button;
 		
 		private var btnNext:Button;
+		private var btnPrev:Button;
 		
 		private var ref:Button;
 		private var footer:Image;
@@ -57,7 +59,7 @@ package screens
 			// position value should be the same
 			// in drawScreen() and initialize()
 			
-			bg = new Image(Assets.getTexture("Screen10BG"));
+			bg = new Image(Assets.getTexture("Screen11BG"));
 			bg.x = 0;
 			bg.y = 100;
 			this.addChild(bg);
@@ -66,29 +68,41 @@ package screens
 			
 			this.addChild(AddPageNav());
 			
-			btn1b = new Button(Assets.getTexture("Screen10Nav1b"),"",Assets.getTexture("Screen10Nav1b"));
-			btn1b.x = 371;
-			btn1b.y = 435;
+			btn1b = new Button(Assets.getTexture("Screen11NavPop1"),"",Assets.getTexture("Screen11NavPop1"));
+			btn1b.x = 304;
+			btn1b.y = 140;
 			btn1b.visible = false;
 			this.addChild(btn1b);
 			
-			btn2b = new Button(Assets.getTexture("Screen10Nav2b"),"",Assets.getTexture("Screen10Nav2b"));
-			btn2b.x = 767;
-			btn2b.y = 435;
+			btn2b = new Button(Assets.getTexture("Screen11NavPop2"),"",Assets.getTexture("Screen11NavPop2"));
+			btn2b.x = 304;
+			btn2b.y = 140;
 			btn2b.visible = false;
 			this.addChild(btn2b);
 			
-			btn3b = new Button(Assets.getTexture("Screen10Nav3b"),"",Assets.getTexture("Screen10Nav3b"));
-			btn3b.x = 1163;
-			btn3b.y = 435;
-			btn3b.visible = false;
-			this.addChild(btn3b);
+			btnPlay = new Button(Assets.getTexture("Screen11PlayVideo"),"",Assets.getTexture("Screen11PlayVideo"));
+			btnPlay.x = 880;
+			btnPlay.y = 207;
+			btnPlay.visible = false;
+			this.addChild(btnPlay);
+			
+			btnVideo = new Button(Assets.getTexture("Screen11VideoImg"),"",Assets.getTexture("Screen11VideoImg"));
+			btnVideo.x = 304;
+			btnVideo.y = 105;
+			btnVideo.visible = false;
+			this.addChild(btnVideo);
 			
 			btnNext = new Button(Assets.getTexture("NavNext"),"",Assets.getTexture("NavNext"));
-			btnNext.x = 1800;
+			btnNext.x = 1740;
 			btnNext.y = 610;
 			btnNext.visible = false;
 			this.addChild(btnNext);
+			
+			btnPrev = new Button(Assets.getTexture("NavPrev"),"",Assets.getTexture("NavPrev"));
+			btnPrev.x = 10;
+			btnPrev.y = 610;
+			btnPrev.visible = false;
+			this.addChild(btnPrev);
 			
 			logo = new Button(Assets.getTexture("HypoxiaExposedLogo"));
 			logo.x = 50;
@@ -105,7 +119,7 @@ package screens
 			this.addChild(AddSideNav());
 			
 			// Ref object has to be on top of everything
-			ref = new Button(Assets.getTexture("Screen10Ref"),"",Assets.getTexture("Screen10Ref"));
+			ref = new Button(Assets.getTexture("Screen11Ref"),"",Assets.getTexture("Screen11Ref"));
 			ref.x = 5;
 			ref.y = 1080;
 			ref.visible = false;
@@ -154,19 +168,16 @@ package screens
 			pagenav.dataProvider = new ListCollection(
 				[
 					{ 	label:"",
-						defaultIcon: new Image( Assets.getTexture("Screen10Nav1a") )
+						defaultIcon: new Image( Assets.getTexture("Screen11InnerNav1") )
 					},
 					{	label:"",
-						defaultIcon: new Image( Assets.getTexture("Screen10Nav2a") )
-					},
-					{	label:"",
-						defaultIcon: new Image( Assets.getTexture("Screen10Nav3a") )
+						defaultIcon: new Image( Assets.getTexture("Screen11InnerNav2") )
 					},
 				]);
 			
 			pagenav.x = 371;
-			pagenav.y = 575;
-			pagenav.gap = 10;
+			pagenav.y = 450;
+			pagenav.gap = 20;
 			
 			return(pagenav);
 			
@@ -221,9 +232,16 @@ package screens
 			DeselectSideNav();
 			
 			basenav.visible = true;
-			basenav.selectedIndex = 0;
+			basenav.selectedIndex = 1;
+			
+			btn1b.visible = false;
+			btn2b.visible = false;
+			
+			btnPlay.visible = false;
+			btnVideo.visible = false;
 			
 			btnNext.visible = true;
+			btnPrev.visible = true;
 			
 			footer.visible = true;
 			
@@ -240,13 +258,13 @@ package screens
 			
 			btn1b.addEventListener(Event.TRIGGERED, DeselectPageNav);
 			btn2b.addEventListener(Event.TRIGGERED, DeselectPageNav);
-			btn3b.addEventListener(Event.TRIGGERED, DeselectPageNav);
 			
 			basenav.addEventListener(Event.CHANGE, toggleBaseNav);
 			pagenav.addEventListener(Event.CHANGE, togglePageNav);
 			sidenav.addEventListener(Event.CHANGE, toggleSideNav);	
 			
-			btnNext.addEventListener(Event.TRIGGERED, CallScreen21);
+			btnPrev.addEventListener(Event.TRIGGERED, CallScreen10);
+			btnNext.addEventListener(Event.TRIGGERED, CallScreen12);
 			
 			// Tween screen to visible
 			TweenLite.to(this, 0.5, {alpha:1});
@@ -267,21 +285,30 @@ package screens
 		private function togglePageButtons(i:int):void
 		{
 			
+			if(btnPlay.hasEventListener(Event.TRIGGERED))
+				{
+					
+					btnPlay.removeEventListener(Event.TRIGGERED, AddVideo1);
+					btnPlay.removeEventListener(Event.TRIGGERED, AddVideo2);
+					
+				}
+				
 			switch (i)
 			{
 				case -1:
 					btn1b.visible = false;
 					btn2b.visible = false;
-					btn3b.visible = false;
+					btnPlay.visible = false;
 					break;
 				case 0:
-					btn1b.visible = !btn1b.visible;
+					btn1b.visible = true;
+					btnPlay.visible = true;
+					btnPlay.addEventListener(Event.TRIGGERED, AddVideo1);
 					break;
 				case 1:
-					btn2b.visible = !btn2b.visible;
-					break;
-				case 2:
-					btn3b.visible = !btn3b.visible;
+					btn2b.visible = true;
+					btnPlay.visible = true;
+					btnPlay.addEventListener(Event.TRIGGERED, AddVideo2);
 					break;
 				default:
 					trace("ERROR THROWN: tabs.selectedIndex passed to togglePageButtons was :" + i);
@@ -291,7 +318,6 @@ package screens
 			
 		}
 		
-		
 		private function toggleBaseNav(e:Event):void
 		{
 			
@@ -300,10 +326,10 @@ package screens
 			switch (tabs.selectedIndex)
 			{
 				case 0:
-					// do nothing, we're already here
+					this.dispatchEvent(new NavigationEvent(NavigationEvent.CHANGE_SCREEN,true,{id: "screen10"}));
 					break;
 				case 1:
-					this.dispatchEvent(new NavigationEvent(NavigationEvent.CHANGE_SCREEN,true,{id: "screen11"}));
+					// do nothing, we're already here
 					break;
 				case 2:
 					this.dispatchEvent(new NavigationEvent(NavigationEvent.CHANGE_SCREEN,true,{id: "screen12"}));
@@ -390,9 +416,63 @@ package screens
 			
 		}
 		
-		private function CallScreen21(e:Event):void{
+		private function CallScreen10(e:Event):void{
 			
-			this.dispatchEvent(new NavigationEvent(NavigationEvent.CHANGE_SCREEN,true,{id: "screen20"}));
+			this.dispatchEvent(new NavigationEvent(NavigationEvent.CHANGE_SCREEN,true,{id: "screen10"}));
+			
+		}
+		
+		private function CallScreen12(e:Event):void{
+			
+			this.dispatchEvent(new NavigationEvent(NavigationEvent.CHANGE_SCREEN,true,{id: "screen12"}));
+			
+		}
+		
+		private function AddVideo1(e:Event):void
+		{
+			
+			DeselectPageNav();
+			
+			btn1b.visible = false;
+			btnPlay.visible = false;
+			btnPlay.removeEventListener(Event.TRIGGERED, AddVideo1);
+			
+			btnVideo.visible = true;
+			btnVideo.addEventListener(Event.TRIGGERED, RemoveVideo1);
+			
+		}
+		
+		private function AddVideo2(e:Event):void
+		{
+			
+			DeselectPageNav();
+			
+			btn2b.visible = false;
+			btnPlay.visible = false;
+			btnPlay.removeEventListener(Event.TRIGGERED, AddVideo2);
+			
+			btnVideo.visible = true;
+			btnVideo.addEventListener(Event.TRIGGERED, RemoveVideo2);
+			
+		}
+		
+		private function RemoveVideo1(e:Event):void
+		{
+			
+			DeselectPageNav();
+			
+			btnVideo.visible = false;
+			btnVideo.removeEventListener(Event.TRIGGERED, RemoveVideo1);
+			
+		}
+		
+		private function RemoveVideo2(e:Event):void
+		{
+			
+			DeselectPageNav();
+			
+			btnVideo.visible = false;
+			btnVideo.removeEventListener(Event.TRIGGERED, RemoveVideo2);
 			
 		}
 		
@@ -417,6 +497,22 @@ package screens
 			{
 				
 				logo.removeEventListener(Event.TRIGGERED, onLogoTriggered);
+				
+			}
+			
+			if(btnVideo.hasEventListener(Event.TRIGGERED))
+			{
+				
+				btnVideo.removeEventListener(Event.TRIGGERED, RemoveVideo1);
+				btnVideo.removeEventListener(Event.TRIGGERED, RemoveVideo2);
+				
+			}
+			
+			if(btnPlay.hasEventListener(Event.TRIGGERED))
+			{
+				
+				btnPlay.removeEventListener(Event.TRIGGERED, AddVideo1);
+				btnPlay.removeEventListener(Event.TRIGGERED, AddVideo2);
 				
 			}
 		}

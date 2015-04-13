@@ -21,9 +21,9 @@ package screens
 		
 		private var btn1b:Button;
 		private var btn2b:Button;
-		private var btn3b:Button;
 		
 		private var btnNext:Button;
+		private var btnPrev:Button;
 		
 		private var ref:Button;
 		private var footer:Image;
@@ -57,7 +57,7 @@ package screens
 			// position value should be the same
 			// in drawScreen() and initialize()
 			
-			bg = new Image(Assets.getTexture("Screen10BG"));
+			bg = new Image(Assets.getTexture("Screen12BG"));
 			bg.x = 0;
 			bg.y = 100;
 			this.addChild(bg);
@@ -66,29 +66,29 @@ package screens
 			
 			this.addChild(AddPageNav());
 			
-			btn1b = new Button(Assets.getTexture("Screen10Nav1b"),"",Assets.getTexture("Screen10Nav1b"));
-			btn1b.x = 371;
-			btn1b.y = 435;
+			btn1b = new Button(Assets.getTexture("Screen12NavPop1"),"",Assets.getTexture("Screen12NavPop1"));
+			btn1b.x = 1260;
+			btn1b.y = 120;
 			btn1b.visible = false;
 			this.addChild(btn1b);
 			
-			btn2b = new Button(Assets.getTexture("Screen10Nav2b"),"",Assets.getTexture("Screen10Nav2b"));
-			btn2b.x = 767;
-			btn2b.y = 435;
+			btn2b = new Button(Assets.getTexture("Screen12NavPop2"),"",Assets.getTexture("Screen12NavPop2"));
+			btn2b.x = 1260;
+			btn2b.y = 411;
 			btn2b.visible = false;
 			this.addChild(btn2b);
 			
-			btn3b = new Button(Assets.getTexture("Screen10Nav3b"),"",Assets.getTexture("Screen10Nav3b"));
-			btn3b.x = 1163;
-			btn3b.y = 435;
-			btn3b.visible = false;
-			this.addChild(btn3b);
-			
-			btnNext = new Button(Assets.getTexture("NavNext"),"",Assets.getTexture("NavNext"));
-			btnNext.x = 1800;
+			btnNext = new Button(Assets.getTexture("SideNav1a"),"",Assets.getTexture("SideNav1a"));
+			btnNext.x = 1740;
 			btnNext.y = 610;
 			btnNext.visible = false;
 			this.addChild(btnNext);
+			
+			btnPrev = new Button(Assets.getTexture("NavPrev"),"",Assets.getTexture("NavPrev"));
+			btnPrev.x = 10;
+			btnPrev.y = 610;
+			btnPrev.visible = false;
+			this.addChild(btnPrev);
 			
 			logo = new Button(Assets.getTexture("HypoxiaExposedLogo"));
 			logo.x = 50;
@@ -105,7 +105,7 @@ package screens
 			this.addChild(AddSideNav());
 			
 			// Ref object has to be on top of everything
-			ref = new Button(Assets.getTexture("Screen10Ref"),"",Assets.getTexture("Screen10Ref"));
+			ref = new Button(Assets.getTexture("Screen12Ref"),"",Assets.getTexture("Screen12Ref"));
 			ref.x = 5;
 			ref.y = 1080;
 			ref.visible = false;
@@ -150,22 +150,20 @@ package screens
 		private function AddPageNav():TabBar{
 			
 			pagenav = new TabBar();
+			pagenav.direction = TabBar.DIRECTION_VERTICAL;
 			
 			pagenav.dataProvider = new ListCollection(
 				[
 					{ 	label:"",
-						defaultIcon: new Image( Assets.getTexture("Screen10Nav1a") )
+						defaultIcon: new Image( Assets.getTexture("Screen12InnerNav1") )
 					},
 					{	label:"",
-						defaultIcon: new Image( Assets.getTexture("Screen10Nav2a") )
-					},
-					{	label:"",
-						defaultIcon: new Image( Assets.getTexture("Screen10Nav3a") )
+						defaultIcon: new Image( Assets.getTexture("Screen12InnerNav2") )
 					},
 				]);
 			
-			pagenav.x = 371;
-			pagenav.y = 575;
+			pagenav.x = 1400;
+			pagenav.y = 280;
 			pagenav.gap = 10;
 			
 			return(pagenav);
@@ -221,9 +219,13 @@ package screens
 			DeselectSideNav();
 			
 			basenav.visible = true;
-			basenav.selectedIndex = 0;
+			basenav.selectedIndex = 2;
+			
+			btn1b.visible = false;
+			btn2b.visible = false;
 			
 			btnNext.visible = true;
+			btnPrev.visible = true;
 			
 			footer.visible = true;
 			
@@ -240,13 +242,13 @@ package screens
 			
 			btn1b.addEventListener(Event.TRIGGERED, DeselectPageNav);
 			btn2b.addEventListener(Event.TRIGGERED, DeselectPageNav);
-			btn3b.addEventListener(Event.TRIGGERED, DeselectPageNav);
 			
 			basenav.addEventListener(Event.CHANGE, toggleBaseNav);
 			pagenav.addEventListener(Event.CHANGE, togglePageNav);
 			sidenav.addEventListener(Event.CHANGE, toggleSideNav);	
 			
-			btnNext.addEventListener(Event.TRIGGERED, CallScreen21);
+			btnPrev.addEventListener(Event.TRIGGERED, CallScreen11);
+			btnNext.addEventListener(Event.TRIGGERED, CallMainScreen);
 			
 			// Tween screen to visible
 			TweenLite.to(this, 0.5, {alpha:1});
@@ -272,16 +274,12 @@ package screens
 				case -1:
 					btn1b.visible = false;
 					btn2b.visible = false;
-					btn3b.visible = false;
 					break;
 				case 0:
-					btn1b.visible = !btn1b.visible;
+					btn1b.visible = true;
 					break;
 				case 1:
-					btn2b.visible = !btn2b.visible;
-					break;
-				case 2:
-					btn3b.visible = !btn3b.visible;
+					btn2b.visible = true;
 					break;
 				default:
 					trace("ERROR THROWN: tabs.selectedIndex passed to togglePageButtons was :" + i);
@@ -291,7 +289,6 @@ package screens
 			
 		}
 		
-		
 		private function toggleBaseNav(e:Event):void
 		{
 			
@@ -300,13 +297,13 @@ package screens
 			switch (tabs.selectedIndex)
 			{
 				case 0:
-					// do nothing, we're already here
+					this.dispatchEvent(new NavigationEvent(NavigationEvent.CHANGE_SCREEN,true,{id: "screen10"}));
 					break;
 				case 1:
 					this.dispatchEvent(new NavigationEvent(NavigationEvent.CHANGE_SCREEN,true,{id: "screen11"}));
 					break;
 				case 2:
-					this.dispatchEvent(new NavigationEvent(NavigationEvent.CHANGE_SCREEN,true,{id: "screen12"}));
+					// do nothing, we're already here
 					break;
 				default:
 					trace("ERROR THROWN: tabs.selectedIndex in toggleSideNav was :" + tabs.selectedIndex);
@@ -390,9 +387,15 @@ package screens
 			
 		}
 		
-		private function CallScreen21(e:Event):void{
+		private function CallScreen11(e:Event):void{
 			
-			this.dispatchEvent(new NavigationEvent(NavigationEvent.CHANGE_SCREEN,true,{id: "screen20"}));
+			this.dispatchEvent(new NavigationEvent(NavigationEvent.CHANGE_SCREEN,true,{id: "screen11"}));
+			
+		}
+		
+		private function CallMainScreen(e:Event):void{
+			
+			this.dispatchEvent(new NavigationEvent(NavigationEvent.CHANGE_SCREEN,true,{id: "mainmenuscreen"}));
 			
 		}
 		
@@ -419,6 +422,7 @@ package screens
 				logo.removeEventListener(Event.TRIGGERED, onLogoTriggered);
 				
 			}
+			
 		}
 	}
 }

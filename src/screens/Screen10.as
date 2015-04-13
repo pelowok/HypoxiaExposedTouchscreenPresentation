@@ -85,7 +85,7 @@ package screens
 			this.addChild(btn3b);
 			
 			btnNext = new Button(Assets.getTexture("NavNext"),"",Assets.getTexture("NavNext"));
-			btnNext.x = 1800;
+			btnNext.x = 1740;
 			btnNext.y = 610;
 			btnNext.visible = false;
 			this.addChild(btnNext);
@@ -246,7 +246,7 @@ package screens
 			pagenav.addEventListener(Event.CHANGE, togglePageNav);
 			sidenav.addEventListener(Event.CHANGE, toggleSideNav);	
 			
-			btnNext.addEventListener(Event.TRIGGERED, CallScreen21);
+			btnNext.addEventListener(Event.TRIGGERED, CallScreen11);
 			
 			// Tween screen to visible
 			TweenLite.to(this, 0.5, {alpha:1});
@@ -390,9 +390,9 @@ package screens
 			
 		}
 		
-		private function CallScreen21(e:Event):void{
+		private function CallScreen11(e:Event):void{
 			
-			this.dispatchEvent(new NavigationEvent(NavigationEvent.CHANGE_SCREEN,true,{id: "screen20"}));
+			this.dispatchEvent(new NavigationEvent(NavigationEvent.CHANGE_SCREEN,true,{id: "screen11"}));
 			
 		}
 		

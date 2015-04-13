@@ -65,24 +65,115 @@ package
 		public static const Screen10Nav3b:Class;
 		
 		// Assets for 1.1
+		[Embed(source="../assets/1-1_lethal/1-1bg.png")]
+		public static const Screen11BG:Class;
 		
+		[Embed(source="../assets/1-1_lethal/1-1ref.png")]
+		public static const Screen11Ref:Class;
+		
+		[Embed(source="../assets/1-1_lethal/innerNav1.png")]
+		public static const Screen11InnerNav1:Class;
+		
+		[Embed(source="../assets/1-1_lethal/innerNav2.png")]
+		public static const Screen11InnerNav2:Class;
+		
+		[Embed(source="../assets/1-1_lethal/pop1.png")]
+		public static const Screen11NavPop1:Class;
+		
+		[Embed(source="../assets/1-1_lethal/pop2.png")]
+		public static const Screen11NavPop2:Class;
+		
+		[Embed(source="../assets/1-1_lethal/videoImg.png")]
+		public static const Screen11VideoImg:Class;
+		
+		[Embed(source="../assets/1-1_lethal/playVideo.png")]
+		public static const Screen11PlayVideo:Class;
 		
 		// Assets for 1.2
+		[Embed(source="../assets/1-2_pervasive/1-2bg.png")]
+		public static const Screen12BG:Class;
 		
+		[Embed(source="../assets/1-2_pervasive/1-2ref.png")]
+		public static const Screen12Ref:Class;
+		
+		[Embed(source="../assets/1-2_pervasive/innerNav1.png")]
+		public static const Screen12InnerNav1:Class;
+		
+		[Embed(source="../assets/1-2_pervasive/innerNav2.png")]
+		public static const Screen12InnerNav2:Class;
+		
+		[Embed(source="../assets/1-2_pervasive/pop1.png")]
+		public static const Screen12NavPop1:Class;
+		
+		[Embed(source="../assets/1-2_pervasive/pop2.png")]
+		public static const Screen12NavPop2:Class;
 		
 		// Assets for 2.0
+		[Embed(source="../assets/2-0_insights/2-0bg.png")]
+		public static const Screen20BG:Class;
 		
+		[Embed(source="../assets/2-0_insights/ref1.png")]
+		public static const Screen20Ref1:Class;
+		
+		[Embed(source="../assets/2-0_insights/ref2.png")]
+		public static const Screen20Ref2:Class;
+		
+		[Embed(source="../assets/2-0_insights/ref3.png")]
+		public static const Screen20Ref3:Class;
+		
+		[Embed(source="../assets/2-0_insights/ref4.png")]
+		public static const Screen20Ref4:Class;
+		
+		[Embed(source="../assets/2-0_insights/navPop1a.png")]
+		public static const Screen20Nav1a:Class;
+		
+		[Embed(source="../assets/2-0_insights/navPop1b.png")]
+		public static const Screen20Nav1b:Class;
+		
+		[Embed(source="../assets/2-0_insights/navPop2a.png")]
+		public static const Screen20Nav2a:Class;
+		
+		[Embed(source="../assets/2-0_insights/navPop2b.png")]
+		public static const Screen20Nav2b:Class;
+		
+		[Embed(source="../assets/2-0_insights/navPop3a.png")]
+		public static const Screen20Nav3a:Class;
+		
+		[Embed(source="../assets/2-0_insights/navPop3b.png")]
+		public static const Screen20Nav3b:Class;
+		
+		[Embed(source="../assets/2-0_insights/navPop4a.png")]
+		public static const Screen20Nav4a:Class;
+		
+		[Embed(source="../assets/2-0_insights/navPop4b.png")]
+		public static const Screen20Nav4b:Class;
+		
+		[Embed(source="../assets/2-0_insights/btnRef.png")]
+		public static const Screen20BtnRef:Class;
+		
+		[Embed(source="../assets/2-0_insights/btnSend.png")]
+		public static const Screen20BtnSend:Class;
 		
 		// Assets for form
+		[Embed(source="../assets/form/formBG1.png")]
+		public static const ScreenFormBG1:Class;
 		
+		[Embed(source="../assets/form/formBG2.png")]
+		public static const ScreenFormBG2:Class;
+		
+		[Embed(source="../assets/form/btnReturn.png")]
+		public static const Screen20BtnReturn:Class;
+		
+		[Embed(source="../assets/form/btnSubmit.png")]
+		public static const Screen20BtnSubmit:Class;
 		
 		// Assets for nav
 		[Embed(source="../assets/nav/navNext.png")]
 		public static const NavNext:Class;
-	/*	
+		
 		[Embed(source="../assets/nav/navPrev.png")]
 		public static const NavPrev:Class;
-	*/
+	
 		[Embed(source="../assets/nav/sideNav1.png")]
 		public static const SideNav1a:Class;
 
