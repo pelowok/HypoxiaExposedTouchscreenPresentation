@@ -221,6 +221,10 @@ package screens
 			
 			// Call this function each time a Screen is made active.
 			
+			
+			Assets.globalReturnScreenID = "screen11";
+			trace("ASSIGNING globalReturnScreenID: " + Assets.globalReturnScreenID);
+			
 			this.visible = true;
 			
 			togglePageButtons(-1);

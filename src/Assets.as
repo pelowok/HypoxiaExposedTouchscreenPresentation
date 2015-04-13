@@ -162,10 +162,10 @@ package
 		public static const ScreenFormBG2:Class;
 		
 		[Embed(source="../assets/form/btnReturn.png")]
-		public static const Screen20BtnReturn:Class;
+		public static const ScreenFormBtnReturn:Class;
 		
 		[Embed(source="../assets/form/btnSubmit.png")]
-		public static const Screen20BtnSubmit:Class;
+		public static const ScreenFormBtnSubmit:Class;
 		
 		// Assets for nav
 		[Embed(source="../assets/nav/navNext.png")]
@@ -201,6 +201,8 @@ package
 		
 		public static var gameScreens:Array = new Array();
 		private static var gameTextures:Dictionary = new Dictionary();	
+		
+		public static var globalReturnScreenID:String;
 		
 		public static function getTexture(name:String):Texture
 		{

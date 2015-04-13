@@ -59,7 +59,6 @@ package screens
 			this.removeEventListener(starling.events.Event.ADDED_TO_STAGE, onAddedToStage);
 			trace(e.target + " added to stage.");
 			drawScreen();
-			
 		}
 		
 		private function drawScreen():void 
@@ -249,6 +248,10 @@ package screens
 			
 			// Call this function each time a Screen is made active.
 			
+			
+			Assets.globalReturnScreenID = "screen20";
+			trace("ASSIGNING globalReturnScreenID: " + Assets.globalReturnScreenID);
+			
 			this.visible = true;
 			
 			togglePageButtons(-1);
@@ -306,6 +309,11 @@ package screens
 			btnRef2.addEventListener(Event.TRIGGERED, ToggleRef2);
 			btnRef3.addEventListener(Event.TRIGGERED, ToggleRef3);
 			btnRef4.addEventListener(Event.TRIGGERED, ToggleRef4);
+			
+			btnSend1.addEventListener(Event.TRIGGERED, CallRegistrationScreen);
+			btnSend2.addEventListener(Event.TRIGGERED, CallRegistrationScreen);
+			btnSend3.addEventListener(Event.TRIGGERED, CallRegistrationScreen);
+			btnSend4.addEventListener(Event.TRIGGERED, CallRegistrationScreen);
 
 			pagenav.addEventListener(Event.CHANGE, togglePageNav);
 			sidenav.addEventListener(Event.CHANGE, toggleSideNav);	
@@ -481,6 +489,11 @@ package screens
 			
 		}
 		
+		private function CallRegistrationScreen(e:Event):void
+		{
+			this.dispatchEvent(new NavigationEvent(NavigationEvent.CHANGE_SCREEN,true,{id: "screenregister"}));
+		}
+		
 		public function disposeTemporarily():void
 		{
 			TweenLite.to(this, 0.5, {alpha:0, onComplete:cleanUp});
@@ -494,10 +507,41 @@ package screens
 			
 			if(logo.hasEventListener(Event.TRIGGERED))
 			{
-				
 				logo.removeEventListener(Event.TRIGGERED, onLogoTriggered);
-				
 			}
+			
+			if(btn1b.hasEventListener(Event.TRIGGERED))
+			{
+				btn1b.removeEventListener(Event.TRIGGERED, DeselectPageNav);
+			}
+			if(btn2b.hasEventListener(Event.TRIGGERED))
+			{
+				btn2b.removeEventListener(Event.TRIGGERED, DeselectPageNav);
+			}
+			if(btn3b.hasEventListener(Event.TRIGGERED))
+			{
+				btn3b.removeEventListener(Event.TRIGGERED, DeselectPageNav);
+			}
+			if(btn4b.hasEventListener(Event.TRIGGERED))
+			{
+				btn4b.removeEventListener(Event.TRIGGERED, DeselectPageNav);
+			}
+			
+			trace("MANY EVENT LISTENERS REMAIN ACTIVE. DEBUG!");
+		/*	
+			btnRef1.addEventListener(Event.TRIGGERED, ToggleRef1);
+			btnRef2.addEventListener(Event.TRIGGERED, ToggleRef2);
+			btnRef3.addEventListener(Event.TRIGGERED, ToggleRef3);
+			btnRef4.addEventListener(Event.TRIGGERED, ToggleRef4);
+			
+			btnSend1.addEventListener(Event.TRIGGERED, CallRegistrationScreen);
+			btnSend2.addEventListener(Event.TRIGGERED, CallRegistrationScreen);
+			btnSend3.addEventListener(Event.TRIGGERED, CallRegistrationScreen);
+			btnSend4.addEventListener(Event.TRIGGERED, CallRegistrationScreen);
+			
+			pagenav.addEventListener(Event.CHANGE, togglePageNav);
+			sidenav.addEventListener(Event.CHANGE, toggleSideNav);
+		*/
 		}
 	}
 }

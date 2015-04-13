@@ -8,6 +8,9 @@ package screens
 	import starling.display.Sprite;
 	import starling.events.Event;
 	import starling.display.Image;
+	import starling.events.KeyboardEvent;
+	
+	import flash.desktop.NativeApplication;
 	
 	public class BackGround extends Sprite
 	{
@@ -59,8 +62,20 @@ package screens
 			// Start listening to events
 			this.addEventListener(Event.ENTER_FRAME, bgAnimation);
 			
+			this.addEventListener(KeyboardEvent.KEY_DOWN, ShutDown);
+			
 			// Tween screen to visible
 			TweenLite.to(this, 0.5, {alpha:1});
+			
+		}
+		
+		private function ShutDown(e:KeyboardEvent):void
+		{
+			
+			if(e.charCode == 113)
+			{
+				NativeApplication.nativeApplication.exit();
+			}
 			
 		}
 		

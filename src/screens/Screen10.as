@@ -47,7 +47,7 @@ package screens
 			this.removeEventListener(starling.events.Event.ADDED_TO_STAGE, onAddedToStage);
 			trace(e.target + " added to stage.");
 			drawScreen();
-			
+
 		}
 		
 		private function drawScreen():void 
@@ -209,6 +209,10 @@ package screens
 		public function initialize():void{
 			
 			// Call this function each time a Screen is made active.
+			
+			
+			Assets.globalReturnScreenID = "screen10";
+			trace("ASSIGNING globalReturnScreenID: " + Assets.globalReturnScreenID);
 			
 			this.visible = true;
 
