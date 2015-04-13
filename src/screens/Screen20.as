@@ -103,50 +103,50 @@ package screens
 			btnRef1 = new Button(Assets.getTexture("Screen20BtnRef"),"",Assets.getTexture("Screen20BtnRef"));
 			btnRef1.x = 400;
 			btnRef1.y = 850;
-			btnRef1.visible = true;
-			btn1b.addChild(btnRef1);
+			btnRef1.visible = false;
+			this.addChild(btnRef1);
 			
 			btnRef2 = new Button(Assets.getTexture("Screen20BtnRef"),"",Assets.getTexture("Screen20BtnRef"));
 			btnRef2.x = 400;
 			btnRef2.y = 850;
-			btnRef2.visible = true;
-			btn2b.addChild(btnRef2);
+			btnRef2.visible = false;
+			this.addChild(btnRef2);
 			
 			btnRef3 = new Button(Assets.getTexture("Screen20BtnRef"),"",Assets.getTexture("Screen20BtnRef"));
 			btnRef3.x = 400;
 			btnRef3.y = 850;
-			btnRef3.visible = true;
-			btn3b.addChild(btnRef3);
+			btnRef3.visible = false;
+			this.addChild(btnRef3);
 			
 			btnRef4 = new Button(Assets.getTexture("Screen20BtnRef"),"",Assets.getTexture("Screen20BtnRef"));
 			btnRef4.x = 400;
 			btnRef4.y = 850;
-			btnRef4.visible = true;
-			btn4b.addChild(btnRef4);
+			btnRef4.visible = false;
+			this.addChild(btnRef4);
 			
 			btnSend1 = new Button(Assets.getTexture("Screen20BtnSend"),"",Assets.getTexture("Screen20BtnSend"));
 			btnSend1.x = 700;
 			btnSend1.y = 850;
-			btnSend1.visible = true;
-			btn1b.addChild(btnSend1);
+			btnSend1.visible = false;
+			this.addChild(btnSend1);
 			
 			btnSend2 = new Button(Assets.getTexture("Screen20BtnSend"),"",Assets.getTexture("Screen20BtnSend"));
 			btnSend2.x = 700;
 			btnSend2.y = 850;
-			btnSend2.visible = true;
-			btn2b.addChild(btnSend2);
+			btnSend2.visible = false;
+			this.addChild(btnSend2);
 			
 			btnSend3 = new Button(Assets.getTexture("Screen20BtnSend"),"",Assets.getTexture("Screen20BtnSend"));
 			btnSend3.x = 700;
 			btnSend3.y = 850;
-			btnSend3.visible = true;
-			btn3b.addChild(btnSend3);
+			btnSend3.visible = false;
+			this.addChild(btnSend3);
 			
 			btnSend4 = new Button(Assets.getTexture("Screen20BtnSend"),"",Assets.getTexture("Screen20BtnSend"));
 			btnSend4.x = 700;
 			btnSend4.y = 850;
-			btnSend4.visible = true;
-			btn4b.addChild(btnSend4);
+			btnSend4.visible = false;
+			this.addChild(btnSend4);
 			
 			logo = new Button(Assets.getTexture("HypoxiaExposedLogo"));
 			logo.x = 50;
@@ -209,7 +209,7 @@ package screens
 					},
 				]);
 			
-			pagenav.x = 160;
+			pagenav.x = 275;
 			pagenav.y = 470;
 			pagenav.gap = 10;
 			
@@ -282,6 +282,17 @@ package screens
 			ref4.y = 1080;
 			ref4.visible = false;
 			
+			btnRef1.visible = false;
+			btnRef2.visible = false;
+			btnRef3.visible = false;
+			btnRef4.visible = false;
+			
+			btnSend1.visible = false;
+			btnSend2.visible = false;
+			btnSend3.visible = false;
+			btnSend4.visible = false;
+			
+			
 			// Start listening to events
 			
 			logo.addEventListener(Event.TRIGGERED, onLogoTriggered);
@@ -324,23 +335,35 @@ package screens
 			ref4.visible = true;
 			TweenLite.to(ref4, 0.7, {alpha: 1, y: 0, onComplete: AddRefListener4});	
 		}
-		private function AddRefListener1():void{
-			ref1.addEventListener(Event.TRIGGERED, HideRef);	
+		private function AddRefListener1():void
+		{
+			ref1.addEventListener(Event.TRIGGERED, HideRef);
+			
 		}
-		private function AddRefListener2():void{
-			ref2.addEventListener(Event.TRIGGERED, HideRef);	
+		private function AddRefListener2():void
+		{
+			ref2.addEventListener(Event.TRIGGERED, HideRef);
+			
 		}
-		private function AddRefListener3():void{
-			ref3.addEventListener(Event.TRIGGERED, HideRef);	
+		private function AddRefListener3():void
+		{
+			
+			ref3.addEventListener(Event.TRIGGERED, HideRef);
+			
 		}
-		private function AddRefListener4():void{
-			ref4.addEventListener(Event.TRIGGERED, HideRef);	
+		private function AddRefListener4():void
+		{
+			
+			ref4.addEventListener(Event.TRIGGERED, HideRef);
+			
 		}
 		
 		private function DeselectPageNav():void
 		{
+
 			pagenav.selectedIndex = -1;
-			togglePageButtons(-1);
+			togglePageButtons(-1);				
+
 		}
 		
 		private function DeselectSideNav():void
@@ -359,18 +382,39 @@ package screens
 					btn2b.visible = false;
 					btn3b.visible = false;
 					btn4b.visible = false;
+					
+					btnRef1.visible = false;
+					btnSend1.visible = false;
+					
+					btnRef2.visible = false;
+					btnSend2.visible = false;
+					
+					btnRef3.visible = false;
+					btnSend3.visible = false;
+					
+					btnRef4.visible = false;
+					btnSend4.visible = false;
+					
 					break;
 				case 0:
-					btn1b.visible = !btn1b.visible;
+					btn1b.visible = true;
+					btnRef1.visible = true;
+					btnSend1.visible = true;
 					break;
 				case 1:
-					btn2b.visible = !btn2b.visible;
+					btn2b.visible = true;
+					btnRef2.visible = true;
+					btnSend2.visible = true;
 					break;
 				case 2:
-					btn3b.visible = !btn3b.visible;
+					btn3b.visible = true;
+					btnRef3.visible = true;
+					btnSend3.visible = true;
 					break;
 				case 3:
-					btn4b.visible = !btn4b.visible;
+					btn4b.visible = true;
+					btnRef4.visible = true;
+					btnSend4.visible = true;
 					break;
 				default:
 					trace("ERROR THROWN: tabs.selectedIndex passed to togglePageButtons was :" + i);
@@ -427,7 +471,7 @@ package screens
 			
 			btn.removeEventListener(Event.TRIGGERED, HideRef);
 			TweenLite.to(btn, 0.7, {alpha: 0, y: 1080, onComplete: DeselectSideNav});
-			
+
 		}
 		
 		private function onLogoTriggered():void
