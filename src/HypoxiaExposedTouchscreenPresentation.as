@@ -3,12 +3,13 @@ package
 	import flash.display.Sprite;
 	import flash.display.StageDisplayState;
 	
+	import mynameiszak.Game;
+	
 	import net.hires.debug.Stats;
 	
-	import starling.core.Starling;
-
+	import mynameiszak.VideoOverlay;
 	
-	import mynameiszak.Game;
+	import starling.core.Starling;
 	
 	[SWF(framerate="60", width="1920", height="1080", backgroundColor="0x000000")]
 	

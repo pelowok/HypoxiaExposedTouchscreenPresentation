@@ -198,7 +198,7 @@ package
 		[Embed(source="../assets/nav/subNavtap.png")]
 		public static const SubNavb:Class;
 		
-		
+
 		public static var gameScreens:Array = new Array();
 		private static var gameTextures:Dictionary = new Dictionary();	
 		

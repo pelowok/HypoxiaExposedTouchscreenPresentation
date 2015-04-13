@@ -8,6 +8,9 @@ package screens
 	import feathers.controls.ToggleButton;
 	import feathers.data.ListCollection;
 	
+	import mynameiszak.VideoOverlay;
+	
+	import starling.core.Starling;
 	import starling.display.Button;
 	import starling.display.Image;
 	import starling.display.Sprite;
@@ -443,6 +446,15 @@ package screens
 			
 			btnVideo.visible = true;
 			btnVideo.addEventListener(Event.TRIGGERED, RemoveVideo1);
+			
+			var video:VideoOverlay = new VideoOverlay();
+			video.x = 150;
+			video.y = 150;
+			video.alpha = 0.75;
+			
+			Starling.current.nativeOverlay.addChild(video);
+			
+		//	HypoxiaExposedTouchscreenPresentation.DisplayVideo(video);
 			
 		}
 		
