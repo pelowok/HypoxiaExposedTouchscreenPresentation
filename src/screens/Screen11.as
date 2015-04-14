@@ -2,19 +2,23 @@ package screens
 {
 	import com.greensock.TweenLite;
 	
+	import flash.display.Stage;
+	import flash.media.Video;
+	import flash.net.NetConnection;
+	
 	import events.NavigationEvent;
 	
 	import feathers.controls.TabBar;
-	import feathers.controls.ToggleButton;
 	import feathers.data.ListCollection;
 	
-	import mynameiszak.VideoOverlay;
+	import mynameiszak.LocalVideoPlayer;
 	
 	import starling.core.Starling;
 	import starling.display.Button;
 	import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.events.Event;
+	import flash.net.NetStream;
 	
 	
 	public class Screen11 extends Sprite
@@ -38,6 +42,10 @@ package screens
 		private var pagenav:TabBar;
 		private var sidenav:TabBar;
 		
+		private var hitscreen:Button;
+		
+		public var overlay:Stage;
+		
 		public function Screen11()
 		{
 			super();
@@ -51,6 +59,9 @@ package screens
 			
 			this.removeEventListener(starling.events.Event.ADDED_TO_STAGE, onAddedToStage);
 			trace(e.target + " added to stage.");
+			
+			overlay = Starling.current.nativeOverlay.stage;
+			
 			drawScreen();
 			
 		}
@@ -120,6 +131,12 @@ package screens
 			this.addChild(footer);
 			
 			this.addChild(AddSideNav());
+			
+			hitscreen = new Button(Assets.getTexture("HitScreen"),"",Assets.getTexture("HitScreen")); 
+			hitscreen.x = 0;
+			hitscreen.y = 0;
+			hitscreen.visible = false;
+			this.addChild(hitscreen);
 			
 			// Ref object has to be on top of everything
 			ref = new Button(Assets.getTexture("Screen11Ref"),"",Assets.getTexture("Screen11Ref"));
@@ -251,6 +268,8 @@ package screens
 			btnPrev.visible = true;
 			
 			footer.visible = true;
+			
+			hitscreen.visible = false;
 			
 			// ref can move so reset it's alpha and position
 			ref.alpha = 0;
@@ -445,17 +464,15 @@ package screens
 			btnPlay.removeEventListener(Event.TRIGGERED, AddVideo1);
 			
 			btnVideo.visible = true;
-			btnVideo.addEventListener(Event.TRIGGERED, RemoveVideo1);
 			
-			var video:VideoOverlay = new VideoOverlay();
-			video.x = 150;
-			video.y = 150;
-			video.alpha = 0.75;
+			//use Video API for displaying the video
+			var video:LocalVideoPlayer = new LocalVideoPlayer("../video/small.mp4");
 			
-			Starling.current.nativeOverlay.addChild(video);
+			hitscreen.visible = true;
+			hitscreen.addEventListener(Event.TRIGGERED, RemoveVideo);
 			
-		//	HypoxiaExposedTouchscreenPresentation.DisplayVideo(video);
-			
+			overlay.addChild(video);
+
 		}
 		
 		private function AddVideo2(e:Event):void
@@ -468,27 +485,58 @@ package screens
 			btnPlay.removeEventListener(Event.TRIGGERED, AddVideo2);
 			
 			btnVideo.visible = true;
-			btnVideo.addEventListener(Event.TRIGGERED, RemoveVideo2);
+
+			//use Video API for displaying the video
+			var video:LocalVideoPlayer = new LocalVideoPlayer("../video/testvideo.mp4");
 			
+			hitscreen.visible = true;
+			hitscreen.addEventListener(Event.TRIGGERED, RemoveVideo);
+			
+			overlay.addChild(video);
+
 		}
 		
-		private function RemoveVideo1(e:Event):void
+		private function RemoveVideo(e:Event):void
 		{
 			
 			DeselectPageNav();
 			
-			btnVideo.visible = false;
-			btnVideo.removeEventListener(Event.TRIGGERED, RemoveVideo1);
-			
-		}
-		
-		private function RemoveVideo2(e:Event):void
-		{
-			
-			DeselectPageNav();
+			hitscreen.removeEventListener(Event.TRIGGERED, RemoveVideo);
 			
 			btnVideo.visible = false;
-			btnVideo.removeEventListener(Event.TRIGGERED, RemoveVideo2);
+			hitscreen.visible = false;
+			
+			// remove the video
+			for(var i:int=0; i < overlay.numChildren; i++)
+			{
+				
+				trace("(" + i + " of  " + overlay.numChildren + ") : " + overlay.getChildAt(i));
+				
+				if(overlay.getChildAt(i) is LocalVideoPlayer)
+				{
+					try
+					{
+						var lvp:LocalVideoPlayer = overlay.getChildAt(i) as LocalVideoPlayer;
+
+						lvp.RemoveVideo();
+						
+						trace("Removing LocalVideoPlayer from overlay..");
+						overlay.removeChild(lvp);
+						
+					} catch(e:Error) {
+						trace(e);
+					}
+				
+				}
+	
+			}
+			
+			// debugging step, this can be dropped later
+			trace("Drop debug loop in Screen 11, function RemoveVideo");
+			for(i=0; i < overlay.numChildren; i++)
+			{	
+				trace("(" + i + " of  " + overlay.numChildren + ") : " + overlay.getChildAt(i));
+			}
 			
 		}
 		
@@ -516,12 +564,11 @@ package screens
 				
 			}
 			
-			if(btnVideo.hasEventListener(Event.TRIGGERED))
+			if(hitscreen.hasEventListener(Event.TRIGGERED))
 			{
 				
-				btnVideo.removeEventListener(Event.TRIGGERED, RemoveVideo1);
-				btnVideo.removeEventListener(Event.TRIGGERED, RemoveVideo2);
-				
+				hitscreen.removeEventListener(Event.TRIGGERED, RemoveVideo);
+
 			}
 			
 			if(btnPlay.hasEventListener(Event.TRIGGERED))

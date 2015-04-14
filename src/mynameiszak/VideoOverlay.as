@@ -72,9 +72,16 @@ package mynameiszak
 			trace("Attempting stream attachment");
 			video.attachNetStream(stream);
 
+			video.width = 1280;
+			video.height = 720;
+			
+			
 			trace("Attempting to play stream");
-			stream.play("../video/small.mp4");
-			stream.pause();
+		//	stream.play("../video/small.mp4");
+		//	stream.play("http://www.overdigital.com/video/Hillman_720p23.976_2400kbps.mp4");
+			stream.play("http://www.mynameiszak.com/sandbox/video/testvideo.mp4");
+		//	stream.play("../video/testvideo.mp4");
+		//	stream.pause();
 			
 		}
 		
