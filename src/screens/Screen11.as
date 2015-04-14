@@ -5,8 +5,10 @@ package screens
 	import flash.display.Stage;
 	import flash.media.Video;
 	import flash.net.NetConnection;
+	import flash.net.NetStream;
 	
 	import events.NavigationEvent;
+	import events.VideoCompleteEvent;
 	
 	import feathers.controls.TabBar;
 	import feathers.data.ListCollection;
@@ -18,7 +20,6 @@ package screens
 	import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.events.Event;
-	import flash.net.NetStream;
 	
 	
 	public class Screen11 extends Sprite
@@ -45,6 +46,7 @@ package screens
 		private var hitscreen:Button;
 		
 		public var overlay:Stage;
+		private var video:LocalVideoPlayer;
 		
 		public function Screen11()
 		{
@@ -466,10 +468,12 @@ package screens
 			btnVideo.visible = true;
 			
 			//use Video API for displaying the video
-			var video:LocalVideoPlayer = new LocalVideoPlayer("../video/small.mp4");
+			video = new LocalVideoPlayer("../video/small.mp4");
 			
 			hitscreen.visible = true;
 			hitscreen.addEventListener(Event.TRIGGERED, RemoveVideo);
+			
+			video.addEventListener(VideoCompleteEvent.COMPLETED, VideoEnded);
 			
 			overlay.addChild(video);
 
@@ -487,13 +491,25 @@ package screens
 			btnVideo.visible = true;
 
 			//use Video API for displaying the video
-			var video:LocalVideoPlayer = new LocalVideoPlayer("../video/testvideo.mp4");
+			video = new LocalVideoPlayer("../video/testvideo.mp4");
 			
 			hitscreen.visible = true;
 			hitscreen.addEventListener(Event.TRIGGERED, RemoveVideo);
 			
+			video.addEventListener(VideoCompleteEvent.COMPLETED, VideoEnded);
+			
 			overlay.addChild(video);
 
+		}
+		
+		private function VideoEnded(e:VideoCompleteEvent):void
+		{
+			trace("VideoEnded called by : " + e.target);
+			
+			video.removeEventListener(VideoCompleteEvent.COMPLETED, VideoEnded);
+			
+			RemoveVideo(new Event(Event.TRIGGERED));
+			
 		}
 		
 		private function RemoveVideo(e:Event):void
@@ -523,8 +539,8 @@ package screens
 						trace("Removing LocalVideoPlayer from overlay..");
 						overlay.removeChild(lvp);
 						
-					} catch(e:Error) {
-						trace(e);
+					} catch(err:Error) {
+						trace(err);
 					}
 				
 				}
