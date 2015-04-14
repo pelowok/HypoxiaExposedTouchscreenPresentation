@@ -94,7 +94,7 @@ package mynameiszak
 					break; 
 				case "NetStream.Play.Stop": 
 					trace("Stop [" + ns.time.toFixed(3) + " seconds]"); 
-					TweenLite.to(this, 2, {alpha:0, onComplete:RemoveVideo});
+					TweenLite.to(this, 2, {alpha:0, onComplete:CallRemoveVideo});
 					break; 
 			} 
 			
@@ -132,17 +132,25 @@ package mynameiszak
 			
 		}
 		
+		private function CallRemoveVideo():void
+		{
+			// This separate method exists to avoid calling RemoveVideo()
+			// twice. Simply bubble an Event that calls RemoveVideo from
+			// the parent container.
+			
+			dispatchEvent(new VideoCompleteEvent(VideoCompleteEvent.COMPLETED, true));
+			
+		}
+		
 		public function RemoveVideo():void
 		{
 			
 			ns.close();
 			video.clear();
 			video.attachNetStream(null);
+			
 			this.removeChild(video);
-			
-		//	this.dispatchEvent(new NavigationEvent(NavigationEvent.CHANGE_SCREEN,true,{id: "screen11"}));
-			dispatchEvent(new VideoCompleteEvent(VideoCompleteEvent.COMPLETED, true));
-			
+
 		}
 	}
 }

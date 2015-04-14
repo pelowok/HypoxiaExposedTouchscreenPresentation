@@ -508,11 +508,11 @@ package screens
 			
 			video.removeEventListener(VideoCompleteEvent.COMPLETED, VideoEnded);
 			
-			RemoveVideo(new Event(Event.TRIGGERED));
+			RemoveVideo(null);
 			
 		}
 		
-		private function RemoveVideo(e:Event):void
+		private function RemoveVideo(e:Event=null):void
 		{
 			
 			DeselectPageNav();
