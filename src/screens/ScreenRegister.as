@@ -8,18 +8,21 @@ package screens
 	import feathers.controls.ToggleButton;
 	import feathers.data.ListCollection;
 	
+	import mynameiszak.FormTest1;
+	import mynameiszak.Game;
+	
 	import starling.display.Button;
 	import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.events.Event;
-	
-	import mynameiszak.Game;
 	
 	public class ScreenRegister extends Sprite
 	{
 		
 		private var bg1:Image;
 		private var bg2:Image;
+		
+		private var newForm:FormTest1;
 		
 		private var btnSubmit:Button;
 		private var btnReturn:Button;
@@ -53,10 +56,19 @@ package screens
 			// position value should be the same
 			// in drawScreen() and initialize()
 			
-			bg1 = new Image(Assets.getTexture("ScreenFormBG1"));
+		// Deprecated	
+		//	bg1 = new Image(Assets.getTexture("ScreenFormBG1"));
+		
+		// In-progress form
+			bg1 = new Image(Assets.getTexture("HitScreen"));
 			bg1.x = 0;
 			bg1.y = 200;
 			this.addChild(bg1);
+			
+			newForm = new FormTest1();
+			newForm.x = 140;
+			newForm.y = 200;
+			this.addChild(newForm);
 			
 			bg2 = new Image(Assets.getTexture("ScreenFormBG2"));
 			bg2.x = 0;
@@ -123,6 +135,8 @@ package screens
 			DeselectSideNav();
 			
 			bg1.visible = true;
+			newForm.visible = true;
+			
 			bg2.visible = false;
 			
 			btnSubmit.visible = true;

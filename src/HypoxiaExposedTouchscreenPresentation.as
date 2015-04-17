@@ -1,13 +1,10 @@
 package
 {
 	import flash.display.Sprite;
-	import flash.display.StageDisplayState;
-	
+
 	import mynameiszak.Game;
 	
 	import net.hires.debug.Stats;
-	
-	import mynameiszak.VideoOverlay;
 	
 	import starling.core.Starling;
 	

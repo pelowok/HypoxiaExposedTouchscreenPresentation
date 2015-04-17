@@ -119,7 +119,7 @@ package mynameiszak
 		
 		public function PauseVideo():void
 		{
-			
+			ns.togglePause();
 		}
 		
 		public function StopVideo():void

@@ -1,11 +1,11 @@
 package mynameiszak
 {
 	
-	import flash.display.Bitmap;
-	import flash.utils.Dictionary;
 	import flash.utils.getQualifiedClassName;
 	
 	import events.NavigationEvent;
+	
+	
 	
 	import screens.BackGround;
 	import screens.Home;
@@ -18,7 +18,6 @@ package mynameiszak
 	
 	import starling.display.Sprite;
 	import starling.events.Event;
-	import starling.textures.Texture;
 	
 	public class Game extends Sprite
 	{
@@ -44,6 +43,7 @@ package mynameiszak
 			
 			// Signal to debugger that the Starling framework is now available
 			trace("starling framework initialized");
+			
 			
 			this.addEventListener(events.NavigationEvent.CHANGE_SCREEN, onChangeScreen);
 			
