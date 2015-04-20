@@ -99,11 +99,18 @@ package mynameiszak
 					// backspace
 					input.text = input.text.substr( 0, input.text.length - 1);
 					break;
+				case 9:
+					// tab
+					trace("Go to next field");
+					break;
 				case 4294967295:
 					// switch layout key was pressed
 					break;
 				default:
-					input.text += e.char;
+					if(e.char != null)
+					{
+						input.text += e.char;
+					}
 					break;
 			}
 			
