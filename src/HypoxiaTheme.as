@@ -29,7 +29,7 @@ package
 	import starling.text.BitmapFont;
 	import starling.textures.Texture;
 	
-	public class Theme extends DisplayListWatcher
+	public class HypoxiaTheme extends DisplayListWatcher
 	{
 		
 		/**
@@ -110,14 +110,14 @@ package
 		 * Instantiates a new feathers theme which will be actively monitoring the Starling stage 
 		 * and skinning components as they are added to it.
 		 */		
-		public function Theme(root:DisplayObject) {
+		public function HypoxiaTheme(root:DisplayObject) {
 			
 			super(root as DisplayObjectContainer);
 			
 			// SCENARIO 1: Use a TextFieldTextRenderer
 			FeathersControl.defaultTextRendererFactory = function():ITextRenderer {
 				var tftr:TextFieldTextRenderer = new TextFieldTextRenderer();
-				tftr.textFormat = new TextFormat('_sans', 16, 0xFFFFFF,	true);
+				tftr.textFormat = new TextFormat('_sans', 20, 0xCCCCCC,	true);
 				tftr.textFormat.align = TextFormatAlign.CENTER
 				return tftr;
 			};
@@ -125,7 +125,7 @@ package
 			// SCENARIO 2: Use a BitmapFontTextRenderer. This will use the font png and xml embedded
 			// above.
 //			FeathersControl.defaultTextRendererFactory = function():ITextRenderer {
-//				var bmf:BitmapFont = new BitmapFont(Theme.getTexture(FONT_BITMAP), XML(new FONT_XML()));
+//				var bmf:BitmapFont = new BitmapFont(HypoxiaTheme.getTexture(FONT_BITMAP), XML(new FONT_XML()));
 //				var bftr:BitmapFontTextRenderer = new BitmapFontTextRenderer();
 //				bftr.textFormat = new BitmapFontTextFormat(bmf, 24);
 //				bftr.textFormat.align = TextFormatAlign.CENTER;
@@ -139,36 +139,36 @@ package
 			setInitializerForClass(Key, _key);
 			setInitializerForClass(Label, _softkeyboardKeyLabel, Key.SOFTKEYBOARD_KEY_LABEL);
 			setInitializerForClass(Callout, _callout);
-			
+
 		}
 		
 		/** Initializer for the Key subcomponent */
 		private function _key(k:Key):void {
 			
 			// Assign regular key skins
-			k.regularKeyUpSkin = Theme.getScale9Image(SoftKeyboardKeySkinRegularUp, 5, 5);
-			k.regularKeyHoverSkin = Theme.getScale9Image(SoftKeyboardKeySkinRegularHover, 5, 5);
-			k.regularKeyDownSkin = Theme.getScale9Image(SoftKeyboardKeySkinRegularDown, 5, 5);
+			k.regularKeyUpSkin = HypoxiaTheme.getScale9Image(SoftKeyboardKeySkinRegularUp, 5, 5);
+			k.regularKeyHoverSkin = HypoxiaTheme.getScale9Image(SoftKeyboardKeySkinRegularHover, 5, 5);
+			k.regularKeyDownSkin = HypoxiaTheme.getScale9Image(SoftKeyboardKeySkinRegularDown, 5, 5);
 			
 			// Assign special key skins
-			k.specialKeyUpSkin = Theme.getScale9Image(SoftKeyboardKeySkinSpecialUp, 5, 5);
-			k.specialKeyHoverSkin = Theme.getScale9Image(SoftKeyboardKeySkinSpecialHover, 5, 5);
-			k.specialKeyDownSkin = Theme.getScale9Image(SoftKeyboardKeySkinSpecialDown, 5, 5);
+			k.specialKeyUpSkin = HypoxiaTheme.getScale9Image(SoftKeyboardKeySkinSpecialUp, 5, 5);
+			k.specialKeyHoverSkin = HypoxiaTheme.getScale9Image(SoftKeyboardKeySkinSpecialHover, 5, 5);
+			k.specialKeyDownSkin = HypoxiaTheme.getScale9Image(SoftKeyboardKeySkinSpecialDown, 5, 5);
 			
 			// Assign skins for key that have variants
-			k.hasVariantsKeyUpSkin = Theme.getScale9Image(SoftKeyboardKeySkinHasVariantsUp, 5, 5);
-			k.hasVariantsKeyHoverSkin = Theme.getScale9Image(SoftKeyboardKeySkinHasVariantsHover, 5, 5);
-			k.hasVariantsKeyDownSkin = Theme.getScale9Image(SoftKeyboardKeySkinHasVariantsDown, 5, 5);
+			k.hasVariantsKeyUpSkin = HypoxiaTheme.getScale9Image(SoftKeyboardKeySkinHasVariantsUp, 5, 5);
+			k.hasVariantsKeyHoverSkin = HypoxiaTheme.getScale9Image(SoftKeyboardKeySkinHasVariantsHover, 5, 5);
+			k.hasVariantsKeyDownSkin = HypoxiaTheme.getScale9Image(SoftKeyboardKeySkinHasVariantsDown, 5, 5);
 			
 			// Assign icons to special keys
-			if (k.charCode == CharCode.NUM_LOCK) 	k.icon = Theme.getImage(SoftKeyboardIconBackspace);
-			if (k.charCode == CharCode.BACKSPACE) 	k.icon = Theme.getImage(SoftKeyboardIconBackspace);
-			if (k.charCode == CharCode.RETURN) 		k.icon = Theme.getImage(SoftKeyboardIconEnter);
-			if (k.charCode == CharCode.TAB) 		k.icon = Theme.getImage(SoftKeyboardIconTab);
+			if (k.charCode == CharCode.NUM_LOCK) 	k.icon = HypoxiaTheme.getImage(SoftKeyboardIconBackspace);
+			if (k.charCode == CharCode.BACKSPACE) 	k.icon = HypoxiaTheme.getImage(SoftKeyboardIconBackspace);
+			if (k.charCode == CharCode.RETURN) 		k.icon = HypoxiaTheme.getImage(SoftKeyboardIconEnter);
+			if (k.charCode == CharCode.TAB) 		k.icon = HypoxiaTheme.getImage(SoftKeyboardIconTab);
 			
 			if (k.charCode == CharCode.CAPS_LOCK) {
-				k.icon = Theme.getImage(SoftKeyboardIconCapsLock);
-				k.selectedIcon = Theme.getImage(SoftKeyboardIconCapsLockSelected);
+				k.icon = HypoxiaTheme.getImage(SoftKeyboardIconCapsLock);
+				k.selectedIcon = HypoxiaTheme.getImage(SoftKeyboardIconCapsLockSelected);
 			}
 			
 		}
@@ -184,12 +184,12 @@ package
 		
 		/** Initializer for the Callout component */
 		public function _callout(c:Callout):void {
-			c.backgroundSkin = Theme.getScale9Image(SoftKeyboardCalloutBackground, 15, 15);
+			c.backgroundSkin = HypoxiaTheme.getScale9Image(SoftKeyboardCalloutBackground, 15, 15);
 			
-			c.topArrowSkin = Theme.getImage(SoftKeyboardCalloutTopArrow);
-			c.rightArrowSkin = Theme.getImage(SoftKeyboardCalloutRightArrow);
-			c.bottomArrowSkin = Theme.getImage(SoftKeyboardCalloutBottomArrow);
-			c.leftArrowSkin = Theme.getImage(SoftKeyboardCalloutLeftArrow);
+			c.topArrowSkin = HypoxiaTheme.getImage(SoftKeyboardCalloutTopArrow);
+			c.rightArrowSkin = HypoxiaTheme.getImage(SoftKeyboardCalloutRightArrow);
+			c.bottomArrowSkin = HypoxiaTheme.getImage(SoftKeyboardCalloutBottomArrow);
+			c.leftArrowSkin = HypoxiaTheme.getImage(SoftKeyboardCalloutLeftArrow);
 			
 			c.paddingLeft = 8;
 			c.paddingRight = 12;
@@ -200,7 +200,7 @@ package
 		}
 		
 		private function _softKeyboard(s:SoftKeyboard):void {
-			s.backgroundSkin = Theme.getScale9Image(SoftKeyboardGlobalBackground, 15, 15);
+			s.backgroundSkin = HypoxiaTheme.getScale9Image(SoftKeyboardGlobalBackground, 15, 15);
 			s.padding = 10;
 		}
 		
@@ -237,7 +237,7 @@ package
 		 * @param source Class associated to the embedded asset
 		 */
 		public static function getImage(source:Class):Image {
-			return new Image(Theme.getTexture(source));
+			return new Image(HypoxiaTheme.getTexture(source));
 		}
 		
 		/**
@@ -251,7 +251,7 @@ package
 			staticHeight:Number = 25
 		):Scale9Image {
 			
-			var texture:Texture = Theme.getTexture(source);
+			var texture:Texture = HypoxiaTheme.getTexture(source);
 			
 			var rect:Rectangle = new Rectangle(
 				staticWidth, 

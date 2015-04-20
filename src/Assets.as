@@ -167,6 +167,21 @@ package
 		[Embed(source="../assets/form/btnSubmit.png")]
 		public static const ScreenFormBtnSubmit:Class;
 		
+		[Embed(source="../assets/form/downIcon.png")]
+		public static const DownIcon:Class;
+		
+		[Embed(source="../assets/form/PinkBox.png")]
+		public static const PinkBox:Class;
+		
+		[Embed(source="../assets/form/GreenBox.png")]
+		public static const GreenBox:Class;
+		
+		[Embed(source="../assets/form/PinkFrame.png")]
+		public static const PinkFrame:Class;
+		
+		[Embed(source="../assets/form/bluesq.png")]
+		public static const BlueSquare:Class;
+		
 		// Assets for nav
 		[Embed(source="../assets/nav/navNext.png")]
 		public static const NavNext:Class;
