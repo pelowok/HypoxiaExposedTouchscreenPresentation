@@ -3,13 +3,11 @@ package screens
 	import com.greensock.TweenLite;
 	
 	import flash.display.Stage;
-	import flash.media.Video;
-	import flash.net.NetConnection;
-	import flash.net.NetStream;
 	
 	import events.NavigationEvent;
 	import events.VideoCompleteEvent;
 	
+	import feathers.controls.Button;
 	import feathers.controls.TabBar;
 	import feathers.data.ListCollection;
 	
@@ -18,6 +16,7 @@ package screens
 	import starling.core.Starling;
 	import starling.display.Button;
 	import starling.display.Image;
+	import starling.display.Quad;
 	import starling.display.Sprite;
 	import starling.events.Event;
 	
@@ -27,23 +26,23 @@ package screens
 		
 		private var bg:Image;
 		
-		private var btn1b:Button;
-		private var btn2b:Button;
-		private var btnPlay:Button;
-		private var btnVideo:Button;
+		private var btn1b:feathers.controls.Button;
+		private var btn2b:UnstyledButton;
+		private var btnPlay:UnstyledButton;
+		private var btnVideo:UnstyledButton;
 		
-		private var btnNext:Button;
-		private var btnPrev:Button;
+		private var btnNext:UnstyledButton;
+		private var btnPrev:UnstyledButton;
 		
-		private var ref:Button;
+		private var ref:UnstyledButton;
 		private var footer:Image;
-		private var logo:Button;
+		private var logo:UnstyledButton;
 		
 		private var basenav:TabBar;
 		private var pagenav:TabBar;
 		private var sidenav:TabBar;
 		
-		private var hitscreen:Button;
+		private var hitscreen:UnstyledButton;
 		
 		public var overlay:Stage;
 		private var video:LocalVideoPlayer;
@@ -84,43 +83,48 @@ package screens
 			
 			this.addChild(AddPageNav());
 			
-			btn1b = new Button(Assets.getTexture("Screen11NavPop1"),"",Assets.getTexture("Screen11NavPop1"));
+			btn1b = new feathers.controls.Button();
+			//Assets.getTexture("Screen11NavPop1"),"",Assets.getTexture("Screen11NavPop1"));
 			btn1b.x = 304;
 			btn1b.y = 140;
 			btn1b.visible = false;
+			
+			btn1b.defaultSkin = new Image(Assets.getTexture("Screen11NavPop1"));
+			btn1b.downSkin = new Image(Assets.getTexture("Screen11NavPop1"));
+			
 			this.addChild(btn1b);
 			
-			btn2b = new Button(Assets.getTexture("Screen11NavPop2"),"",Assets.getTexture("Screen11NavPop2"));
+			btn2b = new UnstyledButton(Assets.getTexture("Screen11NavPop2"),"",Assets.getTexture("Screen11NavPop2"));
 			btn2b.x = 304;
 			btn2b.y = 140;
 			btn2b.visible = false;
 			this.addChild(btn2b);
 			
-			btnPlay = new Button(Assets.getTexture("Screen11PlayVideo"),"",Assets.getTexture("Screen11PlayVideo"));
+			btnPlay = new UnstyledButton(Assets.getTexture("Screen11PlayVideo"),"",Assets.getTexture("Screen11PlayVideo"));
 			btnPlay.x = 880;
 			btnPlay.y = 207;
 			btnPlay.visible = false;
 			this.addChild(btnPlay);
 			
-			btnVideo = new Button(Assets.getTexture("Screen11VideoImg"),"",Assets.getTexture("Screen11VideoImg"));
+			btnVideo = new UnstyledButton(Assets.getTexture("Screen11VideoImg"),"",Assets.getTexture("Screen11VideoImg"));
 			btnVideo.x = 304;
 			btnVideo.y = 105;
 			btnVideo.visible = false;
 			this.addChild(btnVideo);
 			
-			btnNext = new Button(Assets.getTexture("NavNext"),"",Assets.getTexture("NavNext"));
+			btnNext = new UnstyledButton(Assets.getTexture("NavNext"),"",Assets.getTexture("NavNext"));
 			btnNext.x = 1740;
 			btnNext.y = 610;
 			btnNext.visible = false;
 			this.addChild(btnNext);
 			
-			btnPrev = new Button(Assets.getTexture("NavPrev"),"",Assets.getTexture("NavPrev"));
+			btnPrev = new UnstyledButton(Assets.getTexture("NavPrev"),"",Assets.getTexture("NavPrev"));
 			btnPrev.x = 10;
 			btnPrev.y = 610;
 			btnPrev.visible = false;
 			this.addChild(btnPrev);
 			
-			logo = new Button(Assets.getTexture("HypoxiaExposedLogo"));
+			logo = new UnstyledButton(Assets.getTexture("HypoxiaExposedLogo"));
 			logo.x = 50;
 			logo.y = 10;
 			logo.scaleX = 0.25;
@@ -134,14 +138,14 @@ package screens
 			
 			this.addChild(AddSideNav());
 			
-			hitscreen = new Button(Assets.getTexture("HitScreen"),"",Assets.getTexture("HitScreen")); 
+			hitscreen = new UnstyledButton(Assets.getTexture("HitScreen"),"",Assets.getTexture("HitScreen")); 
 			hitscreen.x = 0;
 			hitscreen.y = 0;
 			hitscreen.visible = false;
 			this.addChild(hitscreen);
 			
 			// Ref object has to be on top of everything
-			ref = new Button(Assets.getTexture("Screen11Ref"),"",Assets.getTexture("Screen11Ref"));
+			ref = new UnstyledButton(Assets.getTexture("Screen11Ref"),"",Assets.getTexture("Screen11Ref"));
 			ref.x = 5;
 			ref.y = 1080;
 			ref.visible = false;

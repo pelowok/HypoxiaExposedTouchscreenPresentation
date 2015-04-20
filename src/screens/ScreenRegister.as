@@ -8,7 +8,7 @@ package screens
 	import feathers.controls.ToggleButton;
 	import feathers.data.ListCollection;
 	
-	import mynameiszak.FormTest1;
+	import mynameiszak.FormTest2;
 	import mynameiszak.Game;
 	
 	import starling.display.Button;
@@ -22,7 +22,7 @@ package screens
 		private var bg1:Image;
 		private var bg2:Image;
 		
-		private var newForm:FormTest1;
+		private var newForm:FormTest2;
 		
 		private var btnSubmit:Button;
 		private var btnReturn:Button;
@@ -65,7 +65,7 @@ package screens
 			bg1.y = 200;
 			this.addChild(bg1);
 			
-			newForm = new FormTest1();
+			newForm = new FormTest2();
 			newForm.x = 140;
 			newForm.y = 200;
 			this.addChild(newForm);

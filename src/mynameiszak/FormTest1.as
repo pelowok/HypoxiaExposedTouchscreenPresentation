@@ -1,6 +1,14 @@
 package mynameiszak
 {
 
+	import flash.events.Event;
+	import flash.events.HTTPStatusEvent;
+	import flash.events.IOErrorEvent;
+	import flash.net.URLLoader;
+	import flash.net.URLRequest;
+	import flash.net.URLRequestMethod;
+	import flash.net.URLVariables;
+	
 	import feathers.controls.Button;
 	import feathers.controls.GroupedList;
 	import feathers.controls.TextInput;
@@ -9,15 +17,8 @@ package mynameiszak
 	import feathers.data.HierarchicalCollection;
 	import feathers.themes.MinimalDesktopTheme;
 	
+	import starling.display.Quad;
 	import starling.display.Sprite;
-
-	import flash.net.URLLoader;
-	import flash.events.Event;
-	import flash.net.URLRequest;
-	import flash.net.URLVariables;
-	import flash.net.URLRequestMethod;
-	import flash.events.IOErrorEvent;
-	import flash.events.HTTPStatusEvent;
 	
 	
 	public class FormTest1 extends starling.display.Sprite {
@@ -43,12 +44,12 @@ package mynameiszak
 			
 			super();
 			
-			new MinimalDesktopTheme();
+		//	new MinimalDesktopTheme();
 			
 		// works
-			ConnectToDB();
+		//	ConnectToDB();
 			
-		//	ConnectToSpreadsheet();
+		BuildForm2();
 
 		}
 		
@@ -99,11 +100,26 @@ package mynameiszak
 			var loader:URLLoader = URLLoader(event.target);
 			var vars:URLVariables = new URLVariables(loader.data);
 			
-			trace('vars.email: '+vars.senderEmail);
-			trace('vars.id: '+vars.email_address);
-			trace('vars.db: '+vars.first_name);
+			trace('vars.email: '+vars.email);
+			trace('vars.id: '+vars.id);
+			trace('vars.db: '+vars.db);
 		
 			BuildForm();
+		}
+		
+		private function BuildForm2():void
+		{
+			
+			
+			
+		}
+		
+		private function input_changeHandler(e:Event):void
+		{
+			
+			var target:TextInput = e.target as TextInput;
+			trace(target.text );
+			
 		}
 		
 		protected function HTTPReport(e:HTTPStatusEvent):void
