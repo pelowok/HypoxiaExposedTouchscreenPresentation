@@ -82,8 +82,8 @@ package mynameiszak
 			hitscreen = BuildHitscreen(hitscreen);
 			keyboard = BuildKeyboard(keyboard);
 			titlePicker = BuildTitlePicker(titlePicker);
-			firstName = BuildFirstName(firstName);
-			surName = BuildLastName(surName);
+			firstName = BuildTextInput(firstName, "Enter your first name", 450, 402);
+			surName = BuildTextInput(surName, "Enter your surname", 450, 502);
 			
 			// add components to display list in order bottom to top
 			this.addChild(hitscreen);
@@ -263,63 +263,33 @@ package mynameiszak
 			}
 		}
 		
-		private function BuildFirstName(ti:TextInput):TextInput
+		private function BuildTextInput(ti:TextInput, promptString:String, _x:int, _y:int):TextInput
 		{
 			
 			// EMAIL INPUT
 			ti = new TextInput();
+			
 			ti.textEditorFactory = function():ITextEditor
 			{
-				return new TextFieldTextEditor();
+				var tfte:TextFieldTextEditor = new TextFieldTextEditor();
+				
+				tfte.embedFonts = true;
+				
+				var tf:TextFormat = new TextFormat("Helvetica", 22, 0x000000);
+				tfte.textFormat = tf;
+				
+				return tfte;
 			};
 			
-			ti.promptFactory = function():ITextRenderer
-			{
-				var textRenderer:BitmapFontTextRenderer = new BitmapFontTextRenderer();
-				return textRenderer;
-			}
 			
-			ti.prompt = "Enter your first name";
-		//	ti.selectRange( 0, ti.text.length );
+			ti.prompt = promptString;
 			
 			// focus manager goes here
 			ti.addEventListener(TouchEvent.TOUCH , HandleTextInputTouch);
 			
 			// position and appearence
-			ti.x = 450;
-			ti.y = 402;
-			ti.backgroundSkin = new starling.display.Quad(330, 40, 0xffffff);
-			
-			return ti;
-			
-		}
-		
-		private function BuildLastName(ti:TextInput):TextInput
-		{
-			
-			// EMAIL INPUT
-			ti = new TextInput();
-			ti.textEditorFactory = function():ITextEditor
-			{
-				return new TextFieldTextEditor();
-			};
-			
-			ti.promptFactory = function():ITextRenderer
-			{
-				//var textRenderer:BitmapFontTextRenderer = new BitmapFontTextRenderer();
-				var textRenderer:TextFieldTextRenderer;
-				return textRenderer;
-			}
-			
-			ti.prompt = "Enter your surname";
-			//	ti.selectRange( 0, ti.text.length );
-			
-			// focus manager goes here
-			ti.addEventListener(TouchEvent.TOUCH , HandleTextInputTouch);
-			
-			// position and appearence
-			ti.x = 450;
-			ti.y = 502;
+			ti.x = _x;
+			ti.y = _y;
 			ti.backgroundSkin = new starling.display.Quad(330, 40, 0xffffff);
 			
 			return ti;

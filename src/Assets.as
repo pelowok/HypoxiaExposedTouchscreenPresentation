@@ -7,17 +7,8 @@ package
 	public class Assets
 	{
 		// Fonts
-		[Embed(source="../assets/fonts/HelveticaNeueLTStd-Hv.otf",fontFamily="HelveticaNeueLTHeavy",fontWeight="bold",mimeType="application/x-font",embedAsCFF="true")]
-		protected static const HELVETICA_NEUE_LT_STD_HV:Class;
-		
-		[Embed(source="../assets/fonts/HelveticaNeueLTStd-HvCn.otf",fontFamily="HelveticaNeueLTHeavyCondensed",fontWeight="bold",mimeType="application/x-font",embedAsCFF="true")]
-		protected static const HELVETICA_NEUE_LT_STD_HV_CN:Class;
-		
-		[Embed(source="../assets/fonts/HelveticaNeueLTStd-Md.otf",fontFamily="HelveticaNeueLTMedium",mimeType="application/x-font",embedAsCFF="true")]
-		protected static const HELVETICA_NEUE_LT_STD_MD:Class;
-		
-		[Embed(source="../assets/fonts/HelveticaNeueLTStd-MdCn.otf",fontFamily="HelveticaNeueLTMediumCondensed",mimeType="application/x-font",embedAsCFF="true")]
-		protected static const HELVETICA_NEUE_LT_STD_MD_CN:Class;
+		[Embed(source="../assets/fonts/HELVETICANEUELTPRO-HV.OTF", fontFamily = "Helvetica", mimeType = "application/x-font", embedAsCFF="false")]
+		public static const HelveticaHeavy:Class;
 		
 		// Assets for all screens
 		[Embed(source="../assets/bg/mainBG.jpg")]
