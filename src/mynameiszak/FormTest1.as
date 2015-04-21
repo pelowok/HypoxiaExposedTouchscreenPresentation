@@ -78,7 +78,7 @@ package mynameiszak
 		private function ConnectToDB():void
 		{
 
-			var request:URLRequest = new URLRequest('http://www.mynameiszak.com/sandbox/php/tester6.php');
+			var request:URLRequest = new URLRequest('http://www.mynameiszak.com/sandbox/php/HtmlEmailScript.php');
 			
 			var variables:URLVariables = new URLVariables();
 			variables.sender_email = 'HypoxiaExposed@clientname.com';

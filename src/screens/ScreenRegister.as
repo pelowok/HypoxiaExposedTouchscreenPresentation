@@ -60,13 +60,13 @@ package screens
 		//	bg1 = new Image(Assets.getTexture("ScreenFormBG1"));
 		
 		// In-progress form
-			bg1 = new Image(Assets.getTexture("HitScreen"));
+			bg1 = new Image(Assets.getTexture("ScreenFormBG1"));
 			bg1.x = 0;
 			bg1.y = 200;
 			this.addChild(bg1);
 			
 			newForm = new RegistrationForm();
-			newForm.x = 140;
+			newForm.x = 0;
 			newForm.y = 200;
 			this.addChild(newForm);
 			

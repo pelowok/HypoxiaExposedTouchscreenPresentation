@@ -1,5 +1,15 @@
 package mynameiszak
 {
+	import flash.events.Event;
+	import flash.events.HTTPStatusEvent;
+	import flash.events.IOErrorEvent;
+	import flash.net.URLLoader;
+	import flash.net.URLRequest;
+	import flash.net.URLRequestMethod;
+	import flash.net.URLVariables;
+	import flash.text.TextFormat;
+	import flash.text.TextFormatAlign;
+	
 	import cc.cote.feathers.softkeyboard.KeyEvent;
 	import cc.cote.feathers.softkeyboard.SoftKeyboard;
 	import cc.cote.feathers.softkeyboard.layouts.Layout;
@@ -7,17 +17,24 @@ package mynameiszak
 	import cc.cote.feathers.softkeyboard.layouts.QwertySwitch;
 	
 	import feathers.controls.Button;
+	import feathers.controls.Label;
+	import feathers.controls.List;
 	import feathers.controls.PickerList;
 	import feathers.controls.TextInput;
+	import feathers.controls.popups.DropDownPopUpContentManager;
 	import feathers.controls.renderers.DefaultListItemRenderer;
 	import feathers.controls.renderers.IListItemRenderer;
 	import feathers.controls.text.BitmapFontTextRenderer;
 	import feathers.controls.text.TextFieldTextEditor;
+	import feathers.controls.text.TextFieldTextRenderer;
+	import feathers.core.FeathersControl;
 	import feathers.core.FocusManager;
 	import feathers.core.IFocusManager;
 	import feathers.core.ITextEditor;
 	import feathers.core.ITextRenderer;
 	import feathers.data.ListCollection;
+	import feathers.layout.AnchorLayout;
+	import feathers.layout.AnchorLayoutData;
 	
 	import starling.display.Image;
 	import starling.display.Quad;
@@ -29,7 +46,7 @@ package mynameiszak
 		
 		private var keyboard:SoftKeyboard;
 		private var activeInput:TextInput;
-		private var title:PickerList;
+		private var titlePicker:PickerList;
 		
 		public function RegistrationForm()
 		{
@@ -45,14 +62,18 @@ package mynameiszak
 		{
 			// build components
 			keyboard = BuildKeyboard();
-			title = BuildTitlePicker();
+			titlePicker = BuildTitlePicker(titlePicker);
 			
 			
 			// add components to display list in order bottom to top
-			this.addChild(title);
+			this.addChild(titlePicker);
 			
 			// keyboard needs to be on top
 			this.addChild(keyboard);
+			
+			// TESTING PURPOSES
+			// Send HTML Email
+		//	SendHtmlEmail();
 			
 		}
 		
@@ -67,7 +88,7 @@ package mynameiszak
 			keyboard = new SoftKeyboard(layout);
 			keyboard.addEventListener(KeyEvent.KEY_UP, onKeyUp);
 
-			keyboard.x = 440;
+			keyboard.x = 465;
 			keyboard.y = 880;
 			
 			keyboard.width = 900;
@@ -114,57 +135,132 @@ package mynameiszak
 			
 		}
 		
-		private function BuildTitlePicker():PickerList
+		private function BuildTitlePicker(pl:PickerList):PickerList
 		{
 			
-			title = new PickerList();
+			var items:Array = [];
 			
-			// assign data 
-			title.dataProvider = new ListCollection(
-				[
-					
-					{ text: "<no preffered title>", thumbnail: Assets.getTexture( "GreenBox" ) },
-					{ text: "Dr.", thumbnail: Assets.getTexture( "GreenBox" ) },
-					{ text: "Mr.", thumbnail: Assets.getTexture( "GreenBox" ) },
-					{ text: "Mrs.", thumbnail: Assets.getTexture( "GreenBox" ) },
-					{ text: "Ms.", thumbnail: Assets.getTexture( "GreenBox" ) },
-					
-				]);
+			items.push({ text: "<no preferred title>" });
+			items.push({ text: "Dr." });
+			items.push({ text: "Mr." });
+			items.push({ text: "Mrs." });
+			items.push({ text: "Ms." });
+
+			items.fixed = true;
 			
-			// define the rendered fields in each button
-			title.listProperties.itemRendererFactory = function():IListItemRenderer
+			pl = new PickerList();
+			pl.prompt = "Select an Item";
+			pl.dataProvider = new ListCollection(items);
+			
+			//normally, the first item is selected, but let's show the prompt
+			pl.selectedIndex = -1;
+			
+			var listLayoutData:AnchorLayoutData = new AnchorLayoutData();
+			listLayoutData.horizontalCenter = 0;
+			listLayoutData.verticalCenter = 0;
+			pl.layoutData = listLayoutData;
+			
+			//the typical item helps us set an ideal width for the button
+			//if we don't use a typical item, the button will resize to fit
+			//the currently selected item.
+			pl.typicalItem = { text: "Select an Item" };
+			pl.labelField = "text";
+			
+			pl.listFactory = function():List
 			{
-				var renderer:DefaultListItemRenderer = new DefaultListItemRenderer();
-				renderer.labelField = "text";
-				renderer.iconSourceField = "thumbnail";
-				renderer.defaultSkin = new Image( Assets.getTexture( "GreenBox" ) );
-				
-				return renderer;
+				var list:List = new List();
+				//notice that we're setting typicalItem on the list separately. we
+				//may want to have the list measure at a different width, so it
+				//might need a different typical item than the picker list's button.
+				list.typicalItem = { text: "< No preferred title >" };
+				list.itemRendererFactory = function():IListItemRenderer
+				{
+					var renderer:DefaultListItemRenderer = new DefaultListItemRenderer();
+					//notice that we're setting labelField on the item renderers
+					//separately. the default item renderer has a labelField property,
+					//but a custom item renderer may not even have a label, so
+					//PickerList cannot simply pass its labelField down to item
+					//renderers automatically
+					renderer.labelField = "text";
+					renderer.defaultSkin = new Image( Assets.getTexture( "GreenBox" ) );
+					renderer.selectedUpSkin = new Image( Assets.getTexture( "PinkBox" ) );
+					return renderer;
+				};
+
+				return list;
 			};
 			
+			
+			
 			// Event handlers
-			title.addEventListener(starling.events.Event.CHANGE, title_changeHandler);
+			pl.addEventListener(starling.events.Event.CHANGE, title_changeHandler);
 			
 			// screen position and appearence
-			title.x = 50;
-			title.y = 100;
+			pl.width = 335;
 			
-			title.prompt = "Title";
-			title.selectedIndex = -1;
-			
-			return title;
+			pl.x = 447;
+			pl.y = 305;
+
+			return pl;
 			
 		}
 		
-		private function title_changeHandler(e:Event):void
+		private function title_changeHandler(e:starling.events.Event):void
 		{
 			var pl:PickerList;
 			
 			if(e.target is PickerList)
 			{
+			
 				pl = e.target as PickerList;
-				trace("PickerList[title] : " + pl.labelField );
+				trace( pl.selectedItem.text);
+	
 			}
+		}
+		
+		// HTML Email on validated SUBMIT
+		private function SendHtmlEmail():void
+		{
+			
+			var request:URLRequest = new URLRequest('http://www.mynameiszak.com/sandbox/php/HtmlEmailScript.php');
+			
+			var variables:URLVariables = new URLVariables();
+			variables.sender_email = 'HypoxiaExposed@clientname.com';
+			variables.email_address = 'kristen_mutascio@millet.com'; //'mynameiszak@gmail.com';
+			variables.first_name = 'Kristen'; //'Zak';
+			variables.last_name = 'Mutascio'; //'PeloJoaquin';
+			variables.job_title = 'Professional Project Juggler'; //'Designer';
+			
+			request.data = variables;
+			request.method = URLRequestMethod.POST;
+			var loader:URLLoader = new URLLoader();
+			loader.addEventListener(IOErrorEvent.IO_ERROR, ioErrorHandler);
+			loader.addEventListener(flash.events.Event.COMPLETE, handleSubmitComplete);
+			loader.load(request);
+		}
+		
+		private function handleSubmitComplete(e:flash.events.Event):void {
+			
+			var loader:URLLoader = URLLoader(e.target);
+			var vars:URLVariables = new URLVariables(loader.data);
+			
+			trace('vars.email: '+vars.email);
+			trace('vars.id: '+vars.id);
+			trace('vars.db: '+vars.db);
+
+		}
+
+		protected function HTTPReport(e:HTTPStatusEvent):void
+		{
+			
+			trace(e);
+		}
+		
+		protected function ioErrorHandler(e:IOErrorEvent):void
+		{
+			
+			trace(e);
+			
 		}
 	}
 }

@@ -117,8 +117,8 @@ package
 			// SCENARIO 1: Use a TextFieldTextRenderer
 			FeathersControl.defaultTextRendererFactory = function():ITextRenderer {
 				var tftr:TextFieldTextRenderer = new TextFieldTextRenderer();
-				tftr.textFormat = new TextFormat('_sans', 20, 0xCCCCCC,	true);
-				tftr.textFormat.align = TextFormatAlign.CENTER
+				tftr.textFormat = new TextFormat('_sans', 24, 0x000000,	true);
+				tftr.textFormat.align = TextFormatAlign.LEFT
 				return tftr;
 			};
 			
