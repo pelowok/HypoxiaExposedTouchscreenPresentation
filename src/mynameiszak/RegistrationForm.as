@@ -58,6 +58,7 @@ package mynameiszak
 		
 		private var titlePicker:PickerList;
 		private var firstName:TextInput;
+		private var surName:TextInput;
 		
 		public function RegistrationForm()
 		{
@@ -79,14 +80,16 @@ package mynameiszak
 			
 			// build components
 			hitscreen = BuildHitscreen(hitscreen);
-			keyboard = BuildKeyboard();
+			keyboard = BuildKeyboard(keyboard);
 			titlePicker = BuildTitlePicker(titlePicker);
 			firstName = BuildFirstName(firstName);
+			surName = BuildLastName(surName);
 			
 			// add components to display list in order bottom to top
 			this.addChild(hitscreen);
 			this.addChild(titlePicker);
 			this.addChild(firstName);
+			this.addChild(surName);
 			
 			// keyboard needs to be on top
 			this.addChild(keyboard);
@@ -96,6 +99,7 @@ package mynameiszak
 			arrSlidingForm.push(bg1);
 			arrSlidingForm.push(titlePicker);
 			arrSlidingForm.push(firstName);
+			arrSlidingForm.push(surName);
 			
 			
 			
@@ -119,23 +123,23 @@ package mynameiszak
 		}
 		
 		// SoftKeyboard functions
-		private function BuildKeyboard():SoftKeyboard
+		private function BuildKeyboard(sk:SoftKeyboard):SoftKeyboard
 		{
 			
 			var layout:Vector.<Layout> = new <Layout>[
 				new QwertySwitch(NumbersSymbolsSwitch),
 				new NumbersSymbolsSwitch(QwertySwitch)
 			];
-			keyboard = new SoftKeyboard(layout);
-			keyboard.addEventListener(KeyEvent.KEY_UP, onKeyUp);
+			sk = new SoftKeyboard(layout);
+			sk.addEventListener(KeyEvent.KEY_UP, onKeyUp);
 
-			keyboard.x = 465;
-			keyboard.y = 880;
+			sk.x = 465;
+			sk.y = 880;
 			
-			keyboard.width = 900;
-			keyboard.height = 300;
+			sk.width = 900;
+			sk.height = 300;
 			
-			return(keyboard);
+			return(sk);
 			
 		}
 		
@@ -284,6 +288,37 @@ package mynameiszak
 			// position and appearence
 			ti.x = 450;
 			ti.y = 402;
+			ti.backgroundSkin = new starling.display.Quad(330, 40, 0xffffff);
+			
+			return ti;
+			
+		}
+		
+		private function BuildLastName(ti:TextInput):TextInput
+		{
+			
+			// EMAIL INPUT
+			ti = new TextInput();
+			ti.textEditorFactory = function():ITextEditor
+			{
+				return new TextFieldTextEditor();
+			};
+			
+			ti.promptFactory = function():ITextRenderer
+			{
+				var textRenderer:BitmapFontTextRenderer = new BitmapFontTextRenderer();
+				return textRenderer;
+			}
+			
+			ti.prompt = "Enter your surname";
+			//	ti.selectRange( 0, ti.text.length );
+			
+			// focus manager goes here
+			ti.addEventListener(TouchEvent.TOUCH , HandleTextInputTouch);
+			
+			// position and appearence
+			ti.x = 450;
+			ti.y = 502;
 			ti.backgroundSkin = new starling.display.Quad(330, 40, 0xffffff);
 			
 			return ti;

@@ -99,11 +99,11 @@ package
 		 * Those two assets will only be used if you uncomment the BitmapFontTextRenderer examples 
 		 * below (SCENARIO 2).
 		 */
-		[Embed(source="../assets/fonts/MarkerFelt.png")]
-		public static const FONT_BITMAP:Class;
+//		[Embed(source="../assets/fonts/MarkerFelt.png")]
+//		public static const FONT_BITMAP:Class;
 		
-		[Embed(source="../assets/fonts/MarkerFelt-XML.fnt", mimeType="application/octet-stream")]
-		public static const FONT_XML:Class;
+//		[Embed(source="../assets/fonts/MarkerFelt-XML.fnt", mimeType="application/octet-stream")]
+//		public static const FONT_XML:Class;
 		
 
 		/** 
