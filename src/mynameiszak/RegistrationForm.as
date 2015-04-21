@@ -282,9 +282,9 @@ package mynameiszak
 			ti.addEventListener(TouchEvent.TOUCH , HandleTextInputTouch);
 			
 			// position and appearence
-			ti.x = 420;
-			ti.y = 400;
-			ti.backgroundSkin = new starling.display.Quad(300, 40, 0xffffff);
+			ti.x = 450;
+			ti.y = 402;
+			ti.backgroundSkin = new starling.display.Quad(330, 40, 0xffffff);
 			
 			return ti;
 			
