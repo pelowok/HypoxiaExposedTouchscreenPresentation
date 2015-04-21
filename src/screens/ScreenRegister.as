@@ -18,6 +18,7 @@ package screens
 	
 	public class ScreenRegister extends Sprite
 	{
+		trace("DEBUG: bg1 appears in the ScreenRegister class as well as the RegistrationForm class");
 		
 		private var bg1:Image;
 		private var bg2:Image;
@@ -65,11 +66,6 @@ package screens
 			bg1.y = 200;
 			this.addChild(bg1);
 			
-			newForm = new RegistrationForm();
-			newForm.x = 0;
-			newForm.y = 200;
-			this.addChild(newForm);
-			
 			bg2 = new Image(Assets.getTexture("ScreenFormBG2"));
 			bg2.x = 0;
 			bg2.y = 200;
@@ -100,6 +96,11 @@ package screens
 			this.addChild(footer);
 			
 			this.addChild(AddSideNav());
+			
+			newForm = new RegistrationForm();
+			newForm.x = 0;
+			newForm.y = 200;
+			this.addChild(newForm);
 			
 		}
 

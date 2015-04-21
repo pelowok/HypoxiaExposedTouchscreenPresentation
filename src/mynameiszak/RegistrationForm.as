@@ -1,5 +1,7 @@
 package mynameiszak
 {
+	import com.greensock.TweenLite;
+	
 	import flash.events.Event;
 	import flash.events.HTTPStatusEvent;
 	import flash.events.IOErrorEvent;
@@ -36,17 +38,26 @@ package mynameiszak
 	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
 	
+	import starling.display.DisplayObject;
 	import starling.display.Image;
 	import starling.display.Quad;
 	import starling.display.Sprite;
 	import starling.events.Event;
+	import starling.events.Touch;
+	import starling.events.TouchEvent;
 	
 	public class RegistrationForm extends Sprite
 	{
 		
+		private var bg1:Image;
+		
+		private var hitscreen:UnstyledButton;
+		private var arrSlidingForm:Array;
 		private var keyboard:SoftKeyboard;
 		private var activeInput:TextInput;
+		
 		private var titlePicker:PickerList;
+		private var firstName:TextInput;
 		
 		public function RegistrationForm()
 		{
@@ -60,20 +71,50 @@ package mynameiszak
 		
 		private function BuildForm(e:starling.events.Event = null):void
 		{
+			// add form background
+			bg1 = new Image(Assets.getTexture("ScreenFormBG1"));
+			bg1.x = 0;
+			bg1.y = 0;
+			this.addChild(bg1);
+			
 			// build components
+			hitscreen = BuildHitscreen(hitscreen);
 			keyboard = BuildKeyboard();
 			titlePicker = BuildTitlePicker(titlePicker);
-			
+			firstName = BuildFirstName(firstName);
 			
 			// add components to display list in order bottom to top
+			this.addChild(hitscreen);
 			this.addChild(titlePicker);
+			this.addChild(firstName);
 			
 			// keyboard needs to be on top
 			this.addChild(keyboard);
 			
+			// push all the sliding components into arrSlidingForm
+			arrSlidingForm = new Array();
+			arrSlidingForm.push(bg1);
+			arrSlidingForm.push(titlePicker);
+			arrSlidingForm.push(firstName);
+			
+			
+			
 			// TESTING PURPOSES
 			// Send HTML Email
 		//	SendHtmlEmail();
+			
+		}
+		
+		// HIT SCREEN
+		private function BuildHitscreen(ub:UnstyledButton):UnstyledButton
+		{
+			ub = new UnstyledButton(Assets.getTexture("HitScreen"),"",Assets.getTexture("HitScreen")); 
+			ub.x = 0;
+			ub.y = -200;
+			ub.alpha = 0;
+			ub.visible = false;
+			
+			return ub;
 			
 		}
 		
@@ -216,6 +257,91 @@ package mynameiszak
 				trace( pl.selectedItem.text);
 	
 			}
+		}
+		
+		private function BuildFirstName(ti:TextInput):TextInput
+		{
+			
+			// EMAIL INPUT
+			ti = new TextInput();
+			ti.textEditorFactory = function():ITextEditor
+			{
+				return new TextFieldTextEditor();
+			};
+			
+			ti.promptFactory = function():ITextRenderer
+			{
+				var textRenderer:BitmapFontTextRenderer = new BitmapFontTextRenderer();
+				return textRenderer;
+			}
+			
+			ti.prompt = "Enter your first name";
+		//	ti.selectRange( 0, ti.text.length );
+			
+			// focus manager goes here
+			ti.addEventListener(TouchEvent.TOUCH , HandleTextInputTouch);
+			
+			// position and appearence
+			ti.x = 420;
+			ti.y = 400;
+			ti.backgroundSkin = new starling.display.Quad(300, 40, 0xffffff);
+			
+			return ti;
+			
+		}
+		
+		private function HandleTextInputTouch(e:TouchEvent):void
+		{
+			
+			var ti:TextInput = e.currentTarget as TextInput;
+			
+			var touch:Touch = e.getTouch(ti, starling.events.TouchPhase.BEGAN);
+			if (touch)
+			{
+
+				activeInput = ti;
+				
+				ShowKeyboard();
+				
+			}
+			
+		}
+		
+		public function ShowKeyboard():void
+		{
+			
+			hitscreen.visible = true;
+
+			for each(var obj in arrSlidingForm)
+			{
+				TweenLite.to(obj, 1, {y:(obj.y - 75)});
+			}
+			
+			TweenLite.to(keyboard, 1, {y:580, onComplete:(function():void{hitscreen.addEventListener(TouchEvent.TOUCH, HideKeyboard);})});
+			
+		}
+		
+		public function HideKeyboard(e:TouchEvent):void
+		{
+			
+			var ub:UnstyledButton = e.currentTarget as UnstyledButton;
+			
+			var touch:Touch = e.getTouch(ub, starling.events.TouchPhase.BEGAN);
+			if (touch)
+			{
+
+				hitscreen.visible = false;
+				hitscreen.removeEventListener(TouchEvent.TOUCH, HideKeyboard);
+				
+				for each(var obj in arrSlidingForm)
+				{
+					TweenLite.to(obj, 1, {y:(obj.y + 75)});
+				}
+				
+				TweenLite.to(keyboard, 1, {y:1080});
+			
+			}
+			
 		}
 		
 		// HTML Email on validated SUBMIT
