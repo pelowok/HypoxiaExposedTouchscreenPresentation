@@ -306,7 +306,8 @@ package mynameiszak
 			
 			ti.promptFactory = function():ITextRenderer
 			{
-				var textRenderer:BitmapFontTextRenderer = new BitmapFontTextRenderer();
+				//var textRenderer:BitmapFontTextRenderer = new BitmapFontTextRenderer();
+				var textRenderer:TextFieldTextRenderer;
 				return textRenderer;
 			}
 			
