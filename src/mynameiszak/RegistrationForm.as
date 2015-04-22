@@ -85,8 +85,8 @@ package mynameiszak
 			hitscreen = BuildHitscreen(hitscreen);
 			keyboard = BuildKeyboard(keyboard);
 			
-			titlePicker = BuildPickerList(titlePicker, "Select from List", 447, 305);
-			rolePicker = BuildPickerList(rolePicker, "Select from List", 1047, 305);
+			titlePicker = BuildPickerList(titlePicker, "Select from List", 447, 301);
+			rolePicker = BuildPickerList(rolePicker, "Select from List", 865, 301);
 			
 			firstName = BuildTextInput(firstName, "Enter your first name", 450, 402);
 			surName = BuildTextInput(surName, "Enter your surname", 450, 504);

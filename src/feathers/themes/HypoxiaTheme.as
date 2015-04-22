@@ -156,11 +156,11 @@ package feathers.themes
 				return new TextFieldTextRenderer();
 			};
 			
-			button.defaultLabelProperties.textFormat = new TextFormat( "Helvetica", 22, 0x000000 );
+			button.defaultLabelProperties.textFormat = new TextFormat( "Helvetica", 22, 0x000000, true );
 			button.horizontalAlign = "left";
 			button.defaultLabelProperties.textFormat.align = TextFormatAlign.LEFT;
-
-			
+			button.defaultLabelProperties.textFormat.leftMargin = 5;
+			button.paddingBottom = 11;
 		}
 		
 		/** Initializer for the Key subcomponent */
