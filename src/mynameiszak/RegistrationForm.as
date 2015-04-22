@@ -270,7 +270,6 @@ package mynameiszak
 					renderer.defaultLabelProperties.textFormat = tf;
 					
 					renderer.horizontalAlign = "left";
-					trace("RENDERER ALIGN : " +renderer.horizontalAlign);
 					
 					renderer.defaultSkin = new Image( Assets.getTexture( "GreenBox" ) );
 					renderer.selectedUpSkin = new Image( Assets.getTexture( "PinkBox" ) );

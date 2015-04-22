@@ -12,6 +12,7 @@ package feathers.themes
 	import cc.cote.feathers.softkeyboard.Key;
 	import cc.cote.feathers.softkeyboard.SoftKeyboard;
 	
+	import feathers.controls.Button;
 	import feathers.controls.Callout;
 	import feathers.controls.Label;
 	import feathers.controls.text.BitmapFontTextRenderer;
@@ -115,6 +116,8 @@ package feathers.themes
 			
 			super(root as DisplayObjectContainer);
 			
+			var _style:StyleNameFunctionTheme = new StyleNameFunctionTheme();
+			
 			// SCENARIO 1: Use a TextFieldTextRenderer
 			FeathersControl.defaultTextRendererFactory = function():ITextRenderer {
 				var tftr:TextFieldTextRenderer = new TextFieldTextRenderer();
@@ -141,6 +144,22 @@ package feathers.themes
 			setInitializerForClass(Label, _softkeyboardKeyLabel, Key.SOFTKEYBOARD_KEY_LABEL);
 			setInitializerForClass(Callout, _callout);
 			
+			_style.getStyleProviderForClass(feathers.controls.Button).setFunctionForStyleName("picker-list-button", BuildPickerButtonStyle);
+			
+		}
+		
+		private function BuildPickerButtonStyle(button:Button):void
+		{
+			trace("OMFGBBQ");
+			button.labelFactory = function():ITextRenderer
+			{
+				return new TextFieldTextRenderer();
+			};
+			
+			button.defaultLabelProperties.textFormat = new TextFormat( "Helvetica", 22, 0x000000 );
+			button.horizontalAlign = "left";
+			button.defaultLabelProperties.textFormat.align = TextFormatAlign.LEFT;
+
 			
 		}
 		
