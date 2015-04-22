@@ -26,7 +26,6 @@ package screens
 		
 		private var newForm:RegistrationForm;
 		
-		private var btnSubmit:Button;
 		private var btnReturn:Button;
 		
 		private var footer:Image;
@@ -73,12 +72,6 @@ package screens
 			bg2.x = 0;
 			bg2.y = 200;
 			this.addChild(bg2);
-			
-			btnSubmit = new Button(Assets.getTexture("ScreenFormBtnSubmit"),"",Assets.getTexture("ScreenFormBtnSubmit"));
-			btnSubmit.x = 480;
-			btnSubmit.y = 900;
-			btnSubmit.visible = false;
-			this.addChild(btnSubmit);
 			
 			btnReturn = new Button(Assets.getTexture("ScreenFormBtnReturn"),"",Assets.getTexture("ScreenFormBtnReturn"));
 			btnReturn.x = 480;
@@ -143,7 +136,7 @@ package screens
 			
 			bg2.visible = false;
 			
-			btnSubmit.visible = true;
+			
 			btnReturn.visible = false;
 
 			footer.visible = true;
@@ -153,7 +146,7 @@ package screens
 			
 			logo.addEventListener(Event.TRIGGERED, onLogoTriggered);
 			
-			btnSubmit.addEventListener(Event.TRIGGERED, ChangeFormBG);
+			
 
 			sidenav.addEventListener(Event.CHANGE, toggleSideNav);	
 			
@@ -205,14 +198,15 @@ package screens
 			logo.alpha = (n * -1) + 1.4;			
 			
 		}
-
+		
 		private function ChangeFormBG(e:Event):void{
 			
 			bg2.visible = true;
 			btnReturn.visible = true;
 			
+			
 		//	bg1.visible = false;
-			btnSubmit.visible = false;
+		//	btnSubmit.visible = false;
 			
 			btnReturn.addEventListener(Event.TRIGGERED, CallLastScreen);
 		}

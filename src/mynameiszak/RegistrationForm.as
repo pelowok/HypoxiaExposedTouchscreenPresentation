@@ -32,6 +32,7 @@ package mynameiszak
 	import feathers.layout.AnchorLayoutData;
 	import feathers.themes.HypoxiaTheme;
 	
+	import starling.display.Button;
 	import starling.display.Image;
 	import starling.display.Quad;
 	import starling.display.Sprite;
@@ -63,7 +64,7 @@ package mynameiszak
 		private var insight2:Check;
 		private var insight3:Check;
 		private var insight4:Check;
-		private var submit:Button;
+		private var btnSubmit:starling.display.Button;
 		
 		public function RegistrationForm()
 		{
@@ -105,6 +106,8 @@ package mynameiszak
 			insight3 = BuildCheck(insight3, 1275, 455);
 			insight4 = BuildCheck(insight4, 1275, 535);
 			
+			btnSubmit = BuildSubmitButton(btnSubmit, 652, 680);
+			
 			// add components to display list in order bottom to top
 			this.addChild(hitscreen);
 			this.addChild(titlePicker);
@@ -119,7 +122,7 @@ package mynameiszak
 			this.addChild(insight2);
 			this.addChild(insight3);
 			this.addChild(insight4);
-		//	this.addChild(submit);
+			this.addChild(btnSubmit);
 			
 			// keyboard needs to be on top
 			this.addChild(keyboard);
@@ -215,6 +218,65 @@ package mynameiszak
 					break;
 			}
 			
+		}
+		
+		
+		public function ShowKeyboard():void
+		{
+			
+			if(!keyboardIsVisible)
+			{
+				
+				keyboardIsVisible = true;
+				
+				hitscreen.visible = true;
+				
+				btnSubmit.enabled = false;
+				TweenLite.to(btnSubmit, 1, {y: (btnSubmit.y - 75), alpha:0});
+				
+				
+				for each(var obj in arrSlidingForm)
+				{
+					TweenLite.to(obj, 1, {y:(obj.y - 75)});
+				}
+				
+				TweenLite.to(keyboard, 1, {y:580, onComplete:(function():void{hitscreen.addEventListener(TouchEvent.TOUCH, HideKeyboard);})});
+				
+			}
+			
+		}
+		
+		public function HideKeyboard(e:TouchEvent):void
+		{
+			if(keyboardIsVisible)
+			{
+				var ub:UnstyledButton = e.currentTarget as UnstyledButton;
+				
+				var touch:Touch = e.getTouch(ub, starling.events.TouchPhase.BEGAN);
+				if (touch)
+				{
+					
+					TweenLite.to(btnSubmit, 1, {y: (btnSubmit.y + 75), alpha:1});
+					
+					if(TestFields)
+					{
+						btnSubmit.enabled = true;
+					}
+					
+					keyboardIsVisible = false;
+					
+					hitscreen.visible = false;
+					hitscreen.removeEventListener(TouchEvent.TOUCH, HideKeyboard);
+					
+					for each(var obj in arrSlidingForm)
+					{
+						TweenLite.to(obj, 1, {y:(obj.y + 75)});
+					}
+					
+					TweenLite.to(keyboard, 1, {y:1080});
+					
+				}
+			}
 		}
 		
 		private function BuildPickerListItemArray(pl:PickerList):Array
@@ -430,52 +492,115 @@ package mynameiszak
 		{
 			
 		}
-		
-		public function ShowKeyboard():void
+			
+		private function BuildSubmitButton(btn:starling.display.Button, _x:int, _y:int):starling.display.Button
 		{
 			
-			if(!keyboardIsVisible)
-			{
-				
-				keyboardIsVisible = true;
-				
-				hitscreen.visible = true;
-				
-				for each(var obj in arrSlidingForm)
-				{
-					TweenLite.to(obj, 1, {y:(obj.y - 75)});
-				}
-				
-				TweenLite.to(keyboard, 1, {y:580, onComplete:(function():void{hitscreen.addEventListener(TouchEvent.TOUCH, HideKeyboard);})});
-				
-			}
+			btn = new starling.display.Button(Assets.getTexture("ScreenFormBtnSubmit"),"",Assets.getTexture("ScreenFormBtnSubmit"));
+			btn.x = _x;
+			btn.y = _y;
+			
+			btn.addEventListener(TouchEvent.TOUCH, HandleSubmitTouch);
+			
+			trace("btnSubmit needs to be !visible");
+		//	btn.visible = false;
+
+			return btn;
 			
 		}
 		
-		public function HideKeyboard(e:TouchEvent):void
+		private function HandleSubmitTouch(e:TouchEvent):void
 		{
-			if(keyboardIsVisible)
+			var btn:starling.display.Button = e.currentTarget as starling.display.Button;
+			
+			var touch:Touch = e.getTouch(btn, starling.events.TouchPhase.BEGAN);
+			if (touch)
 			{
-				var ub:UnstyledButton = e.currentTarget as UnstyledButton;
-				
-				var touch:Touch = e.getTouch(ub, starling.events.TouchPhase.BEGAN);
-				if (touch)
+				if( TestFields() )
 				{
-	
-					keyboardIsVisible = false;
+					trace("HandleSubmitTouch PASSED validation test : TestFields");
+				} else {
 					
-					hitscreen.visible = false;
-					hitscreen.removeEventListener(TouchEvent.TOUCH, HideKeyboard);
+					trace("HandleSubmitTouch FAILED validation test : TestFields");
 					
-					for each(var obj in arrSlidingForm)
-					{
-						TweenLite.to(obj, 1, {y:(obj.y + 75)});
-					}
-					
-					TweenLite.to(keyboard, 1, {y:1080});
-				
 				}
 			}
+		}
+		
+		
+		private function ValidateName():Boolean
+		{
+			var foo:Boolean = false;
+			
+			trace("firstName.text : " + firstName.text);
+			trace("surName.text : " + surName.text);
+			
+			if(firstName.text.length >= 1)
+			{
+				if(surName.text.length >= 1)
+				{
+					foo = true;
+				} else {
+					trace("Validation failed at step 2 of ValidateName");
+				}
+			} else {
+				trace("Validation failed at step 1 of ValidateName");
+			}
+			
+			return foo;
+		}
+		
+		private function ValidateEmail():Boolean
+		{
+			var foo:Boolean = false;
+			
+			trace("email1.text : " + email1.text);
+			trace("email2.text : " + email2.text);
+			
+			if(isValidEmail(email1.text) )
+			{
+				
+				if(email1.text === email2.text)
+				{
+					trace("VALID EMAIL");
+					foo = true;
+				} else {
+					trace("Validation failed at ValidateEmail, step 2");
+				}
+
+				
+			} else {
+				trace("Validation failed at ValidateEmail, step 1");
+			}
+			
+			return foo;
+		}		
+		
+		private function isValidEmail(email:String):Boolean {
+			
+			var emailExpression:RegExp = /([a-z0-9._-]+?)@([a-z0-9.-]+)\.([a-z]{2,4})/;
+			return emailExpression.test(email);
+			
+		}
+		
+		private function TestFields():Boolean
+		{
+			var foo:Boolean = false;
+			
+			var fooName:Boolean = ValidateName();
+			var fooEmail:Boolean = ValidateEmail();
+			
+			trace("  -- fooName : " + fooName);
+			trace("  -- fooEmail : " + fooEmail);
+			
+			if( fooName == true && fooEmail == true )
+			{
+				trace("btnSubmit enabled");
+				foo = true;;
+			}
+			
+			return foo;
+			
 		}
 		
 		// HTML Email on validated SUBMIT
