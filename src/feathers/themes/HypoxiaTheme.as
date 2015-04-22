@@ -1,4 +1,4 @@
-package  
+package feathers.themes  
 {
 
 	import flash.display.Bitmap;
@@ -22,6 +22,7 @@ package
 	import feathers.display.Scale9Image;
 	import feathers.text.BitmapFontTextFormat;
 	import feathers.textures.Scale9Textures;
+	import feathers.themes.StyleNameFunctionTheme;
 	
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
@@ -35,64 +36,64 @@ package
 		/**
 		 * Embed all skins, icons and fonts necessary to skin the SoftKeyboard component.
 		 */
-		[Embed(source="../assets/images/SoftKeyboardKeySkinRegularUp.png")]
+		[Embed(source="../../../assets/images/SoftKeyboardKeySkinRegularUp.png")]
 		public static const SoftKeyboardKeySkinRegularUp:Class;
 		
-		[Embed(source="../assets/images/SoftKeyboardKeySkinRegularHover.png")]
+		[Embed(source="../../../assets/images/SoftKeyboardKeySkinRegularHover.png")]
 		public static const SoftKeyboardKeySkinRegularHover:Class;
 		
-		[Embed(source="../assets/images/SoftKeyboardKeySkinRegularDown.png")]
+		[Embed(source="../../../assets/images/SoftKeyboardKeySkinRegularDown.png")]
 		public static const SoftKeyboardKeySkinRegularDown:Class;
 		
-		[Embed(source="../assets/images/SoftKeyboardKeySkinSpecialUp.png")]
+		[Embed(source="../../../assets/images/SoftKeyboardKeySkinSpecialUp.png")]
 		public static const SoftKeyboardKeySkinSpecialUp:Class;
 		
-		[Embed(source="../assets/images/SoftKeyboardKeySkinSpecialHover.png")]
+		[Embed(source="../../../assets/images/SoftKeyboardKeySkinSpecialHover.png")]
 		public static const SoftKeyboardKeySkinSpecialHover:Class;
 		
-		[Embed(source="../assets/images/SoftKeyboardKeySkinSpecialDown.png")]
+		[Embed(source="../../../assets/images/SoftKeyboardKeySkinSpecialDown.png")]
 		public static const SoftKeyboardKeySkinSpecialDown:Class;
 		
-		[Embed(source="../assets/images/SoftKeyboardKeySkinHasVariantsUp.png")]
+		[Embed(source="../../../assets/images/SoftKeyboardKeySkinHasVariantsUp.png")]
 		public static const SoftKeyboardKeySkinHasVariantsUp:Class;
 		
-		[Embed(source="../assets/images/SoftKeyboardKeySkinHasVariantsHover.png")]
+		[Embed(source="../../../assets/images/SoftKeyboardKeySkinHasVariantsHover.png")]
 		public static const SoftKeyboardKeySkinHasVariantsHover:Class;
 		
-		[Embed(source="../assets/images/SoftKeyboardKeySkinHasVariantsDown.png")]
+		[Embed(source="../../../assets/images/SoftKeyboardKeySkinHasVariantsDown.png")]
 		public static const SoftKeyboardKeySkinHasVariantsDown:Class;
 
-		[Embed(source="../assets/images/SoftKeyboardIconBackspace.png")]
+		[Embed(source="../../../assets/images/SoftKeyboardIconBackspace.png")]
 		public static const SoftKeyboardIconBackspace:Class;
 		
-		[Embed(source="../assets/images/SoftKeyboardIconCapsLock.png")]
+		[Embed(source="../../../assets/images/SoftKeyboardIconCapsLock.png")]
 		public static const SoftKeyboardIconCapsLock:Class;
 		
-		[Embed(source="../assets/images/SoftKeyboardIconCapsLockSelected.png")]
+		[Embed(source="../../../assets/images/SoftKeyboardIconCapsLockSelected.png")]
 		public static const SoftKeyboardIconCapsLockSelected:Class;
 		
-		[Embed(source="../assets/images/SoftKeyboardIconEnter.png")]
+		[Embed(source="../../../assets/images/SoftKeyboardIconEnter.png")]
 		public static const SoftKeyboardIconEnter:Class;
 		
-		[Embed(source="../assets/images/SoftKeyboardIconTab.png")]
+		[Embed(source="../../../assets/images/SoftKeyboardIconTab.png")]
 		public static const SoftKeyboardIconTab:Class;
 		
-		[Embed(source="../assets/images/SoftKeyboardCalloutBackground.png")]
+		[Embed(source="../../../assets/images/SoftKeyboardCalloutBackground.png")]
 		public static const SoftKeyboardCalloutBackground:Class;
 		
-		[Embed(source="../assets/images/SoftKeyboardCalloutRightArrow.png")]
+		[Embed(source="../../../assets/images/SoftKeyboardCalloutRightArrow.png")]
 		public static const SoftKeyboardCalloutRightArrow:Class;
 		
-		[Embed(source="../assets/images/SoftKeyboardCalloutLeftArrow.png")]
+		[Embed(source="../../../assets/images/SoftKeyboardCalloutLeftArrow.png")]
 		public static const SoftKeyboardCalloutLeftArrow:Class;
 		
-		[Embed(source="../assets/images/SoftKeyboardCalloutTopArrow.png")]
+		[Embed(source="../../../assets/images/SoftKeyboardCalloutTopArrow.png")]
 		public static const SoftKeyboardCalloutTopArrow:Class;
 		
-		[Embed(source="../assets/images/SoftKeyboardCalloutBottomArrow.png")]
+		[Embed(source="../../../assets/images/SoftKeyboardCalloutBottomArrow.png")]
 		public static const SoftKeyboardCalloutBottomArrow:Class;
 		
-		[Embed(source="../assets/images/SoftKeyboardGlobalBackground.png")]
+		[Embed(source="../../../assets/images/SoftKeyboardGlobalBackground.png")]
 		public static const SoftKeyboardGlobalBackground:Class;
 		
 		/**
@@ -117,8 +118,8 @@ package
 			// SCENARIO 1: Use a TextFieldTextRenderer
 			FeathersControl.defaultTextRendererFactory = function():ITextRenderer {
 				var tftr:TextFieldTextRenderer = new TextFieldTextRenderer();
-				tftr.textFormat = new TextFormat("Helvetica", 24, 0x000000, true);
-				tftr.textFormat.align = TextFormatAlign.LEFT
+				tftr.textFormat = new TextFormat("Helvetica", 24, 0xFFFFFF, true);
+				tftr.textFormat.align = TextFormatAlign.CENTER
 				return tftr;
 			};
 			
@@ -139,7 +140,8 @@ package
 			setInitializerForClass(Key, _key);
 			setInitializerForClass(Label, _softkeyboardKeyLabel, Key.SOFTKEYBOARD_KEY_LABEL);
 			setInitializerForClass(Callout, _callout);
-
+			
+			
 		}
 		
 		/** Initializer for the Key subcomponent */

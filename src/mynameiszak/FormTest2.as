@@ -3,7 +3,7 @@ package mynameiszak
 	
 	import flash.events.Event;
 	
-	import HypoxiaTheme;
+	import feathers.themes.HypoxiaTheme;
 	
 	import cc.cote.feathers.softkeyboard.KeyEvent;
 	import cc.cote.feathers.softkeyboard.SoftKeyboard;
@@ -31,6 +31,7 @@ package mynameiszak
 	import starling.display.Sprite;
 	import starling.display.Stage;
 	import starling.events.Event;
+	import feathers.themes.HypoxiaTheme;
 
 	public class FormTest2 extends starling.display.Sprite
 	{

@@ -18,9 +18,10 @@ package screens
 	
 	public class ScreenRegister extends Sprite
 	{
-		trace("DEBUG: bg1 appears in the ScreenRegister class as well as the RegistrationForm class");
+	
+	//	trace("DEBUG: bg1 appears in the ScreenRegister class as well as the RegistrationForm class");
 		
-		private var bg1:Image;
+	//	private var bg1:Image;
 		private var bg2:Image;
 		
 		private var newForm:RegistrationForm;
@@ -61,10 +62,12 @@ package screens
 		//	bg1 = new Image(Assets.getTexture("ScreenFormBG1"));
 		
 		// In-progress form
-			bg1 = new Image(Assets.getTexture("ScreenFormBG1"));
-			bg1.x = 0;
-			bg1.y = 200;
-			this.addChild(bg1);
+		
+			//  bg1 was moved to RegistrationForm class
+			//	bg1 = new Image(Assets.getTexture("ScreenFormBG1"));
+			//	bg1.x = 0;
+			//	bg1.y = 200;
+			//	this.addChild(bg1);
 			
 			bg2 = new Image(Assets.getTexture("ScreenFormBG2"));
 			bg2.x = 0;
@@ -99,7 +102,7 @@ package screens
 			
 			newForm = new RegistrationForm();
 			newForm.x = 0;
-			newForm.y = 200;
+			newForm.y = 168;
 			this.addChild(newForm);
 			
 		}
@@ -135,7 +138,7 @@ package screens
 			sidenav.visible = true;
 			DeselectSideNav();
 			
-			bg1.visible = true;
+		//	bg1.visible = true;
 			newForm.visible = true;
 			
 			bg2.visible = false;
@@ -208,7 +211,7 @@ package screens
 			bg2.visible = true;
 			btnReturn.visible = true;
 			
-			bg1.visible = false;
+		//	bg1.visible = false;
 			btnSubmit.visible = false;
 			
 			btnReturn.addEventListener(Event.TRIGGERED, CallLastScreen);

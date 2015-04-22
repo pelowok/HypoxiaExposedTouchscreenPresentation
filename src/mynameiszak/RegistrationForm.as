@@ -10,7 +10,6 @@ package mynameiszak
 	import flash.net.URLRequestMethod;
 	import flash.net.URLVariables;
 	import flash.text.TextFormat;
-	import flash.text.TextFormatAlign;
 	
 	import cc.cote.feathers.softkeyboard.KeyEvent;
 	import cc.cote.feathers.softkeyboard.SoftKeyboard;
@@ -19,32 +18,26 @@ package mynameiszak
 	import cc.cote.feathers.softkeyboard.layouts.QwertySwitch;
 	
 	import feathers.controls.Button;
-	import feathers.controls.Label;
+	import feathers.controls.Check;
 	import feathers.controls.List;
 	import feathers.controls.PickerList;
 	import feathers.controls.TextInput;
-	import feathers.controls.popups.DropDownPopUpContentManager;
 	import feathers.controls.renderers.DefaultListItemRenderer;
 	import feathers.controls.renderers.IListItemRenderer;
-	import feathers.controls.text.BitmapFontTextRenderer;
 	import feathers.controls.text.TextFieldTextEditor;
 	import feathers.controls.text.TextFieldTextRenderer;
-	import feathers.core.FeathersControl;
-	import feathers.core.FocusManager;
-	import feathers.core.IFocusManager;
 	import feathers.core.ITextEditor;
 	import feathers.core.ITextRenderer;
 	import feathers.data.ListCollection;
-	import feathers.layout.AnchorLayout;
 	import feathers.layout.AnchorLayoutData;
 	
-	import starling.display.DisplayObject;
 	import starling.display.Image;
 	import starling.display.Quad;
 	import starling.display.Sprite;
 	import starling.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
+	import feathers.themes.HypoxiaTheme;
 	
 	public class RegistrationForm extends Sprite
 	{
@@ -59,6 +52,16 @@ package mynameiszak
 		private var titlePicker:PickerList;
 		private var firstName:TextInput;
 		private var surName:TextInput;
+		private var institution:TextInput;
+		private var rolePicker:PickerList;
+		private var specialtyPicker:PickerList;
+		private var email1:TextInput;
+		private var email2:TextInput;
+		private var insight1:Check;
+		private var insight2:Check;
+		private var insight3:Check;
+		private var insight4:Check;
+		private var submit:Button;
 		
 		public function RegistrationForm()
 		{
@@ -81,15 +84,19 @@ package mynameiszak
 			// build components
 			hitscreen = BuildHitscreen(hitscreen);
 			keyboard = BuildKeyboard(keyboard);
-			titlePicker = BuildTitlePicker(titlePicker);
+			
+			titlePicker = BuildPickerList(titlePicker, "Select from List", 447, 305);
+			rolePicker = BuildPickerList(rolePicker, "Select from List", 1047, 305);
+			
 			firstName = BuildTextInput(firstName, "Enter your first name", 450, 402);
-			surName = BuildTextInput(surName, "Enter your surname", 450, 502);
+			surName = BuildTextInput(surName, "Enter your surname", 450, 504);
 			
 			// add components to display list in order bottom to top
 			this.addChild(hitscreen);
 			this.addChild(titlePicker);
 			this.addChild(firstName);
 			this.addChild(surName);
+			this.addChild(rolePicker);
 			
 			// keyboard needs to be on top
 			this.addChild(keyboard);
@@ -100,8 +107,7 @@ package mynameiszak
 			arrSlidingForm.push(titlePicker);
 			arrSlidingForm.push(firstName);
 			arrSlidingForm.push(surName);
-			
-			
+			arrSlidingForm.push(rolePicker);
 			
 			// TESTING PURPOSES
 			// Send HTML Email
@@ -180,22 +186,50 @@ package mynameiszak
 			
 		}
 		
-		private function BuildTitlePicker(pl:PickerList):PickerList
+		private function BuildPickerListItemArray(pl:PickerList):Array
+		{
+
+			var items:Array = [];
+
+			switch(pl)
+			{
+				case titlePicker:
+					trace("titlePicker");
+					items.push({ text: "<no preferred title>" });
+					items.push({ text: "Dr." });
+					items.push({ text: "Mr." });
+					items.push({ text: "Mrs." });
+					items.push({ text: "Ms." });
+					items.fixed = true;
+					break;
+				case rolePicker:
+					trace("rolePicker");
+					items.push({ text: "PHYSICIAN" });
+					items.push({ text: "RESEARCHER" });
+					items.push({ text: "NURSE PRACTITIONER" });
+					items.push({ text: "REGISTERED NURSE" });
+					items.push({ text: "PHYSICIAN'S ASSISTANT" });
+					items.push({ text: "OTHER" });
+					items.fixed = false;
+					break;
+				default:
+					trace("didn't work");
+					break;		
+			}
+
+			
+			
+			return items;
+			
+		}
+		private function BuildPickerList(pl:PickerList, promptString:String, _x:int, _y:int):PickerList
 		{
 			
-			var items:Array = [];
-			
-			items.push({ text: "<no preferred title>" });
-			items.push({ text: "Dr." });
-			items.push({ text: "Mr." });
-			items.push({ text: "Mrs." });
-			items.push({ text: "Ms." });
-
-			items.fixed = true;
+			var itemArray:Array = BuildPickerListItemArray(pl);
 			
 			pl = new PickerList();
 			pl.prompt = "Select an Item";
-			pl.dataProvider = new ListCollection(items);
+			pl.dataProvider = new ListCollection(itemArray);
 			
 			//normally, the first item is selected, but let's show the prompt
 			pl.selectedIndex = -1;
@@ -208,8 +242,10 @@ package mynameiszak
 			//the typical item helps us set an ideal width for the button
 			//if we don't use a typical item, the button will resize to fit
 			//the currently selected item.
-			pl.typicalItem = { text: "Select an Item" };
+		//	pl.typicalItem = { text: "Select an Item" };
 			pl.labelField = "text";
+			
+			pl.customButtonStyleName = "picker-list-button";
 			
 			pl.listFactory = function():List
 			{
@@ -217,7 +253,9 @@ package mynameiszak
 				//notice that we're setting typicalItem on the list separately. we
 				//may want to have the list measure at a different width, so it
 				//might need a different typical item than the picker list's button.
-				list.typicalItem = { text: "< No preferred title >" };
+			//	list.typicalItem = { text: "< No preferred title >" };
+				list.width = 335;
+
 				list.itemRendererFactory = function():IListItemRenderer
 				{
 					var renderer:DefaultListItemRenderer = new DefaultListItemRenderer();
@@ -227,11 +265,20 @@ package mynameiszak
 					//PickerList cannot simply pass its labelField down to item
 					//renderers automatically
 					renderer.labelField = "text";
+					
+					var tf:TextFormat = new TextFormat("Helvetica", 22, 0xFFFFFF);
+					renderer.defaultLabelProperties.textFormat = tf;
+					
+					renderer.horizontalAlign = "left";
+					trace("RENDERER ALIGN : " +renderer.horizontalAlign);
+					
 					renderer.defaultSkin = new Image( Assets.getTexture( "GreenBox" ) );
 					renderer.selectedUpSkin = new Image( Assets.getTexture( "PinkBox" ) );
+					renderer.padding = 10;
+
 					return renderer;
 				};
-
+				
 				return list;
 			};
 			
@@ -243,11 +290,11 @@ package mynameiszak
 			// screen position and appearence
 			pl.width = 335;
 			
-			pl.x = 447;
-			pl.y = 305;
-
-			return pl;
+			pl.x = _x;
+			pl.y = _y;
 			
+			return pl;
+		
 		}
 		
 		private function title_changeHandler(e:starling.events.Event):void
