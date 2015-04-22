@@ -30,6 +30,7 @@ package mynameiszak
 	import feathers.core.ITextRenderer;
 	import feathers.data.ListCollection;
 	import feathers.layout.AnchorLayoutData;
+	import feathers.themes.HypoxiaTheme;
 	
 	import starling.display.Image;
 	import starling.display.Quad;
@@ -37,10 +38,11 @@ package mynameiszak
 	import starling.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
-	import feathers.themes.HypoxiaTheme;
 	
 	public class RegistrationForm extends Sprite
 	{
+		
+		public var keyboardIsVisible:Boolean;
 		
 		private var bg1:Image;
 		
@@ -75,6 +77,9 @@ package mynameiszak
 		
 		private function BuildForm(e:starling.events.Event = null):void
 		{
+			
+			keyboardIsVisible = false;
+			
 			// add form background
 			bg1 = new Image(Assets.getTexture("ScreenFormBG1"));
 			bg1.x = 0;
@@ -87,9 +92,18 @@ package mynameiszak
 			
 			titlePicker = BuildPickerList(titlePicker, "Select from List", 447, 301);
 			rolePicker = BuildPickerList(rolePicker, "Select from List", 865, 301);
+			specialtyPicker = BuildPickerList(specialtyPicker, "Select from List", 865, 406);
 			
 			firstName = BuildTextInput(firstName, "Enter your first name", 450, 402);
 			surName = BuildTextInput(surName, "Enter your surname", 450, 504);
+			institution = BuildTextInput(institution, "Enter Institution Name", 450, 609);
+			email1 = BuildTextInput(email1, "Enter your email address", 868, 506);
+			email2 = BuildTextInput(email2, "Confirm your email address", 868, 609);
+			
+			insight1 = BuildCheck(insight1, 1275, 305);
+			insight2 = BuildCheck(insight2, 1275, 380);
+			insight3 = BuildCheck(insight3, 1275, 455);
+			insight4 = BuildCheck(insight4, 1275, 535);
 			
 			// add components to display list in order bottom to top
 			this.addChild(hitscreen);
@@ -97,6 +111,15 @@ package mynameiszak
 			this.addChild(firstName);
 			this.addChild(surName);
 			this.addChild(rolePicker);
+			this.addChild(specialtyPicker);
+			this.addChild(institution);
+			this.addChild(email1);
+			this.addChild(email2);
+			this.addChild(insight1);
+			this.addChild(insight2);
+			this.addChild(insight3);
+			this.addChild(insight4);
+		//	this.addChild(submit);
 			
 			// keyboard needs to be on top
 			this.addChild(keyboard);
@@ -108,6 +131,14 @@ package mynameiszak
 			arrSlidingForm.push(firstName);
 			arrSlidingForm.push(surName);
 			arrSlidingForm.push(rolePicker);
+			arrSlidingForm.push(specialtyPicker);
+			arrSlidingForm.push(institution);
+			arrSlidingForm.push(email1);
+			arrSlidingForm.push(email2);
+			arrSlidingForm.push(insight1);
+			arrSlidingForm.push(insight2);
+			arrSlidingForm.push(insight3);
+			arrSlidingForm.push(insight4);
 			
 			// TESTING PURPOSES
 			// Send HTML Email
@@ -209,6 +240,16 @@ package mynameiszak
 					items.push({ text: "NURSE PRACTITIONER" });
 					items.push({ text: "REGISTERED NURSE" });
 					items.push({ text: "PHYSICIAN'S ASSISTANT" });
+					items.push({ text: "OTHER" });
+					items.fixed = false;
+					break;
+				case specialtyPicker:
+					trace("specialtyPicker");
+					items.push({ text: "LOREM IPSUM 1" });
+					items.push({ text: "LOREM IPSUM 2" });
+					items.push({ text: "LOREM IPSUM 3" });
+					items.push({ text: "LOREM IPSUM 4" });
+					items.push({ text: "LOREM IPSUM 5" });
 					items.push({ text: "OTHER" });
 					items.fixed = false;
 					break;
@@ -353,47 +394,88 @@ package mynameiszak
 
 				activeInput = ti;
 				
-				ShowKeyboard();
+				if(!keyboardIsVisible)
+				{
+					ShowKeyboard();
+				}
 				
 			}
+			
+		}
+		
+		private function BuildCheck(check:Check, _x:int, _y:int):Check
+		{
+			
+			// CHECK BOXES
+			check = new Check();
+			
+			check.defaultIcon = new Image(Assets.getTexture("Icon5"));
+			
+			check.defaultSelectedIcon = new Image(Assets.getTexture("Icon4"));
+				
+			check.isSelected = true;
+
+			// focus manager goes here
+			check.addEventListener(TouchEvent.TOUCH , HandleCheckTouch);
+			
+			// position and appearence
+			check.x = _x;
+			check.y = _y;
+
+			return check;
+			
+		}
+		
+		private function HandleCheckTouch(e:TouchEvent):void
+		{
 			
 		}
 		
 		public function ShowKeyboard():void
 		{
 			
-			hitscreen.visible = true;
-
-			for each(var obj in arrSlidingForm)
+			if(!keyboardIsVisible)
 			{
-				TweenLite.to(obj, 1, {y:(obj.y - 75)});
+				
+				keyboardIsVisible = true;
+				
+				hitscreen.visible = true;
+				
+				for each(var obj in arrSlidingForm)
+				{
+					TweenLite.to(obj, 1, {y:(obj.y - 75)});
+				}
+				
+				TweenLite.to(keyboard, 1, {y:580, onComplete:(function():void{hitscreen.addEventListener(TouchEvent.TOUCH, HideKeyboard);})});
+				
 			}
-			
-			TweenLite.to(keyboard, 1, {y:580, onComplete:(function():void{hitscreen.addEventListener(TouchEvent.TOUCH, HideKeyboard);})});
 			
 		}
 		
 		public function HideKeyboard(e:TouchEvent):void
 		{
-			
-			var ub:UnstyledButton = e.currentTarget as UnstyledButton;
-			
-			var touch:Touch = e.getTouch(ub, starling.events.TouchPhase.BEGAN);
-			if (touch)
+			if(keyboardIsVisible)
 			{
-
-				hitscreen.visible = false;
-				hitscreen.removeEventListener(TouchEvent.TOUCH, HideKeyboard);
+				var ub:UnstyledButton = e.currentTarget as UnstyledButton;
 				
-				for each(var obj in arrSlidingForm)
+				var touch:Touch = e.getTouch(ub, starling.events.TouchPhase.BEGAN);
+				if (touch)
 				{
-					TweenLite.to(obj, 1, {y:(obj.y + 75)});
-				}
+	
+					keyboardIsVisible = false;
+					
+					hitscreen.visible = false;
+					hitscreen.removeEventListener(TouchEvent.TOUCH, HideKeyboard);
+					
+					for each(var obj in arrSlidingForm)
+					{
+						TweenLite.to(obj, 1, {y:(obj.y + 75)});
+					}
+					
+					TweenLite.to(keyboard, 1, {y:1080});
 				
-				TweenLite.to(keyboard, 1, {y:1080});
-			
+				}
 			}
-			
 		}
 		
 		// HTML Email on validated SUBMIT

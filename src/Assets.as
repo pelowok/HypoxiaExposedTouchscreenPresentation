@@ -183,8 +183,11 @@ package
 		[Embed(source="../assets/form/PinkFrame.png")]
 		public static const PinkFrame:Class;
 		
-		[Embed(source="../assets/form/bluesq.png")]
-		public static const BlueSquare:Class;
+		[Embed(source="../assets/form/icon4.png")]
+		public static const Icon4:Class;
+		
+		[Embed(source="../assets/form/icon5.png")]
+		public static const Icon5:Class;
 		
 		// Assets for nav
 		[Embed(source="../assets/nav/navNext.png")]
