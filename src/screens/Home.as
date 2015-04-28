@@ -65,6 +65,16 @@ package screens
 			//    them), and the event can bubble.
 			this.addEventListener(Event.TRIGGERED, onHomeScreenClick);
 			
+			AddOverlay();
+			
+		}
+		
+		private function AddOverlay():void	
+		{
+			var overlay:Overlay = new Overlay();
+			overlay.touchable = false;
+			overlay.name = "gridoverlay";
+			this.addChild(overlay);
 		}
 		
 		private function onHomeScreenClick(e:Event):void
@@ -81,7 +91,7 @@ package screens
 			this.visible = true;
 			
 			// Start listening to events
-			this.addEventListener(Event.ENTER_FRAME, homeAnimation);
+		//	this.addEventListener(Event.ENTER_FRAME, homeAnimation);
 			
 			// Tween screen to visible
 			TweenLite.to(this, 0.5, {alpha:1});

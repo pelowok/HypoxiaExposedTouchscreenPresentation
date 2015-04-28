@@ -45,3 +45,4 @@ Temporary Items
 *.zip
 bin-release/HypoxiaExposedTouchscreenPresentation.exe
 bin-release/HypoxiaExposedTouchscreenPresentation.exe
+bin-debug/HypoxiaExposedTouchscreenPresentation.swf

@@ -186,6 +186,16 @@ package screens
 			ref4.visible = false;
 			this.addChild(ref4);
 			
+			AddOverlay();
+			
+		}
+		
+		private function AddOverlay():void	
+		{
+			var overlay:Overlay = new Overlay();
+			overlay.touchable = false;
+			overlay.name = "gridoverlay";
+			this.addChild(overlay);
 		}
 		
 		private function AddPageNav():TabBar{

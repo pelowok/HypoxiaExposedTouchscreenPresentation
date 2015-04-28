@@ -151,6 +151,16 @@ package screens
 			ref.visible = false;
 			this.addChild(ref);
 			
+			AddOverlay();
+			
+		}
+		
+		private function AddOverlay():void	
+		{
+			var overlay:Overlay = new Overlay();
+			overlay.touchable = false;
+			overlay.name = "gridoverlay";
+			this.addChild(overlay);
 		}
 		
 		private function AddBaseNav():TabBar{

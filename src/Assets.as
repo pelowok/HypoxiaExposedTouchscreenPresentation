@@ -223,6 +223,8 @@ package
 		[Embed(source="../assets/nav/subNavtap.png")]
 		public static const SubNavb:Class;
 		
+		[Embed(source="../assets/grid.png")]
+		public static const GridOverlay:Class;
 
 		public static var gameScreens:Array = new Array();
 		private static var gameTextures:Dictionary = new Dictionary();	

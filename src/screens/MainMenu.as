@@ -6,7 +6,6 @@ package screens
 	import events.NavigationEvent;
 	
 	import starling.display.Button;
-	import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.events.Event;
 		
@@ -43,22 +42,32 @@ package screens
 			// in drawScreen() and initialize()
 			
 			btn1 = new Button(Assets.getTexture("MainButton01a"),"",Assets.getTexture("MainButton01a"));
-			btn1.x = 400;
-			btn1.y = 400;
+			btn1.x = 460;
+			btn1.y = 280;
 			this.addChild(btn1);
 			
 			btn2 = new Button(Assets.getTexture("MainButton02a"),"",Assets.getTexture("MainButton02a"));
-			btn2.x = 800;
-			btn2.y = 400;
+			btn2.x = 1010;
+			btn2.y = 280;
 			this.addChild(btn2);
 			
-			logo = new Button(Assets.getTexture("HypoxiaExposedLogo"));
-			logo.x = 50;
-			logo.y = 10;
-			logo.scaleX = 0.5;
-			logo.scaleY = 0.5;
+			logo = new Button(Assets.getTexture("HypoxiaExposedLogo"),"",Assets.getTexture("HypoxiaExposedLogo"));
+			logo.x = 75;
+			logo.y = 75;
+			logo.scaleX = 0.4;
+			logo.scaleY = 0.4;
 			this.addChild(logo);
+
+			AddOverlay();
 			
+		}
+		
+		private function AddOverlay():void	
+		{
+			var overlay:Overlay = new Overlay();
+			overlay.touchable = false;
+			overlay.name = "gridoverlay";
+			this.addChild(overlay);
 		}
 		
 		public function initialize():void{
@@ -112,6 +121,20 @@ package screens
 			{
 				
 				logo.removeEventListener(Event.TRIGGERED, onLogoTriggered);
+				
+			}
+			
+			if(btn1.hasEventListener(Event.TRIGGERED))
+			{
+				
+				btn1.removeEventListener(Event.TRIGGERED, onBtn1Triggered);
+
+			}
+			
+			if(btn2.hasEventListener(Event.TRIGGERED))
+			{
+				
+				btn2.removeEventListener(Event.TRIGGERED, onBtn2Triggered);
 				
 			}
 		}

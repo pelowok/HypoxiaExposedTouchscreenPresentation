@@ -5,8 +5,6 @@ package mynameiszak
 	
 	import events.NavigationEvent;
 	
-	
-	
 	import screens.BackGround;
 	import screens.Home;
 	import screens.MainMenu;
@@ -30,6 +28,7 @@ package mynameiszak
 		private var screen12:Screen12;
 		private var screen20:Screen20;
 		public var screenRegister:ScreenRegister;
+	
 		
 		public function Game()
 		{

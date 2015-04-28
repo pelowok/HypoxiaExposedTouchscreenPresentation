@@ -2,21 +2,22 @@ package screens
 {
 	import com.greensock.TweenLite;
 	
+	import flash.desktop.NativeApplication;
+	
 	import events.NavigationEvent;
 	
 	import starling.display.Button;
+	import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.events.Event;
-	import starling.display.Image;
 	import starling.events.KeyboardEvent;
-	
-	import flash.desktop.NativeApplication;
 	
 	public class BackGround extends Sprite
 	{
 		
 		private var bg:Image;
 		private var footer:Button;
+		private var hasOverlay:Boolean;
 		
 		public function BackGround()
 		{
@@ -30,6 +31,9 @@ package screens
 		{
 			
 			trace(e.target + " added to stage.");
+			
+			hasOverlay = false;
+			
 			drawScreen();
 			
 		}
@@ -62,20 +66,34 @@ package screens
 			// Start listening to events
 			this.addEventListener(Event.ENTER_FRAME, bgAnimation);
 			
-			this.addEventListener(KeyboardEvent.KEY_DOWN, ShutDown);
+			this.addEventListener(KeyboardEvent.KEY_DOWN, CheckKeys);
 			
 			// Tween screen to visible
 			TweenLite.to(this, 0.5, {alpha:1});
 			
+			AddOverlay();
+			
 		}
 		
-		private function ShutDown(e:KeyboardEvent):void
+		private function AddOverlay():void	
 		{
+			var overlay:Overlay = new Overlay();
+			overlay.touchable = false;
+			overlay.name = "gridoverlay";
+			this.addChild(overlay);
+		}
+		
+		private function CheckKeys(e:KeyboardEvent):void
+		{
+			trace(e.charCode);
+	
 			
-			if(e.charCode == 113)
+		//	QUIT function	
+		/*	if(e.charCode == 113)
 			{
 				NativeApplication.nativeApplication.exit();
 			}
+		*/
 			
 		}
 		

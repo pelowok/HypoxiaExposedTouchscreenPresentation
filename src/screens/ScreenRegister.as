@@ -98,6 +98,16 @@ package screens
 			newForm.y = 168;
 			this.addChild(newForm);
 			
+			AddOverlay();
+			
+		}
+		
+		private function AddOverlay():void	
+		{
+			var overlay:Overlay = new Overlay();
+			overlay.touchable = false;
+			overlay.name = "gridoverlay";
+			this.addChild(overlay);
 		}
 
 		private function AddSideNav():TabBar{
