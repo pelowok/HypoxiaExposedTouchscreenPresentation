@@ -8,8 +8,8 @@ package screens
 	import feathers.controls.ToggleButton;
 	import feathers.data.ListCollection;
 	
-	import mynameiszak.RegistrationForm;
 	import mynameiszak.Game;
+	import mynameiszak.RegistrationForm;
 	
 	import starling.display.Button;
 	import starling.display.Image;
@@ -199,19 +199,22 @@ package screens
 			
 		}
 		
-		private function ChangeFormBG(e:Event):void{
+		public function ChangeFormBG():void{
+			
+			newForm.visible = false;
 			
 			bg2.visible = true;
 			btnReturn.visible = true;
 			
-			
-		//	bg1.visible = false;
-		//	btnSubmit.visible = false;
-			
 			btnReturn.addEventListener(Event.TRIGGERED, CallLastScreen);
+			
 		}
 		
 		private function CallLastScreen(e:Event):void{
+			
+			this.cleanUp();
+			
+			this.initialize();
 			
 			trace("CALLING : " + Assets.globalReturnScreenID);
 			
@@ -242,6 +245,22 @@ package screens
 				logo.removeEventListener(Event.TRIGGERED, onLogoTriggered);
 				
 			}
+			
+			if(btnReturn.hasEventListener(Event.TRIGGERED))
+			{
+				btnReturn.removeEventListener(Event.TRIGGERED, CallLastScreen);
+			}
+			
+			
+			
+			this.removeChild(newForm);
+			
+			newForm = new RegistrationForm();
+			newForm.x = 0;
+			newForm.y = 168;
+			this.addChild(newForm);
+			
+			
 			
 		}
 	}

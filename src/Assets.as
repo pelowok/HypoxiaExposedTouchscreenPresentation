@@ -171,6 +171,9 @@ package
 		[Embed(source="../assets/form/btnSubmit.png")]
 		public static const ScreenFormBtnSubmit:Class;
 		
+		[Embed(source="../assets/form/btnSubmitDisabled.png")]
+		public static const ScreenFormBtnSubmitDisabled:Class;
+		
 		[Embed(source="../assets/form/downIcon.png")]
 		public static const DownIcon:Class;
 		

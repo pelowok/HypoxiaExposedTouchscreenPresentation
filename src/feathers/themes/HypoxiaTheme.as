@@ -150,7 +150,7 @@ package feathers.themes
 		
 		private function BuildPickerButtonStyle(button:Button):void
 		{
-			trace("OMFGBBQ");
+			// trace("OMFGBBQ");
 			button.labelFactory = function():ITextRenderer
 			{
 				return new TextFieldTextRenderer();

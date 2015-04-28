@@ -32,6 +32,8 @@ package mynameiszak
 	import feathers.layout.AnchorLayoutData;
 	import feathers.themes.HypoxiaTheme;
 	
+	import screens.ScreenRegister;
+	
 	import starling.display.Button;
 	import starling.display.Image;
 	import starling.display.Quad;
@@ -44,6 +46,7 @@ package mynameiszak
 	{
 		
 		public var keyboardIsVisible:Boolean;
+		public var arrContactData:Array;
 		
 		private var bg1:Image;
 		
@@ -142,6 +145,11 @@ package mynameiszak
 			arrSlidingForm.push(insight2);
 			arrSlidingForm.push(insight3);
 			arrSlidingForm.push(insight4);
+			arrSlidingForm.push(btnSubmit);
+			
+			
+			// Prepare array for contact data
+			arrContactData = new Array();
 			
 			// TESTING PURPOSES
 			// Send HTML Email
@@ -231,9 +239,10 @@ package mynameiszak
 				
 				hitscreen.visible = true;
 				
+				trace("ShowKeyboard is disabling btnSubmit");
 				btnSubmit.enabled = false;
-				TweenLite.to(btnSubmit, 1, {y: (btnSubmit.y - 75), alpha:0});
-				
+				btnSubmit.removeEventListener( TouchEvent.TOUCH, HandleSubmitTouch );
+				trace("btnSubmit.hasEventListener(TouchEvent.TOUCH) : " + btnSubmit.hasEventListener(TouchEvent.TOUCH) );
 				
 				for each(var obj in arrSlidingForm)
 				{
@@ -255,13 +264,8 @@ package mynameiszak
 				var touch:Touch = e.getTouch(ub, starling.events.TouchPhase.BEGAN);
 				if (touch)
 				{
-					
-					TweenLite.to(btnSubmit, 1, {y: (btnSubmit.y + 75), alpha:1});
-					
-					if(TestFields)
-					{
-						btnSubmit.enabled = true;
-					}
+
+					ToggleSubmit( TestFields() );
 					
 					keyboardIsVisible = false;
 					
@@ -287,7 +291,7 @@ package mynameiszak
 			switch(pl)
 			{
 				case titlePicker:
-					trace("titlePicker");
+				//	trace("titlePicker");
 					items.push({ text: "<no preferred title>" });
 					items.push({ text: "Dr." });
 					items.push({ text: "Mr." });
@@ -296,7 +300,7 @@ package mynameiszak
 					items.fixed = true;
 					break;
 				case rolePicker:
-					trace("rolePicker");
+				//	trace("rolePicker");
 					items.push({ text: "PHYSICIAN" });
 					items.push({ text: "RESEARCHER" });
 					items.push({ text: "NURSE PRACTITIONER" });
@@ -306,7 +310,7 @@ package mynameiszak
 					items.fixed = false;
 					break;
 				case specialtyPicker:
-					trace("specialtyPicker");
+				//	trace("specialtyPicker");
 					items.push({ text: "LOREM IPSUM 1" });
 					items.push({ text: "LOREM IPSUM 2" });
 					items.push({ text: "LOREM IPSUM 3" });
@@ -387,7 +391,7 @@ package mynameiszak
 			
 			
 			// Event handlers
-			pl.addEventListener(starling.events.Event.CHANGE, title_changeHandler);
+			pl.addEventListener(starling.events.Event.CHANGE, PickerChangeHander);
 			
 			// screen position and appearence
 			pl.width = 335;
@@ -399,7 +403,7 @@ package mynameiszak
 		
 		}
 		
-		private function title_changeHandler(e:starling.events.Event):void
+		private function PickerChangeHander(e:starling.events.Event):void
 		{
 			var pl:PickerList;
 			
@@ -408,8 +412,12 @@ package mynameiszak
 			
 				pl = e.target as PickerList;
 				trace( pl.selectedItem.text);
-	
+				
+				// Should we enable the submit button?
+				ToggleSubmit( TestFields() );
+				
 			}
+			
 		}
 		
 		private function BuildTextInput(ti:TextInput, promptString:String, _x:int, _y:int):TextInput
@@ -499,11 +507,9 @@ package mynameiszak
 			btn = new starling.display.Button(Assets.getTexture("ScreenFormBtnSubmit"),"",Assets.getTexture("ScreenFormBtnSubmit"));
 			btn.x = _x;
 			btn.y = _y;
+			btn.disabledState = Assets.getTexture( "ScreenFormBtnSubmitDisabled" );
 			
-			btn.addEventListener(TouchEvent.TOUCH, HandleSubmitTouch);
-			
-			trace("btnSubmit needs to be !visible");
-		//	btn.visible = false;
+			btn.enabled = false;
 
 			return btn;
 			
@@ -518,7 +524,61 @@ package mynameiszak
 			{
 				if( TestFields() )
 				{
+					
 					trace("HandleSubmitTouch PASSED validation test : TestFields");
+					
+					arrContactData = [];
+					
+					arrContactData = new Array(10)
+					// mandatory and validated already
+					trace("email1.text : " + email1.text);
+					trace("email2.text : " + email2.text);
+					
+					arrContactData[0] = ( email1.text );
+					
+					trace("arrContactData[0] : " + arrContactData[0]);
+					
+					arrContactData[1] = ( firstName.text );
+					arrContactData[2] = ( surName.text );
+					
+					// not validated, so check length first
+					if(titlePicker.selectedItem != null)
+					{
+						arrContactData[3] = ( titlePicker.selectedItem.text );
+					} else {
+						arrContactData[3] = ( "null" );
+					}
+					
+					if(institution.text.length > 0)
+					{
+						arrContactData[4] = ( institution.text );
+					} else {
+						arrContactData[4] = ( "null" );
+					}
+					
+					if(rolePicker.selectedItem != null)
+					{
+						arrContactData[5] = ( rolePicker.selectedItem.text );
+					} else {
+						arrContactData[5] = ( "null" );
+					}
+					
+					if(specialtyPicker.selectedItem != null)
+					{
+						arrContactData[6] = ( specialtyPicker.selectedItem.text );
+					} else {
+						arrContactData[6] = ( "null" );
+					}
+		
+					
+					// does not require validation
+					arrContactData[7] = ( insight1.isSelected );
+					arrContactData[8] = ( insight2.isSelected );
+					arrContactData[9] = ( insight3.isSelected );
+					arrContactData[10] = ( insight4.isSelected );
+					
+					PretendToSendHtml();
+					
 				} else {
 					
 					trace("HandleSubmitTouch FAILED validation test : TestFields");
@@ -595,15 +655,124 @@ package mynameiszak
 			
 			if( fooName == true && fooEmail == true )
 			{
-				trace("btnSubmit enabled");
-				foo = true;;
-			}
-			
+
+				foo = true;
+				
+			} 
+
+			trace("TestFields returns : " + foo);
 			return foo;
 			
 		}
 		
+		private function ToggleSubmit(valid:Boolean):void
+		{
+			
+			if(valid)
+			{
+				trace("VALID");
+
+				trace(" * DEBUG * EventListener not releasing or detecting properly on btnSubmit ");	
+				
+				trace("Adding event listener TOUCH to btnSubmit");
+				btnSubmit.addEventListener(TouchEvent.TOUCH, HandleSubmitTouch);
+				
+				btnSubmit.enabled = true;
+				
+			} else {
+				trace("INVALID");
+				
+				trace(" * DEBUG * EventListener not releasing or detecting properly on btnSubmit ");
+				
+				trace("Removing event listener TOUCH from btnSubmit");
+				btnSubmit.removeEventListener(TouchEvent.TOUCH, HandleSubmitTouch);
+
+				btnSubmit.enabled = false;
+				
+			}
+			
+			trace( ">> btnSubmit.hasEventListener( TouchEvent.TOUCH ) : " + btnSubmit.hasEventListener( TouchEvent.TOUCH ) );
+			
+		}
+		
 		// HTML Email on validated SUBMIT
+		private function PretendToSendHtml():void
+		{
+			
+		//	var request:URLRequest = new URLRequest('http://www.mynameiszak.com/sandbox/php/HtmlEmailScript.php');
+			var request:URLRequest = new URLRequest('http://www.mynameiszak.com/sandbox/php/HtmlEmailScript2.php');
+			
+			var variables:URLVariables = new URLVariables();
+			
+			variables.sender_email = 'mynameiszak@gmail.com';
+			
+			variables.email_address = arrContactData[0];
+			variables.first_name = arrContactData[1];
+			variables.last_name = arrContactData[2];
+			
+			variables.job_title = arrContactData[3];
+			variables.institution_name = arrContactData[4];
+			variables.role_name = arrContactData[5];
+			variables.specialty_name = arrContactData[6];
+			
+			variables.insight1_bool = arrContactData[7];
+			variables.insight2_bool = arrContactData[8];
+			variables.insight3_bool = arrContactData[9];
+			variables.insight4_bool = arrContactData[10];
+			
+			request.data = variables;
+			request.method = URLRequestMethod.POST;
+	
+			trace("EMAIL.REQUEST : " + request );
+			trace("  DATA: " + request.data );
+			trace("  METHOD : " + request.method );
+
+			var loader:URLLoader = new URLLoader();
+			loader.addEventListener(IOErrorEvent.IO_ERROR, ioErrorHandler);
+			loader.addEventListener(flash.events.Event.COMPLETE, handleSubmitComplete);
+			loader.load(request);
+			
+		}
+		
+		private function CallSecondHTML():void
+		{
+			
+			trace("CallSecondHTML fired.");
+			
+			var request:URLRequest = new URLRequest('http://www.mynameiszak.com/sandbox/php/add_rowgs.php');
+			
+			var variables:URLVariables = new URLVariables();
+			
+			variables.sender_email = 'mynameiszak@gmail.com';
+			
+			variables.email_address = arrContactData[0];
+			variables.first_name = arrContactData[1];
+			variables.last_name = arrContactData[2];
+			
+			variables.job_title = arrContactData[3];
+			variables.institution_name = arrContactData[4];
+			variables.role_name = arrContactData[5];
+			variables.specialty_name = arrContactData[6];
+			
+			variables.insight1_bool = arrContactData[7];
+			variables.insight2_bool = arrContactData[8];
+			variables.insight3_bool = arrContactData[9];
+			variables.insight4_bool = arrContactData[10];
+			
+			request.data = variables;
+			request.method = URLRequestMethod.POST;
+			
+			trace("EMAIL.REQUEST : " + request );
+			trace("  DATA: " + request.data );
+			trace("  METHOD : " + request.method );
+			
+			var loader:URLLoader = new URLLoader();
+			loader.addEventListener(IOErrorEvent.IO_ERROR, ioErrorHandler);
+			loader.addEventListener(flash.events.Event.COMPLETE, handleSubmitComplete2);
+			loader.load(request);
+			
+		}
+		
 		private function SendHtmlEmail():void
 		{
 			
@@ -629,10 +798,51 @@ package mynameiszak
 			var loader:URLLoader = URLLoader(e.target);
 			var vars:URLVariables = new URLVariables(loader.data);
 			
-			trace('vars.email: '+vars.email);
-			trace('vars.id: '+vars.id);
-			trace('vars.db: '+vars.db);
+			trace('vars.SenderEmail: '+vars.SenderEmail);
+			trace('vars.EmailAddress: '+vars.EmailAddress);
+			trace('vars.FirstName: '+vars.FirstName);
+			trace('vars.LastName: '+vars.LastName);
+			trace('vars.JobTitle: ' + vars.JobTitle);
+			trace('vars.InstitutionName: ' + vars.InstitutionName);
+			trace('vars.RoleName: ' + vars.RoleName);
+			trace('vars.SpecialtyName: ' + vars.SpecialtyName);
+			trace('vars.Insight1: ' + vars.Insight1);
+			trace('vars.Insight2: ' + vars.Insight2);
+			trace('vars.Insight3: ' + vars.Insight3);
+			trace('vars.Insight4: ' + vars.Insight4);
+			
+			CallSecondHTML();
 
+		}
+		
+		private function handleSubmitComplete2(e:flash.events.Event):void {
+			
+			var loader:URLLoader = URLLoader(e.target);
+			var vars:URLVariables = new URLVariables(loader.data);
+			
+			trace('vars.SenderEmail: '+vars.SenderEmail);
+			trace('vars.EmailAddress: '+vars.EmailAddress);
+			trace('vars.FirstName: '+vars.FirstName);
+			trace('vars.LastName: '+vars.LastName);
+			trace('vars.JobTitle: ' + vars.JobTitle);
+			trace('vars.InstitutionName: ' + vars.InstitutionName);
+			trace('vars.RoleName: ' + vars.RoleName);
+			trace('vars.SpecialtyName: ' + vars.SpecialtyName);
+			trace('vars.Insight1: ' + vars.Insight1);
+			trace('vars.Insight2: ' + vars.Insight2);
+			trace('vars.Insight3: ' + vars.Insight3);
+			trace('vars.Insight4: ' + vars.Insight4);
+			
+			StoreDataLocally();
+			
+			if(this.parent is ScreenRegister)
+			{
+				var screenreg:ScreenRegister = this.parent as ScreenRegister;
+				
+				screenreg.ChangeFormBG();
+				
+			}	
+			
 		}
 
 		protected function HTTPReport(e:HTTPStatusEvent):void
@@ -646,6 +856,26 @@ package mynameiszak
 			
 			trace(e);
 			
+		}
+		
+		private function StoreDataLocally():void
+		{
+			
+			trace("ADD CODE HERE TO STORE DATA LOCALLY");
+			
+			
+			//  onComplete, call clean up to clear the array of contact data
+			CleanUp();
+			
+			
+			
+		}
+		
+		public function CleanUp():void
+		{
+			arrContactData = [];
+			
+			trace("ADD CODE HERE TO FIRE THIS DATA CLEAR ONCOMPLETE");
 		}
 	}
 }

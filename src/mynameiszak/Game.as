@@ -29,7 +29,7 @@ package mynameiszak
 		private var screen11:Screen11;
 		private var screen12:Screen12;
 		private var screen20:Screen20;
-		private var screenRegister:ScreenRegister;
+		public var screenRegister:ScreenRegister;
 		
 		public function Game()
 		{
