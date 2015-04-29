@@ -2,10 +2,11 @@ package screens
 {
 	import com.greensock.TweenLite;
 	
+	import flash.display.MovieClip;
+	
 	import events.NavigationEvent;
 	
 	import feathers.controls.TabBar;
-	import feathers.controls.ToggleButton;
 	import feathers.data.ListCollection;
 	
 	import starling.display.Button;
@@ -18,6 +19,11 @@ package screens
 	{
 		
 		private var bg:Image;
+//		private var mc:MovieClip;
+//		private var iMC:int;
+		
+		private var chart:Image;
+		private var whitebox:Image;
 		
 		private var btn1b:Button;
 		private var btn2b:Button;
@@ -50,6 +56,8 @@ package screens
 
 		}
 		
+		
+		
 		private function drawScreen():void 
 		{
 			
@@ -61,6 +69,18 @@ package screens
 			bg.x = 0;
 			bg.y = 100;
 			this.addChild(bg);
+			
+		//	iMC = -1;
+		//	temp();
+			chart = new Image(Assets.getTexture("Screen12Chart"));
+			chart.x = 330;
+			chart.y = 300;
+			this.addChild(chart);
+			
+			whitebox = new Image(Assets.getTexture("WhiteBox"));
+			whitebox.x = 435;
+			whitebox.y = 408;
+			this.addChild(whitebox);
 			
 			this.addChild(AddBaseNav());
 			
@@ -78,7 +98,7 @@ package screens
 			btn2b.visible = false;
 			this.addChild(btn2b);
 			
-			btnNext = new Button(Assets.getTexture("SideNav1a"),"",Assets.getTexture("SideNav1a"));
+			btnNext = new Button(Assets.getTexture("ReturnHome"),"",Assets.getTexture("ReturnHome"));
 			btnNext.x = 1740;
 			btnNext.y = 610;
 			btnNext.visible = false;
@@ -222,6 +242,11 @@ package screens
 			trace("ASSIGNING globalReturnScreenID: " + Assets.globalReturnScreenID);
 			
 			this.visible = true;
+			
+			chart.visible = true;
+			whitebox.height = 270;
+			whitebox.alpha = 1;
+			whitebox.visible = true;
 			
 			togglePageButtons(-1);
 			
@@ -391,12 +416,22 @@ package screens
 		private function screenAnimation(e:Event):void
 		{
 			
-			// Start animations			
-			var currentDate:Date = new Date();
-			var speed:Number = 0.0006;
-			var n:Number = 0.7 + (Math.cos(currentDate.getTime() * speed) * 0.3);
+			// Start animations
 			
-			logo.alpha = (n * -1) + 1.4;			
+			if(whitebox.height > 0)
+			{
+				whitebox.height -=1;
+			} else {
+				whitebox.height = 0;
+				whitebox.visible = false;
+			}
+			
+			
+		//	var currentDate:Date = new Date();
+		//	var speed:Number = 0.0006;
+		//	var n:Number = 0.7 + (Math.cos(currentDate.getTime() * speed) * 0.3);
+			
+		//	logo.alpha = (n * -1) + 1.4;			
 			
 		}
 		
@@ -437,5 +472,62 @@ package screens
 			}
 			
 		}
+	/*	
+		private function temp():void
+		{
+			
+			iMC += 1;
+			
+			// create atlas
+			var texture:Texture = Texture.fromEmbeddedAsset(Assets["BGPersist" + iMC + "_png"]);
+			var xml:XML = XML( new Assets["BGPersist" + iMC + "_xml"]() );
+			var atlas:TextureAtlas = new TextureAtlas(texture, xml);
+			
+			// create movie clip if it isn't already instantiated
+			if(mc){
+				
+				
+				
+			} else {
+				
+				mc = new MovieClip(atlas.getTextures("bgPresist"), 6);
+				mc.loop = false; // default: true
+				
+			}
+			
+			mc.addEventListener(Event.COMPLETE, movieCompletedHandler);
+			
+			this.addChild(mc);
+			mc.x = 300;
+			mc.y = 300;
+			
+			// control playback
+			mc.stop();
+			
+			// important: add movie to juggler
+			Starling.juggler.add(mc);
+			
+		}
+		
+		private function movieCompletedHandler(e:Event):void
+		{
+			
+			mc.removeEventListener(Event.COMPLETE, movieCompletedHandler);
+			
+			if(iMC <= 3)
+			{
+				mc.texture.dispose();
+				
+				temp();
+				
+			} else {
+				
+				mc.stop();
+				Starling.juggler.remove(mc);
+				
+			}
+
+		}
+	*/
 	}
 }

@@ -3,6 +3,7 @@ package
 	import starling.textures.Texture;
 	import flash.utils.Dictionary;
 	import flash.display.Bitmap;
+	import starling.textures.TextureAtlas;
 
 	public class Assets
 	{
@@ -97,6 +98,12 @@ package
 		[Embed(source="../assets/1-2_pervasive/1-2bg.png")]
 		public static const Screen12BG:Class;
 		
+		[Embed(source="../assets/1-2_pervasive/bgPersist.png")]
+		public static const Screen12Chart:Class;
+		
+		[Embed(source="../assets/1-2_pervasive/whiteBox.png")]
+		public static const WhiteBox:Class;
+		
 		[Embed(source="../assets/1-2_pervasive/1-2ref.png")]
 		public static const Screen12Ref:Class;
 		
@@ -111,6 +118,39 @@ package
 		
 		[Embed(source="../assets/1-2_pervasive/pop2.png")]
 		public static const Screen12NavPop2:Class;
+		
+		[Embed(source="../assets/1-2_pervasive/returnHome.png")]
+		public static const ReturnHome:Class;
+		
+		[Embed(source="../assets/1-2_pervasive/bgPersist0.xml", mimeType="application/octet-stream")]
+		public static const BGPersist0_xml:Class;
+		
+		[Embed(source="../assets/1-2_pervasive/bgPersist1.xml", mimeType="application/octet-stream")]
+		public static const BGPersist1_xml:Class;
+		
+		[Embed(source="../assets/1-2_pervasive/bgPersist2.xml", mimeType="application/octet-stream")]
+		public static const BGPersist2_xml:Class;
+		
+		[Embed(source="../assets/1-2_pervasive/bgPersist3.xml", mimeType="application/octet-stream")]
+		public static const BGPersist3_xml:Class;
+		
+		[Embed(source="../assets/1-2_pervasive/bgPersist4.xml", mimeType="application/octet-stream")]
+		public static const BGPersist4_xml:Class;
+		
+		[Embed(source="../assets/1-2_pervasive/bgPersist0.png")]
+		public static const BGPersist0_png:Class;
+		
+		[Embed(source="../assets/1-2_pervasive/bgPersist1.png")]
+		public static const BGPersist1_png:Class;
+		
+		[Embed(source="../assets/1-2_pervasive/bgPersist2.png")]
+		public static const BGPersist2_png:Class;
+		
+		[Embed(source="../assets/1-2_pervasive/bgPersist3.png")]
+		public static const BGPersist3_png:Class;
+		
+		[Embed(source="../assets/1-2_pervasive/bgPersist4.png")]
+		public static const BGPersist4_png:Class;
 		
 		// Assets for 2.0
 		[Embed(source="../assets/2-0_insights/2-0bg.png")]
@@ -225,6 +265,8 @@ package
 		
 		[Embed(source="../assets/grid.png")]
 		public static const GridOverlay:Class;
+		
+
 
 		public static var gameScreens:Array = new Array();
 		private static var gameTextures:Dictionary = new Dictionary();	
@@ -246,6 +288,22 @@ package
 			
 		}
 		
-		
+		public static function getAtlas(name:String):TextureAtlas
+		{
+			
+			if (gameTextures[name] == undefined)
+			{
+				
+				var str:String = name + "_xml";
+				var tex:Texture = Texture.fromEmbeddedAsset(new Assets[( str )]() );
+				var xml:XML = new XML(new Assets[(name + "_png")]() );
+				
+				gameTextures[name] = new TextureAtlas(tex, xml);
+				
+			}
+			
+			return gameTextures[name];
+			
+		}
 	}
 }

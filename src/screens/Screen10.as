@@ -5,7 +5,6 @@ package screens
 	import events.NavigationEvent;
 	
 	import feathers.controls.TabBar;
-	import feathers.controls.ToggleButton;
 	import feathers.data.ListCollection;
 	
 	import starling.display.Button;
@@ -59,7 +58,7 @@ package screens
 			
 			bg = new Image(Assets.getTexture("Screen10BG"));
 			bg.x = 0;
-			bg.y = 100;
+			bg.y = 0;
 			this.addChild(bg);
 			
 			this.addChild(AddBaseNav());
@@ -67,34 +66,34 @@ package screens
 			this.addChild(AddPageNav());
 			
 			btn1b = new Button(Assets.getTexture("Screen10Nav1b"),"",Assets.getTexture("Screen10Nav1b"));
-			btn1b.x = 371;
-			btn1b.y = 435;
+			btn1b.x = 360;
+			btn1b.y = 350;
 			btn1b.visible = false;
 			this.addChild(btn1b);
 			
 			btn2b = new Button(Assets.getTexture("Screen10Nav2b"),"",Assets.getTexture("Screen10Nav2b"));
-			btn2b.x = 767;
-			btn2b.y = 435;
+			btn2b.x = 771;
+			btn2b.y = 350;
 			btn2b.visible = false;
 			this.addChild(btn2b);
 			
 			btn3b = new Button(Assets.getTexture("Screen10Nav3b"),"",Assets.getTexture("Screen10Nav3b"));
-			btn3b.x = 1163;
-			btn3b.y = 435;
+			btn3b.x = 1182;
+			btn3b.y = 350;
 			btn3b.visible = false;
 			this.addChild(btn3b);
 			
 			btnNext = new Button(Assets.getTexture("NavNext"),"",Assets.getTexture("NavNext"));
 			btnNext.x = 1740;
-			btnNext.y = 610;
+			btnNext.y = 550;
 			btnNext.visible = false;
 			this.addChild(btnNext);
 
-			logo = new Button(Assets.getTexture("HypoxiaExposedLogo"));
+			logo = new Button(Assets.getTexture("HypoxiaExposedLogo"),"",Assets.getTexture("HypoxiaExposedLogo"));
 			logo.x = 50;
-			logo.y = 10;
-			logo.scaleX = 0.25;
-			logo.scaleY = 0.25;
+			logo.y = 15;
+			logo.scaleX = 0.33;
+			logo.scaleY = 0.33;
 			this.addChild(logo);
 			
 			footer = new Image(Assets.getTexture("Footer"));
@@ -125,6 +124,8 @@ package screens
 		
 		private function AddBaseNav():TabBar{
 			
+			// THREE SMALL GREEN OUTLINE BOXES AT BOTTOM OF PAGE
+			
 			basenav = new TabBar();
 			
 			basenav.dataProvider = new ListCollection(
@@ -149,8 +150,8 @@ package screens
 					},
 				]);
 			
-			basenav.x = 900;
-			basenav.y = 855;
+			basenav.x = 880;
+			basenav.y = 895;
 			basenav.gap = 35;
 			
 			return(basenav);
@@ -159,6 +160,7 @@ package screens
 		
 		private function AddPageNav():TabBar{
 			
+			// THREE WHITE NAV BOXES MID SCREEN
 			pagenav = new TabBar();
 			
 			pagenav.dataProvider = new ListCollection(
@@ -174,9 +176,9 @@ package screens
 					},
 				]);
 			
-			pagenav.x = 371;
-			pagenav.y = 575;
-			pagenav.gap = 10;
+			pagenav.x = 360;
+			pagenav.y = 485;
+			pagenav.gap = 25;
 			
 			return(pagenav);
 			
@@ -208,8 +210,8 @@ package screens
 					},
 				]);
 			
-			sidenav.x = 1500;
-			sidenav.y = 10;
+			sidenav.x = 1505;
+			sidenav.y = 50;
 			sidenav.gap = 2;
 			
 			return(sidenav);
@@ -248,7 +250,7 @@ package screens
 			ref.visible = false;
 				
 			// Start listening to events
-			this.addEventListener(Event.ENTER_FRAME, screenAnimation);
+		//	this.addEventListener(Event.ENTER_FRAME, screenAnimation);
 			
 			logo.addEventListener(Event.TRIGGERED, onLogoTriggered);
 
