@@ -186,7 +186,7 @@ package screens
 			ref4.visible = false;
 			this.addChild(ref4);
 			
-			AddOverlay();
+		//	AddOverlay();
 			
 		}
 		
@@ -246,8 +246,8 @@ package screens
 					},
 				]);
 			
-			sidenav.x = 1160;
-			sidenav.y = 10;
+			sidenav.x = 1505;
+			sidenav.y = 50;
 			sidenav.gap = 2;
 			
 			return(sidenav);

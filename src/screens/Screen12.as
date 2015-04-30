@@ -67,19 +67,19 @@ package screens
 			
 			bg = new Image(Assets.getTexture("Screen12BG"));
 			bg.x = 0;
-			bg.y = 100;
+			bg.y = 0;
 			this.addChild(bg);
 			
 		//	iMC = -1;
 		//	temp();
 			chart = new Image(Assets.getTexture("Screen12Chart"));
-			chart.x = 330;
-			chart.y = 300;
+			chart.x = 345;
+			chart.y = 350;
 			this.addChild(chart);
 			
 			whitebox = new Image(Assets.getTexture("WhiteBox"));
-			whitebox.x = 435;
-			whitebox.y = 408;
+			whitebox.x = 450;
+			whitebox.y = 458;
 			this.addChild(whitebox);
 			
 			this.addChild(AddBaseNav());
@@ -87,26 +87,26 @@ package screens
 			this.addChild(AddPageNav());
 			
 			btn1b = new Button(Assets.getTexture("Screen12NavPop1"),"",Assets.getTexture("Screen12NavPop1"));
-			btn1b.x = 1260;
-			btn1b.y = 120;
+			btn1b.x = 1327;
+			btn1b.y = 210;
 			btn1b.visible = false;
 			this.addChild(btn1b);
 			
 			btn2b = new Button(Assets.getTexture("Screen12NavPop2"),"",Assets.getTexture("Screen12NavPop2"));
-			btn2b.x = 1260;
-			btn2b.y = 411;
+			btn2b.x = 1327;
+			btn2b.y = 480;
 			btn2b.visible = false;
 			this.addChild(btn2b);
 			
 			btnNext = new Button(Assets.getTexture("ReturnHome"),"",Assets.getTexture("ReturnHome"));
 			btnNext.x = 1740;
-			btnNext.y = 610;
+			btnNext.y = 560;
 			btnNext.visible = false;
 			this.addChild(btnNext);
 			
 			btnPrev = new Button(Assets.getTexture("NavPrev"),"",Assets.getTexture("NavPrev"));
 			btnPrev.x = 10;
-			btnPrev.y = 610;
+			btnPrev.y = 560;
 			btnPrev.visible = false;
 			this.addChild(btnPrev);
 			
@@ -131,7 +131,7 @@ package screens
 			ref.visible = false;
 			this.addChild(ref);
 			
-			AddOverlay();
+		//	AddOverlay();
 			
 		}
 		
@@ -169,8 +169,8 @@ package screens
 					},
 				]);
 			
-			basenav.x = 900;
-			basenav.y = 855;
+			basenav.x = 880;
+			basenav.y = 895;
 			basenav.gap = 35;
 			
 			return(basenav);
@@ -192,8 +192,8 @@ package screens
 					},
 				]);
 			
-			pagenav.x = 1400;
-			pagenav.y = 280;
+			pagenav.x = 1440;
+			pagenav.y = 340;
 			pagenav.gap = 10;
 			
 			return(pagenav);
@@ -226,8 +226,8 @@ package screens
 					},
 				]);
 			
-			sidenav.x = 1500;
-			sidenav.y = 10;
+			sidenav.x = 1505;
+			sidenav.y = 50;
 			sidenav.gap = 2;
 			
 			return(sidenav);
@@ -420,10 +420,11 @@ package screens
 			
 			if(whitebox.height > 0)
 			{
-				whitebox.height -=1;
+				whitebox.height -=3;
 			} else {
 				whitebox.height = 0;
 				whitebox.visible = false;
+				this.removeEventListener(Event.ENTER_FRAME, screenAnimation);
 			}
 			
 			

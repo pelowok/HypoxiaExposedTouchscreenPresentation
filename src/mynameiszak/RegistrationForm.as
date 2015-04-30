@@ -2,6 +2,7 @@ package mynameiszak
 {
 	import com.greensock.TweenLite;
 	
+	import flash.display3D.textures.Texture;
 	import flash.events.Event;
 	import flash.events.HTTPStatusEvent;
 	import flash.events.IOErrorEvent;
@@ -700,7 +701,8 @@ package mynameiszak
 		{
 			
 		//	var request:URLRequest = new URLRequest('http://www.mynameiszak.com/sandbox/php/HtmlEmailScript.php');
-			var request:URLRequest = new URLRequest('http://www.mynameiszak.com/sandbox/php/HtmlEmailScript2.php');
+		//	var request:URLRequest = new URLRequest('http://www.mynameiszak.com/sandbox/php/HtmlEmailScript2.php');
+			var request:URLRequest = new URLRequest('http://www.mynameiszak.com/sandbox/php/HtmlEmailScript3.php');
 			
 			var variables:URLVariables = new URLVariables();
 			

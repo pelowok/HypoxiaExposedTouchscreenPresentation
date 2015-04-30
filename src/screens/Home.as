@@ -65,7 +65,7 @@ package screens
 			//    them), and the event can bubble.
 			this.addEventListener(Event.TRIGGERED, onHomeScreenClick);
 			
-			AddOverlay();
+		//	AddOverlay();
 			
 		}
 		

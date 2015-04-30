@@ -59,18 +59,25 @@ package mynameiszak
 				ns.play(target);
 				ns.pause();
 				
-				video.width = 1280;
-				video.height = 720;
+			//	video.width = 1280;
+			//	video.height = 720;
 				
-				video.x = 320;
-				video.y = 120;
+			//	video.x = 320;
+			//	video.y = 210;
 
+				video.width = 1920;
+				video.height = 1080;
+				
+				video.x = 0;
+				video.y = 0;
+				
+				
 			} catch(err:Error) 
 			{
 				trace(err);
 			}
 
-			TweenLite.to(this, 2, {alpha:1, onComplete:PlayVideo});
+			TweenLite.to(this, 1, {alpha:1, onComplete:PlayVideo});
 			
 		}
 		

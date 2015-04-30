@@ -98,7 +98,7 @@ package screens
 			newForm.y = 168;
 			this.addChild(newForm);
 			
-			AddOverlay();
+		//	AddOverlay();
 			
 		}
 		

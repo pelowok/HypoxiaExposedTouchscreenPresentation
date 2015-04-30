@@ -88,8 +88,8 @@ package
 		[Embed(source="../assets/1-1_lethal/pop2.png")]
 		public static const Screen11NavPop2:Class;
 		
-		[Embed(source="../assets/1-1_lethal/videoImg.png")]
-		public static const Screen11VideoImg:Class;
+	//	[Embed(source="../assets/1-1_lethal/videoImg.png")]
+	//	public static const Screen11VideoImg:Class;
 		
 		[Embed(source="../assets/1-1_lethal/playVideo.png")]
 		public static const Screen11PlayVideo:Class;
@@ -121,36 +121,6 @@ package
 		
 		[Embed(source="../assets/1-2_pervasive/returnHome.png")]
 		public static const ReturnHome:Class;
-		
-		[Embed(source="../assets/1-2_pervasive/bgPersist0.xml", mimeType="application/octet-stream")]
-		public static const BGPersist0_xml:Class;
-		
-		[Embed(source="../assets/1-2_pervasive/bgPersist1.xml", mimeType="application/octet-stream")]
-		public static const BGPersist1_xml:Class;
-		
-		[Embed(source="../assets/1-2_pervasive/bgPersist2.xml", mimeType="application/octet-stream")]
-		public static const BGPersist2_xml:Class;
-		
-		[Embed(source="../assets/1-2_pervasive/bgPersist3.xml", mimeType="application/octet-stream")]
-		public static const BGPersist3_xml:Class;
-		
-		[Embed(source="../assets/1-2_pervasive/bgPersist4.xml", mimeType="application/octet-stream")]
-		public static const BGPersist4_xml:Class;
-		
-		[Embed(source="../assets/1-2_pervasive/bgPersist0.png")]
-		public static const BGPersist0_png:Class;
-		
-		[Embed(source="../assets/1-2_pervasive/bgPersist1.png")]
-		public static const BGPersist1_png:Class;
-		
-		[Embed(source="../assets/1-2_pervasive/bgPersist2.png")]
-		public static const BGPersist2_png:Class;
-		
-		[Embed(source="../assets/1-2_pervasive/bgPersist3.png")]
-		public static const BGPersist3_png:Class;
-		
-		[Embed(source="../assets/1-2_pervasive/bgPersist4.png")]
-		public static const BGPersist4_png:Class;
 		
 		// Assets for 2.0
 		[Embed(source="../assets/2-0_insights/2-0bg.png")]
@@ -263,8 +233,8 @@ package
 		[Embed(source="../assets/nav/subNavtap.png")]
 		public static const SubNavb:Class;
 		
-		[Embed(source="../assets/grid.png")]
-		public static const GridOverlay:Class;
+	//	[Embed(source="../assets/grid.png")]
+	//	public static const GridOverlay:Class;
 		
 
 
@@ -281,7 +251,7 @@ package
 				
 				var bitmap:Bitmap = new Assets[name]();
 				gameTextures[name] = Texture.fromBitmap(bitmap);
-				
+
 			}
 			
 			return gameTextures[name];

@@ -110,7 +110,7 @@ package screens
 			ref.visible = false;
 			this.addChild(ref);
 		
-			AddOverlay();
+		//	AddOverlay();
 			
 		}
 		

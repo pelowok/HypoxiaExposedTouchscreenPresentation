@@ -31,8 +31,9 @@ include("google_spreadsheet.php");
 	$Insight4 = $_POST['insight4_bool'];
 	
 $doc = new googlespreadsheet();
-$doc->authenticate("grateful.key.loser@gmail.com", "bellybutton");
-$doc->settitleSpreadsheet("testsheet1");
+$doc->authenticate("HypoxiaExposedSheetWriter@gmail.com", "2@tlantic");
+//$doc->authenticate("grateful.key.loser@gmail.com", "bellybutton");
+$doc->settitleSpreadsheet("ASCOTouchscreen");
 $doc->settitleWorksheet("Sheet1");
 $values["sender_email"]=stripslashes($_POST['sender_email']);
 $values["email_address"]=stripslashes($_POST['email_address']);

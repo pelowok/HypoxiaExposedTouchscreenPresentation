@@ -1,0 +1,2 @@
+[Wed Apr 29 2015 12:04:55 GMT-0400 (Eastern Daylight Time)] Layer "HypoxiaExposed.com": Unsupported extension: com
+[Wed Apr 29 2015 12:04:55 GMT-0400 (Eastern Daylight Time)] Layer "Cell death pathways activated2 Cells enter cell-cycle arrest,  ": Expected end of input but "," found.

@@ -26,10 +26,10 @@ package screens
 		
 		private var bg:Image;
 		
-		private var btn1b:feathers.controls.Button;
+		private var btn1b:UnstyledButton;
 		private var btn2b:UnstyledButton;
 		private var btnPlay:UnstyledButton;
-		private var btnVideo:UnstyledButton;
+	//	private var btnVideo:UnstyledButton;
 		
 		private var btnNext:UnstyledButton;
 		private var btnPrev:UnstyledButton;
@@ -76,14 +76,14 @@ package screens
 			
 			bg = new Image(Assets.getTexture("Screen11BG"));
 			bg.x = 0;
-			bg.y = 100;
+			bg.y = 0;
 			this.addChild(bg);
 			
 			this.addChild(AddBaseNav());
 			
 			this.addChild(AddPageNav());
 			
-			btn1b = new feathers.controls.Button();
+		/*	btn1b = new feathers.controls.Button();
 			//Assets.getTexture("Screen11NavPop1"),"",Assets.getTexture("Screen11NavPop1"));
 			btn1b.x = 304;
 			btn1b.y = 140;
@@ -93,24 +93,31 @@ package screens
 			btn1b.downSkin = new Image(Assets.getTexture("Screen11NavPop1"));
 			
 			this.addChild(btn1b);
+		*/
+			
+			btn1b = new UnstyledButton(Assets.getTexture("Screen11NavPop1"),"",Assets.getTexture("Screen11NavPop1"));
+			btn1b.x = 304;
+			btn1b.y = 200;
+			btn1b.visible = false;
+			this.addChild(btn1b);
 			
 			btn2b = new UnstyledButton(Assets.getTexture("Screen11NavPop2"),"",Assets.getTexture("Screen11NavPop2"));
 			btn2b.x = 304;
-			btn2b.y = 140;
+			btn2b.y = 200;
 			btn2b.visible = false;
 			this.addChild(btn2b);
 			
 			btnPlay = new UnstyledButton(Assets.getTexture("Screen11PlayVideo"),"",Assets.getTexture("Screen11PlayVideo"));
 			btnPlay.x = 880;
-			btnPlay.y = 207;
+			btnPlay.y = 267;
 			btnPlay.visible = false;
 			this.addChild(btnPlay);
 			
-			btnVideo = new UnstyledButton(Assets.getTexture("Screen11VideoImg"),"",Assets.getTexture("Screen11VideoImg"));
-			btnVideo.x = 304;
-			btnVideo.y = 105;
-			btnVideo.visible = false;
-			this.addChild(btnVideo);
+		//	btnVideo = new UnstyledButton(Assets.getTexture("Screen11VideoImg"),"",Assets.getTexture("Screen11VideoImg"));
+		//	btnVideo.x = 304;
+		//	btnVideo.y = 190;
+		//	btnVideo.visible = false;
+		//	this.addChild(btnVideo);
 			
 			btnNext = new UnstyledButton(Assets.getTexture("NavNext"),"",Assets.getTexture("NavNext"));
 			btnNext.x = 1740;
@@ -151,7 +158,7 @@ package screens
 			ref.visible = false;
 			this.addChild(ref);
 			
-			AddOverlay();
+		//	AddOverlay();
 			
 		}
 		
@@ -189,8 +196,8 @@ package screens
 					},
 				]);
 			
-			basenav.x = 900;
-			basenav.y = 855;
+			basenav.x = 880;
+			basenav.y = 895;
 			basenav.gap = 35;
 			
 			return(basenav);
@@ -245,8 +252,8 @@ package screens
 					},
 				]);
 			
-			sidenav.x = 1500;
-			sidenav.y = 10;
+			sidenav.x = 1505;
+			sidenav.y = 50;
 			sidenav.gap = 2;
 			
 			return(sidenav);
@@ -278,7 +285,7 @@ package screens
 			btn2b.visible = false;
 			
 			btnPlay.visible = false;
-			btnVideo.visible = false;
+		//	btnVideo.visible = false;
 			
 			btnNext.visible = true;
 			btnPrev.visible = true;
@@ -294,7 +301,7 @@ package screens
 			ref.visible = false;
 			
 			// Start listening to events
-			this.addEventListener(Event.ENTER_FRAME, screenAnimation);
+		//	this.addEventListener(Event.ENTER_FRAME, screenAnimation);
 			
 			logo.addEventListener(Event.TRIGGERED, onLogoTriggered);
 			
@@ -473,16 +480,17 @@ package screens
 		private function AddVideo1(e:Event):void
 		{
 			
-			DeselectPageNav();
+		//	DeselectPageNav();
 			
-			btn1b.visible = false;
-			btnPlay.visible = false;
+		//	btn1b.visible = false;
+		//	btnPlay.visible = false;
 			btnPlay.removeEventListener(Event.TRIGGERED, AddVideo1);
 			
-			btnVideo.visible = true;
+		//	btnVideo.visible = true;
 			
 			//use Video API for displaying the video
-			video = new LocalVideoPlayer("../video/small.mp4");
+		//	video = new LocalVideoPlayer("../video/optimized/LM_RS_Master_Edit_23.mp4");
+			video = new LocalVideoPlayer("../video/LM_RS_Master_Edit_SUBS_23.mov");
 			
 			hitscreen.visible = true;
 			hitscreen.addEventListener(Event.TRIGGERED, RemoveVideo);
@@ -496,16 +504,17 @@ package screens
 		private function AddVideo2(e:Event):void
 		{
 			
-			DeselectPageNav();
+		//	DeselectPageNav();
 			
-			btn2b.visible = false;
-			btnPlay.visible = false;
+		//	btn2b.visible = false;
+		//	btnPlay.visible = false;
 			btnPlay.removeEventListener(Event.TRIGGERED, AddVideo2);
 			
-			btnVideo.visible = true;
+		//	btnVideo.visible = true;
 
 			//use Video API for displaying the video
-			video = new LocalVideoPlayer("../video/testvideo.mp4");
+		//	video = new LocalVideoPlayer("../video/optimized/LM_TG_Master_Edit_24.mp4");
+			video = new LocalVideoPlayer("../video/LM_RS_Master_Edit_SUBS_24.mov");
 			
 			hitscreen.visible = true;
 			hitscreen.addEventListener(Event.TRIGGERED, RemoveVideo);
@@ -533,7 +542,7 @@ package screens
 			
 			hitscreen.removeEventListener(Event.TRIGGERED, RemoveVideo);
 			
-			btnVideo.visible = false;
+		//	btnVideo.visible = false;
 			hitscreen.visible = false;
 			
 			// remove the video

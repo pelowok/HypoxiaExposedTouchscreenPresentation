@@ -18,8 +18,8 @@ package
 		
 		private function drawScreen(e:Event):void
 		{
-			grid = new Image( Assets.getTexture("GridOverlay") );
-			this.addChild(grid);
+		//	grid = new Image( Assets.getTexture("GridOverlay") );
+		//	this.addChild(grid);
 		}
 	}
 }

@@ -17,7 +17,7 @@ package screens
 		
 		private var bg:Image;
 		private var footer:Button;
-		private var hasOverlay:Boolean;
+	//	private var hasOverlay:Boolean;
 		
 		public function BackGround()
 		{
@@ -32,7 +32,7 @@ package screens
 			
 			trace(e.target + " added to stage.");
 			
-			hasOverlay = false;
+		//	hasOverlay = false;
 			
 			drawScreen();
 			
@@ -71,7 +71,7 @@ package screens
 			// Tween screen to visible
 			TweenLite.to(this, 0.5, {alpha:1});
 			
-			AddOverlay();
+		//	AddOverlay();
 			
 		}
 		

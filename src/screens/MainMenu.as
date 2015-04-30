@@ -58,7 +58,7 @@ package screens
 			logo.scaleY = 0.4;
 			this.addChild(logo);
 
-			AddOverlay();
+		//	AddOverlay();
 			
 		}
 		
