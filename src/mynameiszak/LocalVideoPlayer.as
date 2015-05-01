@@ -15,8 +15,8 @@ package mynameiszak
 	
 	public class LocalVideoPlayer extends Sprite
 	{
-		[Embed(source="../video/play.png")]
-		public static const PlayButton:Class;
+	//	[Embed(source="../video/play.png")]
+	//	public static const PlayButton:Class;
 		
 		public var target:String;
 		private var ns:NetStream;
@@ -107,17 +107,17 @@ package mynameiszak
 			
 		}
 		
-		private function AddVideoUI():void
-		{
-			var mc:MovieClip = new MovieClip();
-			var bmp:Bitmap = new PlayButton();
-			mc.addChild(bmp);
-			
-			mc.x = 275;
-			mc.y = 600;
-			
-			this.addChild(mc);
-		}
+	//	private function AddVideoUI():void
+	//	{
+	//		var mc:MovieClip = new MovieClip();
+	//		var bmp:Bitmap = new PlayButton();
+	//		mc.addChild(bmp);
+	//		
+	//		mc.x = 275;
+	//		mc.y = 600;
+	//		
+	//		this.addChild(mc);
+	//	}
 		
 		public function PlayVideo(time:Number=0):void
 		{

@@ -16,6 +16,9 @@ package mynameiszak
 	
 	import starling.display.Sprite;
 	import starling.events.Event;
+	import starling.events.Touch;
+	import starling.events.TouchEvent;
+	import starling.events.TouchPhase;
 	
 	public class Game extends Sprite
 	{
@@ -92,8 +95,34 @@ package mynameiszak
 			screenRegister.alpha = 0;
 			screenRegister.disposeTemporarily();
 			this.addChild(screenRegister);
-			Assets.gameScreens.push([screenRegister, ScreenRegister, "screenregister"])
+			Assets.gameScreens.push([screenRegister, ScreenRegister, "screenregister"]);
 				
+			this.addEventListener(TouchEvent.TOUCH, onTouch);	
+				
+		}
+		
+		private function onTouch(e:TouchEvent):void
+		{
+			var touch:Touch = e.getTouch(stage) as Touch;
+			
+			if(touch)
+			{
+				if(touch.phase == TouchPhase.BEGAN)
+				{
+					trace("There was a touch (MouseDown)");
+				}
+					
+				else if(touch.phase == TouchPhase.ENDED)
+				{
+					trace("The Touch ended (MouseUp)");
+				}
+					
+				else if(touch.phase == TouchPhase.MOVED)
+				{
+					trace("dragging | x: " + touch.globalX.toFixed(0).toString() + "  :  y: " + touch.globalY.toFixed(0).toString());
+				}
+			}
+			
 		}
 		
 		private function onChangeScreen(e:NavigationEvent):void

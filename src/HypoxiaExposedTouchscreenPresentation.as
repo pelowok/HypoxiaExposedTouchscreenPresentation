@@ -34,6 +34,9 @@ package
 			//   before it begins calling in new objects to the app.
 			myStarling = new Starling(Game, stage);
 			myStarling.antiAliasing = 1;
+			
+			Starling.handleLostContext = true;
+			
 			myStarling.start();
 			
 			// Add no code. Any launch code should be added to the Game.as class
