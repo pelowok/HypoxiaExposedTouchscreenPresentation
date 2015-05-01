@@ -32,11 +32,12 @@ package
 			// Instantiate and start the starling framework.
 			// The Game.as class will listen for starling to instantiate and ADD_TO_STAGE
 			//   before it begins calling in new objects to the app.
-			myStarling = new Starling(Game, stage);
-			myStarling.antiAliasing = 1;
 			
 			Starling.handleLostContext = true;
 			
+			myStarling = new Starling(Game, stage);
+			myStarling.antiAliasing = 1;
+
 			myStarling.start();
 			
 			// Add no code. Any launch code should be added to the Game.as class

@@ -17,6 +17,7 @@ package mynameiszak
 	import cc.cote.feathers.softkeyboard.layouts.Layout;
 	import cc.cote.feathers.softkeyboard.layouts.NumbersSymbolsSwitch;
 	import cc.cote.feathers.softkeyboard.layouts.QwertySwitch;
+	import cc.cote.feathers.softkeyboard.layouts.QwertySwitchMod;
 	
 	import feathers.controls.Button;
 	import feathers.controls.Check;
@@ -176,9 +177,15 @@ package mynameiszak
 		{
 			
 			var layout:Vector.<Layout> = new <Layout>[
-				new QwertySwitch(NumbersSymbolsSwitch),
-				new NumbersSymbolsSwitch(QwertySwitch)
+				new QwertySwitchMod(NumbersSymbolsSwitch),
+				new NumbersSymbolsSwitch(QwertySwitchMod)
 			];
+		/*	
+			var layout:Vector.<Layout> = new <Layout>[
+			new QwertySwitch(NumbersSymbolsSwitch),
+			new NumbersSymbolsSwitch(QwertySwitch)
+			];
+		*/
 			sk = new SoftKeyboard(layout);
 			sk.addEventListener(KeyEvent.KEY_UP, onKeyUp);
 

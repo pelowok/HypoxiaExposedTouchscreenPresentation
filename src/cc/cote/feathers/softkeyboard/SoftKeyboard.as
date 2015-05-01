@@ -253,11 +253,11 @@ package cc.cote.feathers.softkeyboard
 			try {
 				_callout = Callout.show(key.variantsContainer, key, direction, true);
 			} catch (e:TypeError) {
-//				var error:Error = new Error(
-//					"The Callout subcomponent requires that it's 'backgroundSkin' property be set."
-//				);
-//				error.name = 'SoftKeyboard error';
-//				throw(error);
+				var error:Error = new Error(
+					"The Callout subcomponent requires that it's 'backgroundSkin' property be set."
+				);
+				error.name = 'SoftKeyboard error';
+				throw(error);
 			}
 
 			
@@ -266,7 +266,7 @@ package cc.cote.feathers.softkeyboard
 			
 			
 			
-			
+		/*	
 			// For whatever reason, we need to manually resize the Callout otherwise in some cases
 			// (when the keyboard is small for instance) the variant keys are too small. 
 			_callout.height = key.height + 
@@ -280,7 +280,7 @@ package cc.cote.feathers.softkeyboard
 				_callout.paddingRight;
 			
 			// THIS BREAKS THE TOP ARROW !!!!!
-			
+		*/	
 
 			
 			
