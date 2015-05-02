@@ -6,6 +6,12 @@ package mynameiszak
 	import flash.display.Stage;
 	import flash.utils.getQualifiedClassName;
 	
+	import cc.cote.feathers.softkeyboard.KeyEvent;
+	import cc.cote.feathers.softkeyboard.SoftKeyboard;
+	import cc.cote.feathers.softkeyboard.layouts.Layout;
+	import cc.cote.feathers.softkeyboard.layouts.NumbersSymbolsSwitch;
+	import cc.cote.feathers.softkeyboard.layouts.QwertySwitchMod;
+	
 	import events.NavigationEvent;
 	import events.VideoCompleteEvent;
 	
@@ -44,7 +50,9 @@ package mynameiszak
 		private var video:LocalVideoPlayer;
 		private var hitscreen:UnstyledButton;
 		private var screensavervideo:Boolean;
-	
+		
+		private var btnQuit:UnstyledButton;
+		private var quitTimer:StarlingTimer;
 		
 		public function Game()
 		{
@@ -58,7 +66,6 @@ package mynameiszak
 			
 			// Signal to debugger that the Starling framework is now available
 			trace("starling framework initialized");
-			
 			
 			this.addEventListener(events.NavigationEvent.CHANGE_SCREEN, onChangeScreen);
 			
@@ -109,6 +116,14 @@ package mynameiszak
 			screenRegister.disposeTemporarily();
 			this.addChild(screenRegister);
 			Assets.gameScreens.push([screenRegister, ScreenRegister, "screenregister"]);
+			
+			btnQuit = new UnstyledButton(Assets.getTexture("HitScreen"),"",Assets.getTexture("HitScreen")); 
+			btnQuit.x = 1870;
+			btnQuit.y = 0;
+			btnQuit.width = 50;
+			btnQuit.height = 50;
+			btnQuit.visible = false;
+			this.addChild(btnQuit);
 				
 			this.addEventListener(TouchEvent.TOUCH, onTouch);	
 			
@@ -236,9 +251,9 @@ package mynameiszak
 		private function onTimerUpdate(e:StarlingTimerEvent):void
 		{
 			
-			var timer:StarlingTimer = e.target as StarlingTimer;
+		//	var timer:StarlingTimer = e.target as StarlingTimer;
 			
-			trace(timer.currentCount);
+		//	trace(timer.currentCount);
 			
 		}
 		
@@ -247,7 +262,7 @@ package mynameiszak
 		private function onTouch(e:TouchEvent):void
 		{
 			var touch:Touch = e.getTouch(stage) as Touch;
-			
+
 			if(touch)
 			{
 				if(touch.phase == TouchPhase.BEGAN)
@@ -261,15 +276,76 @@ package mynameiszak
 					
 				else if(touch.phase == TouchPhase.ENDED)
 				{
+					
 					trace("The Touch ended (MouseUp)");
+					
+					if( countdown.currentCount > 5 )
+					{
+						
+						trace("CATCHED IT");
+						trace(countdown.currentCount);
+						
+						btnQuit.visible = true;
+						btnQuit.addEventListener(TouchEvent.TOUCH, ShutDown);
+						StartQuitTimer();
+						
+					}
+					
 				}
 					
 				else if(touch.phase == TouchPhase.MOVED)
 				{
 					trace("dragging | x: " + touch.globalX.toFixed(0).toString() + "  :  y: " + touch.globalY.toFixed(0).toString());
+					
 				}
 			}
 			
+		}
+		
+		private function StartQuitTimer():void
+		{
+			
+			if(quitTimer){
+				
+				if( quitTimer.hasEventListener(StarlingTimerEvent.TIMER_COMPLETE) )
+				{
+					quitTimer.removeEventListener(StarlingTimerEvent.TIMER_COMPLETE, onTimerComplete);
+				}
+				
+			}
+			
+			quitTimer = new StarlingTimer(Starling.juggler, 1000, 3);
+			quitTimer.addEventListener(StarlingTimerEvent.TIMER_COMPLETE, StopQuit);
+			quitTimer.start();
+				
+		}
+		
+		private function StopQuit(e:StarlingTimerEvent):void
+		{
+			btnQuit.visible = false;
+			btnQuit.removeEventListener(TouchEvent.TOUCH, StartQuitTimer);
+			
+			quitTimer.stop();
+			quitTimer.reset();
+			quitTimer.removeEventListener(StarlingTimerEvent.TIMER_COMPLETE, StopQuit);
+		}
+		
+		private function ShutDown(e:TouchEvent):void
+		{
+			var touch:Touch = e.getTouch(stage) as Touch;
+			
+			if(touch)
+			{
+
+				if(touch.phase == TouchPhase.BEGAN)
+				{
+					
+					trace("SHUT DOWN");
+					
+					
+				}
+		
+			}
 		}
 		
 		private function onChangeScreen(e:NavigationEvent):void

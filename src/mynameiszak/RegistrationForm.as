@@ -433,7 +433,7 @@ package mynameiszak
 			{
 			
 				pl = e.target as PickerList;
-				trace( pl.selectedItem.text);
+			//	trace( pl.selectedItem.text);
 				
 				// Should we enable the submit button?
 				ToggleSubmit( TestFields() );
@@ -546,6 +546,18 @@ package mynameiszak
 			{
 				if( TestFields() )
 				{
+					trace("btnSubmit disabled by function HandleResetTouch.");
+					
+					btnSubmit.disabledState = Assets.getTexture("ScreenFormBtnSubmit2");
+					btnSubmit.enabled = false;
+					
+					if(btnSubmit.hasEventListener(TouchEvent.TOUCH))
+					{
+						
+						btnSubmit.removeEventListener(TouchEvent.TOUCH, HandleSubmitTouch);
+						
+					}
+					
 					
 					trace("HandleSubmitTouch PASSED validation test : TestFields");
 					
@@ -631,7 +643,30 @@ package mynameiszak
 			if (touch)
 			{
 				
-			//	arrContactData = [];
+				titlePicker.selectedIndex = -1;
+				firstName.text = "";
+				surName.text = "";
+				rolePicker.selectedIndex = -1;
+				specialtyPicker.selectedIndex = -1;
+				institution.text = "";
+				email1.text = "";
+				email2.text = "";
+				insight1.isSelected = true;
+				insight2.isSelected = true;
+				insight3.isSelected = true;
+				insight4.isSelected = true;
+				btnSubmit.enabled = false;
+				
+				if(btnSubmit.hasEventListener(TouchEvent.TOUCH))
+				{
+					
+					trace("btnSubmit disabled by function HandleResetTouch.");
+					btnSubmit.enabled = false;
+					btnSubmit.removeEventListener(TouchEvent.TOUCH, HandleSubmitTouch);
+					
+				}
+				
+				arrContactData = [];
 				
 			}
 			
