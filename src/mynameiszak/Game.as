@@ -1,9 +1,13 @@
 package mynameiszak
 {
 	
+	import com.greensock.TweenLite;
+	
+	import flash.display.Stage;
 	import flash.utils.getQualifiedClassName;
 	
 	import events.NavigationEvent;
+	import events.VideoCompleteEvent;
 	
 	import screens.BackGround;
 	import screens.Home;
@@ -14,11 +18,14 @@ package mynameiszak
 	import screens.Screen20;
 	import screens.ScreenRegister;
 	
+	import starling.core.Starling;
 	import starling.display.Sprite;
 	import starling.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
+	import starling.extensions.plasticsurgeon.StarlingTimer;
+	import starling.extensions.plasticsurgeon.StarlingTimerEvent;
 	
 	public class Game extends Sprite
 	{
@@ -31,6 +38,12 @@ package mynameiszak
 		private var screen12:Screen12;
 		private var screen20:Screen20;
 		public var screenRegister:ScreenRegister;
+		
+		public var countdown:StarlingTimer;
+		public var overlay:Stage;
+		private var video:LocalVideoPlayer;
+		private var hitscreen:UnstyledButton;
+		private var screensavervideo:Boolean;
 	
 		
 		public function Game()
@@ -98,8 +111,138 @@ package mynameiszak
 			Assets.gameScreens.push([screenRegister, ScreenRegister, "screenregister"]);
 				
 			this.addEventListener(TouchEvent.TOUCH, onTouch);	
+			
+			// SCREENSAVER
+			
+			hitscreen = new UnstyledButton(Assets.getTexture("HitScreen"),"",Assets.getTexture("HitScreen")); 
+			hitscreen.x = 0;
+			hitscreen.y = 0;
+			hitscreen.visible = false;
+			this.addChild(hitscreen);
+			
+			overlay = Starling.current.nativeOverlay.stage;
+			
+			StartNewCountdown(15);
 				
+			screensavervideo = new Boolean(true);
+			
 		}
+		
+		public function StartNewCountdown(i:int):void
+		{
+			
+			if(countdown){
+				
+				if( countdown.hasEventListener(StarlingTimerEvent.TIMER) )
+				{
+					countdown.removeEventListener(StarlingTimerEvent.TIMER, onTimerUpdate);
+				}
+				
+				if( countdown.hasEventListener(StarlingTimerEvent.TIMER_COMPLETE) )
+				{
+					countdown.removeEventListener(StarlingTimerEvent.TIMER_COMPLETE, onTimerComplete);
+				}
+				
+			}
+			
+			countdown = new StarlingTimer(Starling.juggler, 1000, i);
+			countdown.addEventListener(StarlingTimerEvent.TIMER, onTimerUpdate);
+			countdown.addEventListener(StarlingTimerEvent.TIMER_COMPLETE, onTimerComplete);
+			countdown.start();
+			
+		}
+		
+		private function onTimerComplete(e:StarlingTimerEvent):void
+		{
+			
+			countdown.removeEventListener(StarlingTimerEvent.TIMER, onTimerUpdate);
+			countdown.removeEventListener(StarlingTimerEvent.TIMER_COMPLETE, onTimerComplete);
+			
+			var str:String = new String();
+			if(screensavervideo === true)
+			{
+				
+				str = "../video/LM_RS_Master_Edit_SUBS_23.mov";
+				
+			} else {
+				
+				str = "../video/LM_TG_Master_Edit_SUBS_24.mov";
+				
+			}
+			
+			screensavervideo = !screensavervideo;
+			
+			trace("Launching screensaver : " + str );
+			
+			video = new LocalVideoPlayer( str );
+			
+			hitscreen.visible = true;
+			hitscreen.addEventListener(Event.TRIGGERED, RemoveVideo);
+			
+			video.addEventListener(VideoCompleteEvent.COMPLETED, VideoEnded);
+			
+			overlay.addChild(video);
+			
+		}
+		
+		private function VideoEnded(e:VideoCompleteEvent):void
+		{
+			trace("VideoEnded called by : " + e.target);
+			
+			video.removeEventListener(VideoCompleteEvent.COMPLETED, VideoEnded);
+			
+			RemoveVideo(null);
+			
+			StartNewCountdown(15);
+			
+		}
+		
+		private function RemoveVideo(e:Event=null):void
+		{
+			
+			hitscreen.removeEventListener(Event.TRIGGERED, RemoveVideo);
+			
+			//	btnVideo.visible = false;
+			hitscreen.visible = false;
+			
+			// remove the video
+			for(var i:int=0; i < overlay.numChildren; i++)
+			{
+				
+				trace("(" + i + " of  " + overlay.numChildren + ") : " + overlay.getChildAt(i));
+				
+				if(overlay.getChildAt(i) is LocalVideoPlayer)
+				{
+					try
+					{
+						var lvp:LocalVideoPlayer = overlay.getChildAt(i) as LocalVideoPlayer;
+						
+						lvp.RemoveVideo();
+						
+						trace("Removing LocalVideoPlayer from overlay..");
+						overlay.removeChild(lvp);
+						
+					} catch(err:Error) {
+						trace(err);
+					}
+					
+				}
+				
+			}
+			
+		}
+		
+		
+		private function onTimerUpdate(e:StarlingTimerEvent):void
+		{
+			
+			var timer:StarlingTimer = e.target as StarlingTimer;
+			
+			trace(timer.currentCount);
+			
+		}
+		
+		
 		
 		private function onTouch(e:TouchEvent):void
 		{
@@ -110,6 +253,10 @@ package mynameiszak
 				if(touch.phase == TouchPhase.BEGAN)
 				{
 					trace("There was a touch (MouseDown)");
+					
+					// reset the time-out countdown
+					StartNewCountdown(120);
+					
 				}
 					
 				else if(touch.phase == TouchPhase.ENDED)

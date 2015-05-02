@@ -70,6 +70,7 @@ package mynameiszak
 		private var insight3:Check;
 		private var insight4:Check;
 		private var btnSubmit:starling.display.Button;
+		private var btnReset:starling.display.Button;
 		
 		public function RegistrationForm()
 		{
@@ -111,7 +112,8 @@ package mynameiszak
 			insight3 = BuildCheck(insight3, 1275, 455);
 			insight4 = BuildCheck(insight4, 1275, 535);
 			
-			btnSubmit = BuildSubmitButton(btnSubmit, 652, 680);
+			btnSubmit = BuildSubmitButton(btnSubmit, 450, 680);
+			btnReset = BuildResetButton(btnReset, 600, 680);
 			
 			// add components to display list in order bottom to top
 			this.addChild(hitscreen);
@@ -128,6 +130,7 @@ package mynameiszak
 			this.addChild(insight3);
 			this.addChild(insight4);
 			this.addChild(btnSubmit);
+			this.addChild(btnReset);
 			
 			// keyboard needs to be on top
 			this.addChild(keyboard);
@@ -148,7 +151,7 @@ package mynameiszak
 			arrSlidingForm.push(insight3);
 			arrSlidingForm.push(insight4);
 			arrSlidingForm.push(btnSubmit);
-			
+			arrSlidingForm.push(btnReset);
 			
 			// Prepare array for contact data
 			arrContactData = new Array();
@@ -247,10 +250,15 @@ package mynameiszak
 				
 				hitscreen.visible = true;
 				
-				trace("ShowKeyboard is disabling btnSubmit");
+				trace("ShowKeyboard is disabling btnSubmit.");
 				btnSubmit.enabled = false;
 				btnSubmit.removeEventListener( TouchEvent.TOUCH, HandleSubmitTouch );
 				trace("btnSubmit.hasEventListener(TouchEvent.TOUCH) : " + btnSubmit.hasEventListener(TouchEvent.TOUCH) );
+
+				trace("ShowKeyboard is disabling btnReset.");
+				btnReset.enabled = false;
+				btnReset.removeEventListener( TouchEvent.TOUCH, HandleResetTouch );
+				trace("btnReset.hasEventListener(TouchEvent.TOUCH) : " + btnReset.hasEventListener(TouchEvent.TOUCH) );
 				
 				for each(var obj in arrSlidingForm)
 				{
@@ -287,6 +295,12 @@ package mynameiszak
 					
 					TweenLite.to(keyboard, 1, {y:1080});
 					
+					// reactivate btnReset
+					trace("HideKeyboard is enabling btnReset.");
+					btnReset.enabled = true;
+					btnReset.addEventListener( TouchEvent.TOUCH, HandleResetTouch );
+					trace("btnReset.hasEventListener(TouchEvent.TOUCH) : " + btnReset.hasEventListener(TouchEvent.TOUCH) );
+					
 				}
 			}
 		}
@@ -319,11 +333,11 @@ package mynameiszak
 					break;
 				case specialtyPicker:
 				//	trace("specialtyPicker");
-					items.push({ text: "LOREM IPSUM 1" });
-					items.push({ text: "LOREM IPSUM 2" });
-					items.push({ text: "LOREM IPSUM 3" });
-					items.push({ text: "LOREM IPSUM 4" });
-					items.push({ text: "LOREM IPSUM 5" });
+					items.push({ text: "Medical oncology" });
+					items.push({ text: "Radiation oncology" });
+					items.push({ text: "Surgical oncology" });
+					items.push({ text: "Radiology" });
+					items.push({ text: "Pathology" });
 					items.push({ text: "OTHER" });
 					items.fixed = false;
 					break;
@@ -512,7 +526,7 @@ package mynameiszak
 		private function BuildSubmitButton(btn:starling.display.Button, _x:int, _y:int):starling.display.Button
 		{
 			
-			btn = new starling.display.Button(Assets.getTexture("ScreenFormBtnSubmit"),"",Assets.getTexture("ScreenFormBtnSubmit"));
+			btn = new starling.display.Button(Assets.getTexture("ScreenFormBtnSubmit1"),"",Assets.getTexture("ScreenFormBtnSubmit2"));
 			btn.x = _x;
 			btn.y = _y;
 			btn.disabledState = Assets.getTexture( "ScreenFormBtnSubmitDisabled" );
@@ -595,6 +609,33 @@ package mynameiszak
 			}
 		}
 		
+		private function BuildResetButton(btn:starling.display.Button, _x:int, _y:int):starling.display.Button
+		{
+			
+			btn = new starling.display.Button(Assets.getTexture("ScreenFormBtnReset1"),"",Assets.getTexture("ScreenFormBtnReset2"));
+			btn.x = _x;
+			btn.y = _y;
+			
+			btn.enabled = true;
+			btn.addEventListener( TouchEvent.TOUCH, HandleResetTouch );
+			
+			return btn;
+			
+		}
+		
+		private function HandleResetTouch(e:TouchEvent):void
+		{
+			var btn:starling.display.Button = e.currentTarget as starling.display.Button;
+			
+			var touch:Touch = e.getTouch(btn, starling.events.TouchPhase.BEGAN);
+			if (touch)
+			{
+				
+			//	arrContactData = [];
+				
+			}
+			
+		}
 		
 		private function ValidateName():Boolean
 		{

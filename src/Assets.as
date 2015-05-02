@@ -178,11 +178,20 @@ package
 		[Embed(source="../assets/form/btnReturn.png")]
 		public static const ScreenFormBtnReturn:Class;
 		
-		[Embed(source="../assets/form/btnSubmit.png")]
-		public static const ScreenFormBtnSubmit:Class;
+		[Embed(source="../assets/form/screenRegBtnSubmit1.png")]
+		public static const ScreenFormBtnSubmit1:Class;
+		
+		[Embed(source="../assets/form/screenRegBtnSubmit2.png")]
+		public static const ScreenFormBtnSubmit2:Class;
 		
 		[Embed(source="../assets/form/btnSubmitDisabled.png")]
 		public static const ScreenFormBtnSubmitDisabled:Class;
+		
+		[Embed(source="../assets/form/screenRegBtnReset1.png")]
+		public static const ScreenFormBtnReset1:Class;
+		
+		[Embed(source="../assets/form/screenRegBtnReset2.png")]
+		public static const ScreenFormBtnReset2:Class;
 		
 		[Embed(source="../assets/form/downIcon.png")]
 		public static const DownIcon:Class;
