@@ -2,6 +2,8 @@ package screens
 {
 	import com.greensock.TweenLite;
 	
+	import flash.desktop.NativeApplication;
+	
 	import events.NavigationEvent;
 	
 	import feathers.controls.TabBar;
@@ -11,10 +13,16 @@ package screens
 	import mynameiszak.Game;
 	import mynameiszak.RegistrationForm;
 	
+	import starling.core.Starling;
 	import starling.display.Button;
 	import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.events.Event;
+	import starling.events.Touch;
+	import starling.events.TouchEvent;
+	import starling.events.TouchPhase;
+	import starling.extensions.plasticsurgeon.StarlingTimer;
+	import starling.extensions.plasticsurgeon.StarlingTimerEvent;
 	
 	public class ScreenRegister extends Sprite
 	{
@@ -32,6 +40,8 @@ package screens
 		private var logo:Button;
 		
 		private var sidenav:TabBar;
+		
+		private var quitTimer:StarlingTimer;
 		
 		public function ScreenRegister()
 		{
@@ -218,17 +228,56 @@ package screens
 			
 			btnReturn.addEventListener(Event.TRIGGERED, CallLastScreen);
 			
+			StartQuitTimer();
+			
 		}
 		
 		private function CallLastScreen(e:Event):void{
 			
+			if(quitTimer){
+				
+				if( quitTimer.hasEventListener(StarlingTimerEvent.TIMER_COMPLETE) )
+				{
+					quitTimer.removeEventListener(StarlingTimerEvent.TIMER_COMPLETE, onQuitTimerComplete);
+				}
+				
+			}
+			
 			this.cleanUp();
 			
+			// this call resets the data in the form by calling in a new instance of the form
 			this.initialize();
 			
 			trace("CALLING : " + Assets.globalReturnScreenID);
 			
 			this.dispatchEvent(new NavigationEvent(NavigationEvent.CHANGE_SCREEN,true,{id: Assets.globalReturnScreenID }));
+			
+		}
+		
+		private function StartQuitTimer():void
+		{
+			
+			if(quitTimer){
+				
+				if( quitTimer.hasEventListener(StarlingTimerEvent.TIMER_COMPLETE) )
+				{
+					quitTimer.removeEventListener(StarlingTimerEvent.TIMER_COMPLETE, onQuitTimerComplete);
+				}
+				
+			}
+			
+			quitTimer = new StarlingTimer(Starling.juggler, 1000, 5);
+			quitTimer.addEventListener(StarlingTimerEvent.TIMER_COMPLETE, onQuitTimerComplete);
+			quitTimer.start();
+			
+		}
+		
+		private function onQuitTimerComplete(e:StarlingTimerEvent):void
+		{
+			
+			quitTimer.removeEventListener(StarlingTimerEvent.TIMER_COMPLETE, onQuitTimerComplete);
+			
+			this.dispatchEvent(new NavigationEvent(NavigationEvent.CHANGE_SCREEN,true,{id: "homescreen"}));
 			
 		}
 		

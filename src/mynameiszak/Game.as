@@ -1,16 +1,9 @@
 package mynameiszak
 {
 	
-	import com.greensock.TweenLite;
-	
 	import flash.display.Stage;
 	import flash.utils.getQualifiedClassName;
-	
-	import cc.cote.feathers.softkeyboard.KeyEvent;
-	import cc.cote.feathers.softkeyboard.SoftKeyboard;
-	import cc.cote.feathers.softkeyboard.layouts.Layout;
-	import cc.cote.feathers.softkeyboard.layouts.NumbersSymbolsSwitch;
-	import cc.cote.feathers.softkeyboard.layouts.QwertySwitchMod;
+	import flash.desktop.NativeApplication;
 	
 	import events.NavigationEvent;
 	import events.VideoCompleteEvent;
@@ -118,10 +111,10 @@ package mynameiszak
 			Assets.gameScreens.push([screenRegister, ScreenRegister, "screenregister"]);
 			
 			btnQuit = new UnstyledButton(Assets.getTexture("HitScreen"),"",Assets.getTexture("HitScreen")); 
-			btnQuit.x = 1870;
-			btnQuit.y = 0;
-			btnQuit.width = 50;
-			btnQuit.height = 50;
+			btnQuit.x = 0;
+			btnQuit.y = 980;
+			btnQuit.width = 100;
+			btnQuit.height = 100;
 			btnQuit.visible = false;
 			this.addChild(btnQuit);
 				
@@ -148,11 +141,6 @@ package mynameiszak
 			
 			if(countdown){
 				
-				if( countdown.hasEventListener(StarlingTimerEvent.TIMER) )
-				{
-					countdown.removeEventListener(StarlingTimerEvent.TIMER, onTimerUpdate);
-				}
-				
 				if( countdown.hasEventListener(StarlingTimerEvent.TIMER_COMPLETE) )
 				{
 					countdown.removeEventListener(StarlingTimerEvent.TIMER_COMPLETE, onTimerComplete);
@@ -161,7 +149,6 @@ package mynameiszak
 			}
 			
 			countdown = new StarlingTimer(Starling.juggler, 1000, i);
-			countdown.addEventListener(StarlingTimerEvent.TIMER, onTimerUpdate);
 			countdown.addEventListener(StarlingTimerEvent.TIMER_COMPLETE, onTimerComplete);
 			countdown.start();
 			
@@ -170,7 +157,6 @@ package mynameiszak
 		private function onTimerComplete(e:StarlingTimerEvent):void
 		{
 			
-			countdown.removeEventListener(StarlingTimerEvent.TIMER, onTimerUpdate);
 			countdown.removeEventListener(StarlingTimerEvent.TIMER_COMPLETE, onTimerComplete);
 			
 			var str:String = new String();
@@ -247,18 +233,6 @@ package mynameiszak
 			
 		}
 		
-		
-		private function onTimerUpdate(e:StarlingTimerEvent):void
-		{
-			
-		//	var timer:StarlingTimer = e.target as StarlingTimer;
-			
-		//	trace(timer.currentCount);
-			
-		}
-		
-		
-		
 		private function onTouch(e:TouchEvent):void
 		{
 			var touch:Touch = e.getTouch(stage) as Touch;
@@ -279,7 +253,7 @@ package mynameiszak
 					
 					trace("The Touch ended (MouseUp)");
 					
-					if( countdown.currentCount > 5 )
+					if( countdown.currentCount > 3 )
 					{
 						
 						trace("CATCHED IT");
@@ -341,7 +315,7 @@ package mynameiszak
 				{
 					
 					trace("SHUT DOWN");
-					
+					NativeApplication.nativeApplication.exit(); 
 					
 				}
 		
