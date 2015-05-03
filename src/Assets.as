@@ -193,6 +193,9 @@ package
 		[Embed(source="../assets/form/screenRegBtnReset2.png")]
 		public static const ScreenFormBtnReset2:Class;
 		
+		[Embed(source="../assets/form/screenRegBtnX.png")]
+		public static const RegBtnX:Class;
+		
 		[Embed(source="../assets/form/downIcon.png")]
 		public static const DownIcon:Class;
 		

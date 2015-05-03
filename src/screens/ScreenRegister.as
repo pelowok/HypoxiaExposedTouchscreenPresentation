@@ -35,6 +35,7 @@ package screens
 		private var newForm:RegistrationForm;
 		
 		private var btnReturn:Button;
+		private var btnX:Button;
 		
 		private var footer:Image;
 		private var logo:Button;
@@ -108,6 +109,12 @@ package screens
 			newForm.y = 168;
 			this.addChild(newForm);
 			
+			btnX = new Button(Assets.getTexture("RegBtnX"),"",Assets.getTexture("RegBtnX"));
+			btnX.x = 1530;
+			btnX.y = 200;
+			btnX.visible = true;
+			this.addChild(btnX);
+			
 		//	AddOverlay();
 			
 		}
@@ -153,7 +160,7 @@ package screens
 			
 		//	bg1.visible = true;
 			newForm.visible = true;
-			
+
 			bg2.visible = false;
 			
 			
@@ -169,6 +176,10 @@ package screens
 			
 
 			sidenav.addEventListener(Event.CHANGE, toggleSideNav);	
+			
+			btnX.visible = false;
+
+			this.setChildIndex(btnX, this.numChildren -1);
 			
 			// Tween screen to visible
 			TweenLite.to(this, 0.5, {alpha:1});
@@ -225,8 +236,17 @@ package screens
 			
 			bg2.visible = true;
 			btnReturn.visible = true;
+			btnX.visible = true;
+			
+			if(btnX.hasEventListener(Event.TRIGGERED))
+			{
+				
+				btnX.removeEventListener(Event.TRIGGERED, CallHomeScreen);
+				
+			}
 			
 			btnReturn.addEventListener(Event.TRIGGERED, CallLastScreen);
+			btnX.addEventListener(Event.TRIGGERED, CallHomeScreen);
 			
 			StartQuitTimer();
 			
@@ -251,6 +271,29 @@ package screens
 			trace("CALLING : " + Assets.globalReturnScreenID);
 			
 			this.dispatchEvent(new NavigationEvent(NavigationEvent.CHANGE_SCREEN,true,{id: Assets.globalReturnScreenID }));
+			
+		}
+		
+		private function CallHomeScreen(e:Event):void
+		{
+			
+			if(quitTimer){
+				
+				if( quitTimer.hasEventListener(StarlingTimerEvent.TIMER_COMPLETE) )
+				{
+					quitTimer.removeEventListener(StarlingTimerEvent.TIMER_COMPLETE, onQuitTimerComplete);
+				}
+				
+			}
+			
+			this.cleanUp();
+			
+			// this call resets the data in the form by calling in a new instance of the form
+			this.initialize();
+			
+			trace("CALLING : HomeScreen");
+			// reset the Assets.globalReturnScreenID to Home, so the next user doesn't back out to the wrong screen
+			this.dispatchEvent(new NavigationEvent(NavigationEvent.CHANGE_SCREEN,true,{id: "homescreen"}));
 			
 		}
 		
@@ -310,6 +353,10 @@ package screens
 				btnReturn.removeEventListener(Event.TRIGGERED, CallLastScreen);
 			}
 			
+			if(btnX.hasEventListener(Event.TRIGGERED))
+			{
+				btnX.removeEventListener(Event.TRIGGERED, CallHomeScreen);
+			}
 			
 			
 			this.removeChild(newForm);
@@ -319,7 +366,8 @@ package screens
 			newForm.y = 168;
 			this.addChild(newForm);
 			
-			
+			btnX.visible = false;
+			this.setChildIndex(btnX, this.numChildren -1);
 			
 		}
 	}
