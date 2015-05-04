@@ -5,14 +5,22 @@ package screens
 	
 	import events.NavigationEvent;
 	
+	import starling.core.Starling;
+	import starling.animation.Transitions;
+	import starling.animation.Tween;
 	import starling.display.Button;
 	import starling.display.Sprite;
 	import starling.events.Event;
+	import feathers.controls.ToggleButton;
+	import starling.display.Image;
+	import starling.textures.Texture;
+	import starling.textures.TextureAtlas;
+	import starling.display.MovieClip;
 		
 	public class MainMenu extends Sprite
 	{
 		
-		private var btn1:Button;
+		private var btn1:Button;	
 		private var btn2:Button;
 		private var logo:Button;
 		
@@ -41,17 +49,17 @@ package screens
 			// position value should be the same
 			// in drawScreen() and initialize()
 			
-			btn1 = new Button(Assets.getTexture("MainButton01a"),"",Assets.getTexture("MainButton01a"));
+			btn1 = new Button(Assets.getTexture("MainButton01a"),"",Assets.getTexture("MainButton01b"));
 			btn1.x = 460;
 			btn1.y = 280;
 			this.addChild(btn1);
 			
-			btn2 = new Button(Assets.getTexture("MainButton02a"),"",Assets.getTexture("MainButton02a"));
+			btn2 = new Button(Assets.getTexture("MainButton02a"),"",Assets.getTexture("MainButton02b"));
 			btn2.x = 1010;
 			btn2.y = 280;
 			this.addChild(btn2);
 			
-			logo = new Button(Assets.getTexture("HypoxiaExposedLogo"),"",Assets.getTexture("HypoxiaExposedLogo"));
+			logo = new Button(Assets.getTexture("HypoxiaExposedLogo"),"",Assets.getTexture("HypoxiaExposedLogoGlow"));
 			logo.x = 75;
 			logo.y = 75;
 			logo.scaleX = 0.4;
@@ -89,6 +97,7 @@ package screens
 		private function onLogoTriggered():void
 		{
 			
+		//	AnimateButton1(logo);
 			this.dispatchEvent(new NavigationEvent(NavigationEvent.CHANGE_SCREEN,true,{id: "homescreen"}));
 			
 		}
@@ -105,6 +114,27 @@ package screens
 			
 			this.dispatchEvent(new NavigationEvent(NavigationEvent.CHANGE_SCREEN,true,{id: "screen20"}));
 			
+		}
+		
+		private function AnimateButton1(btn:Button):void
+		{
+			var hex:uint = btn.color;
+			var tween:Tween = new Tween(btn, 0.15, Transitions.EASE_IN);
+			tween.animate("color", 0xFFFFFF);
+			tween.animate("alpha", 0.7);
+			tween.onComplete = function():void{  AnimateButton2(btn, hex); trace("AnimateButton1 FINISHED"); };
+			
+			Starling.juggler.add(tween);
+		}
+		
+		private function AnimateButton2(btn:Button, hex:uint):void
+		{
+			var tween:Tween = new Tween(logo, 0.15, Transitions.EASE_IN);
+			tween.animate("color", hex);
+			tween.animate("alpha", 1);
+			tween.onComplete = function():void{ trace("AnimateButton2 FINISHED"); };
+
+			Starling.juggler.add(tween);
 		}
 		
 		public function disposeTemporarily():void

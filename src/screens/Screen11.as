@@ -121,13 +121,13 @@ package screens
 			
 			btnNext = new UnstyledButton(Assets.getTexture("NavNext"),"",Assets.getTexture("NavNext"));
 			btnNext.x = 1740;
-			btnNext.y = 610;
+			btnNext.y = 565;
 			btnNext.visible = false;
 			this.addChild(btnNext);
 			
 			btnPrev = new UnstyledButton(Assets.getTexture("NavPrev"),"",Assets.getTexture("NavPrev"));
 			btnPrev.x = 10;
-			btnPrev.y = 610;
+			btnPrev.y = 565;
 			btnPrev.visible = false;
 			this.addChild(btnPrev);
 			
@@ -153,8 +153,8 @@ package screens
 			
 			// Ref object has to be on top of everything
 			ref = new UnstyledButton(Assets.getTexture("Screen11Ref"),"",Assets.getTexture("Screen11Ref"));
-			ref.x = 5;
-			ref.y = 1080;
+			ref.x = 0;
+			ref.y = 1040;
 			ref.visible = false;
 			this.addChild(ref);
 			
@@ -506,7 +506,7 @@ package screens
 
 			//use Video API for displaying the video
 		//	video = new LocalVideoPlayer("../video/optimized/LM_TG_Master_Edit_24.mp4");
-			video = new LocalVideoPlayer("../video/LM_RS_Master_Edit_SUBS_24.mov");
+			video = new LocalVideoPlayer("../video/LM_TG_Master_Edit_SUBS_24.mov");
 			
 			hitscreen.visible = true;
 			hitscreen.addEventListener(Event.TRIGGERED, RemoveVideo);

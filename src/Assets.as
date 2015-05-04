@@ -25,6 +25,9 @@ package
 		[Embed(source="../assets/homescreen/HypoxiaExposedLogo.png")]
 		public static const HypoxiaExposedLogo:Class;
 		
+		[Embed(source="../assets/homescreen/HypoxiaExposedLogoGlow.png")]
+		public static const HypoxiaExposedLogoGlow:Class;
+		
 		[Embed(source="../assets/homescreen/SeeWhatsLurking.png")]
 		public static const SeeWhatsLurking:Class;
 		

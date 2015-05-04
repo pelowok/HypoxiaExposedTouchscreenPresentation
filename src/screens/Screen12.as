@@ -86,6 +86,18 @@ package screens
 			
 			this.addChild(AddPageNav());
 			
+			btnNext = new Button(Assets.getTexture("ReturnHome"),"",Assets.getTexture("ReturnHome"));
+			btnNext.x = 1790;
+			btnNext.y = 565;
+			btnNext.visible = false;
+			this.addChild(btnNext);
+			
+			btnPrev = new Button(Assets.getTexture("NavPrev"),"",Assets.getTexture("NavPrev"));
+			btnPrev.x = 10;
+			btnPrev.y = 565;
+			btnPrev.visible = false;
+			this.addChild(btnPrev);
+			
 			btn1b = new Button(Assets.getTexture("Screen12NavPop1"),"",Assets.getTexture("Screen12NavPop1"));
 			btn1b.x = 1327;
 			btn1b.y = 210;
@@ -97,18 +109,6 @@ package screens
 			btn2b.y = 480;
 			btn2b.visible = false;
 			this.addChild(btn2b);
-			
-			btnNext = new Button(Assets.getTexture("ReturnHome"),"",Assets.getTexture("ReturnHome"));
-			btnNext.x = 1740;
-			btnNext.y = 560;
-			btnNext.visible = false;
-			this.addChild(btnNext);
-			
-			btnPrev = new Button(Assets.getTexture("NavPrev"),"",Assets.getTexture("NavPrev"));
-			btnPrev.x = 10;
-			btnPrev.y = 560;
-			btnPrev.visible = false;
-			this.addChild(btnPrev);
 			
 			logo = new Button(Assets.getTexture("HypoxiaExposedLogo"));
 			logo.x = 50;
@@ -126,8 +126,8 @@ package screens
 			
 			// Ref object has to be on top of everything
 			ref = new Button(Assets.getTexture("Screen12Ref"),"",Assets.getTexture("Screen12Ref"));
-			ref.x = 5;
-			ref.y = 1080;
+			ref.x = 0;
+			ref.y = 1040;
 			ref.visible = false;
 			this.addChild(ref);
 			

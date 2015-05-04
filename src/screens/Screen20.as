@@ -93,7 +93,7 @@ package screens
 			btn3b.visible = false;
 			this.addChild(btn3b);
 			
-			btn4b = new Button(Assets.getTexture("Screen20Nav3b"),"",Assets.getTexture("Screen20Nav3b"));
+			btn4b = new Button(Assets.getTexture("Screen20Nav4b"),"",Assets.getTexture("Screen20Nav4b"));
 			btn4b.x = 0;
 			btn4b.y = 0;
 			btn4b.visible = false;
