@@ -2,7 +2,7 @@ package mynameiszak
 {
 	import com.greensock.TweenLite;
 	
-	import flash.display3D.textures.Texture;
+//	import flash.display3D.textures.Texture;
 	import flash.events.Event;
 	import flash.events.HTTPStatusEvent;
 	import flash.events.IOErrorEvent;
@@ -16,10 +16,10 @@ package mynameiszak
 	import cc.cote.feathers.softkeyboard.SoftKeyboard;
 	import cc.cote.feathers.softkeyboard.layouts.Layout;
 	import cc.cote.feathers.softkeyboard.layouts.NumbersSymbolsSwitch;
-	import cc.cote.feathers.softkeyboard.layouts.QwertySwitch;
+//	import cc.cote.feathers.softkeyboard.layouts.QwertySwitch;
 	import cc.cote.feathers.softkeyboard.layouts.QwertySwitchMod;
 	
-	import feathers.controls.Button;
+//	import feathers.controls.Button;
 	import feathers.controls.Check;
 	import feathers.controls.List;
 	import feathers.controls.PickerList;
@@ -27,9 +27,9 @@ package mynameiszak
 	import feathers.controls.renderers.DefaultListItemRenderer;
 	import feathers.controls.renderers.IListItemRenderer;
 	import feathers.controls.text.TextFieldTextEditor;
-	import feathers.controls.text.TextFieldTextRenderer;
+//	import feathers.controls.text.TextFieldTextRenderer;
 	import feathers.core.ITextEditor;
-	import feathers.core.ITextRenderer;
+//	import feathers.core.ITextRenderer;
 	import feathers.data.ListCollection;
 	import feathers.layout.AnchorLayoutData;
 	import feathers.themes.HypoxiaTheme;
