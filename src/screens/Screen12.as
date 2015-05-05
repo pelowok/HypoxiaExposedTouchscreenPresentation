@@ -110,11 +110,11 @@ package screens
 			btn2b.visible = false;
 			this.addChild(btn2b);
 			
-			logo = new Button(Assets.getTexture("HypoxiaExposedLogo"));
+			logo = new Button(Assets.getTexture("HypoxiaExposedLogo"),"",Assets.getTexture("HypoxiaExposedLogoGlow"));
 			logo.x = 50;
-			logo.y = 10;
-			logo.scaleX = 0.25;
-			logo.scaleY = 0.25;
+			logo.y = 15;
+			logo.scaleX = 0.33;
+			logo.scaleY = 0.33;
 			this.addChild(logo);
 			
 			footer = new Image(Assets.getTexture("Footer"));

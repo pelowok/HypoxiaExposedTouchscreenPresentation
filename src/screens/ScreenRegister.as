@@ -90,11 +90,11 @@ package screens
 			btnReturn.visible = false;
 			this.addChild(btnReturn);
 			
-			logo = new Button(Assets.getTexture("HypoxiaExposedLogo"));
+			logo = new Button(Assets.getTexture("HypoxiaExposedLogo"),"",Assets.getTexture("HypoxiaExposedLogoGlow"));
 			logo.x = 50;
-			logo.y = 10;
-			logo.scaleX = 0.25;
-			logo.scaleY = 0.25;
+			logo.y = 15;
+			logo.scaleX = 0.33;
+			logo.scaleY = 0.33;
 			this.addChild(logo);
 			
 			footer = new Image(Assets.getTexture("Footer"));
@@ -169,11 +169,9 @@ package screens
 			footer.visible = true;
 			
 			// Start listening to events
-			this.addEventListener(Event.ENTER_FRAME, screenAnimation);
+		//	this.addEventListener(Event.ENTER_FRAME, screenAnimation);
 			
 			logo.addEventListener(Event.TRIGGERED, onLogoTriggered);
-			
-			
 
 			sidenav.addEventListener(Event.CHANGE, toggleSideNav);	
 			
@@ -331,6 +329,7 @@ package screens
 		
 		private function cleanUp():void
 		{
+			trace("ScreenRegister function cleanUp was called");
 			this.visible = false;
 			
 			// Remove unneeded objects and listeners
@@ -358,13 +357,19 @@ package screens
 				btnX.removeEventListener(Event.TRIGGERED, CallHomeScreen);
 			}
 			
+			newForm.ResetFormData();
 			
-			this.removeChild(newForm);
+			// This commented method was causing a memory leak. It doesn't dispose of the textures
+			// in the newForm that it removes, so the app runs out of texture memory quickly. If you
+			// must use this method, you need to dispose of the newForm textures or you will be a sad
+			// little code monkey for many days.
 			
-			newForm = new RegistrationForm();
-			newForm.x = 0;
-			newForm.y = 168;
-			this.addChild(newForm);
+		//	this.removeChild(newForm);
+			
+		//	newForm = new RegistrationForm();
+		//	newForm.x = 0;
+		//	newForm.y = 168;
+		//	this.addChild(newForm);
 			
 			btnX.visible = false;
 			this.setChildIndex(btnX, this.numChildren -1);

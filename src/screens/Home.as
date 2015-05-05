@@ -90,34 +90,11 @@ package screens
 			
 			this.visible = true;
 			
-			// Start listening to events
-		//	this.addEventListener(Event.ENTER_FRAME, homeAnimation);
-			
 			// Tween screen to visible
 			TweenLite.to(this, 0.5, {alpha:1});
 			
 		}
-		
-		private function homeAnimation(e:Event):void
-		{
-			
-			// Start animations			
-			var currentDate:Date = new Date();
-			var speed:Number = 0.0006;
-			
-			var n:Number = 0.7 + (Math.cos(currentDate.getTime() * speed) * 0.3);
-			title1.alpha = (n * -1) + 1.4;
-			logo.alpha = (n * -1) + 1.4;			
-			
-			var derivedAlpha:Number = (1 - n);
-			
-			// var delta:Number = (bg.alpha - 0.4) * 2;
-			var delta: Number = 0.7 + (Math.cos(currentDate.getTime() * (speed * 4)) * 0.3);
-			var blur2:BlurFilter = new BlurFilter(delta, delta, 1);
-			
-			title2.filter = blur2;
-	
-		}
+
 		
 		public function disposeTemporarily():void
 		{
@@ -129,9 +106,7 @@ package screens
 			this.visible = false;
 			
 			// Remove unneeded objects and listeners
-			if(this.hasEventListener(Event.ENTER_FRAME)){
-				this.removeEventListener(Event.ENTER_FRAME, homeAnimation);
-			}
+			
 		}
 		
 		

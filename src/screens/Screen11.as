@@ -16,7 +16,6 @@ package screens
 	import starling.core.Starling;
 	import starling.display.Button;
 	import starling.display.Image;
-	import starling.display.Quad;
 	import starling.display.Sprite;
 	import starling.events.Event;
 	
@@ -36,7 +35,7 @@ package screens
 		
 		private var ref:UnstyledButton;
 		private var footer:Image;
-		private var logo:UnstyledButton;
+		private var logo:starling.display.Button;
 		
 		private var basenav:TabBar;
 		private var pagenav:TabBar;
@@ -131,11 +130,11 @@ package screens
 			btnPrev.visible = false;
 			this.addChild(btnPrev);
 			
-			logo = new UnstyledButton(Assets.getTexture("HypoxiaExposedLogo"));
+			logo = new starling.display.Button(Assets.getTexture("HypoxiaExposedLogo"),"",Assets.getTexture("HypoxiaExposedLogoGlow"));
 			logo.x = 50;
-			logo.y = 10;
-			logo.scaleX = 0.25;
-			logo.scaleY = 0.25;
+			logo.y = 15;
+			logo.scaleX = 0.33;
+			logo.scaleY = 0.33;
 			this.addChild(logo);
 			
 			footer = new Image(Assets.getTexture("Footer"));

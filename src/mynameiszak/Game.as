@@ -341,6 +341,7 @@ package mynameiszak
 					// trace("active screen is " + obj);
 					if(obj["disposeTemporarily"] is Function)
 					{
+						trace(obj + " has function: disposeTemporarily.");
 						obj.disposeTemporarily();
 					}
 				}
@@ -353,6 +354,7 @@ package mynameiszak
 					// trace("Call in this screen : " + arr[i]);
 					if(objInit["initialize"] is Function)
 					{
+						trace(obj + " has function: initialize.");
 						objInit.initialize();
 						
 					}

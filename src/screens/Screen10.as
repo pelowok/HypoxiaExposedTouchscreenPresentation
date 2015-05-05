@@ -89,7 +89,7 @@ package screens
 			btnNext.visible = false;
 			this.addChild(btnNext);
 
-			logo = new Button(Assets.getTexture("HypoxiaExposedLogo"),"",Assets.getTexture("HypoxiaExposedLogo"));
+			logo = new Button(Assets.getTexture("HypoxiaExposedLogo"),"",Assets.getTexture("HypoxiaExposedLogoGlow"));
 			logo.x = 50;
 			logo.y = 15;
 			logo.scaleX = 0.33;

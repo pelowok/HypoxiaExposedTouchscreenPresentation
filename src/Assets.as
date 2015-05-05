@@ -264,6 +264,7 @@ package
 			if (gameTextures[name] == undefined)
 			{
 				
+				trace(" ## TEXTURE : " + name + " ## ");
 				var bitmap:Bitmap = new Assets[name]();
 				gameTextures[name] = Texture.fromBitmap(bitmap);
 

@@ -643,33 +643,38 @@ package mynameiszak
 			if (touch)
 			{
 				
-				titlePicker.selectedIndex = -1;
-				firstName.text = "";
-				surName.text = "";
-				rolePicker.selectedIndex = -1;
-				specialtyPicker.selectedIndex = -1;
-				institution.text = "";
-				email1.text = "";
-				email2.text = "";
-				insight1.isSelected = true;
-				insight2.isSelected = true;
-				insight3.isSelected = true;
-				insight4.isSelected = true;
-				btnSubmit.enabled = false;
-				
-				if(btnSubmit.hasEventListener(TouchEvent.TOUCH))
-				{
-					
-					trace("btnSubmit disabled by function HandleResetTouch.");
-					btnSubmit.enabled = false;
-					btnSubmit.removeEventListener(TouchEvent.TOUCH, HandleSubmitTouch);
-					
-				}
-				
-				arrContactData = [];
+				ResetFormData();
 				
 			}
 			
+		}
+		
+		public function ResetFormData():void
+		{
+			titlePicker.selectedIndex = -1;
+			firstName.text = "";
+			surName.text = "";
+			rolePicker.selectedIndex = -1;
+			specialtyPicker.selectedIndex = -1;
+			institution.text = "";
+			email1.text = "";
+			email2.text = "";
+			insight1.isSelected = true;
+			insight2.isSelected = true;
+			insight3.isSelected = true;
+			insight4.isSelected = true;
+			btnSubmit.enabled = false;
+			
+			if(btnSubmit.hasEventListener(TouchEvent.TOUCH))
+			{
+				
+				trace("btnSubmit disabled by function HandleResetTouch.");
+				btnSubmit.enabled = false;
+				btnSubmit.removeEventListener(TouchEvent.TOUCH, HandleSubmitTouch);
+				
+			}
+			
+			arrContactData = [];
 		}
 		
 		private function ValidateName():Boolean
