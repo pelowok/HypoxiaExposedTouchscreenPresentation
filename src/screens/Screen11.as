@@ -262,7 +262,7 @@ package screens
 			
 			this.visible = true;
 			
-			togglePageButtons(-1);
+		//	togglePageButtons(-1);
 			
 			pagenav.visible = true;
 			DeselectPageNav();
@@ -273,10 +273,32 @@ package screens
 			basenav.visible = true;
 			basenav.selectedIndex = 1;
 			
-			btn1b.visible = false;
-			btn2b.visible = false;
+			with (btn1b)
+			{
+				visible = false;
+				alpha = 0;
+				width = 563;
+				height = 328;
+				x = 371;
+				y = 450;
+			};
 			
-			btnPlay.visible = false;
+			with (btn2b)
+			{
+				visible = false;
+				alpha = 0;
+				width = 563;
+				height = 328;
+				x = 954;
+				y = 450;
+			};
+			
+			with (btnPlay)
+			{
+				visible = false;
+			}
+			
+			
 		//	btnVideo.visible = false;
 			
 			btnNext.visible = true;
@@ -297,8 +319,8 @@ package screens
 			
 			logo.addEventListener(Event.TRIGGERED, onLogoTriggered);
 			
-			btn1b.addEventListener(Event.TRIGGERED, DeselectPageNav);
-			btn2b.addEventListener(Event.TRIGGERED, DeselectPageNav);
+		//	btn1b.addEventListener(Event.TRIGGERED, DeselectPageNav);
+		//	btn2b.addEventListener(Event.TRIGGERED, DeselectPageNav);
 			
 			basenav.addEventListener(Event.CHANGE, toggleBaseNav);
 			pagenav.addEventListener(Event.CHANGE, togglePageNav);
@@ -315,7 +337,7 @@ package screens
 		private function DeselectPageNav():void
 		{
 			pagenav.selectedIndex = -1;
-			togglePageButtons(-1);
+		//	togglePageButtons(-1);
 		}
 		
 		private function DeselectSideNav():void
@@ -327,29 +349,66 @@ package screens
 		{
 			
 			if(btnPlay.hasEventListener(Event.TRIGGERED))
-				{
-					
-					btnPlay.removeEventListener(Event.TRIGGERED, AddVideo1);
-					btnPlay.removeEventListener(Event.TRIGGERED, AddVideo2);
-					
-				}
+			{
+				
+				btnPlay.removeEventListener(Event.TRIGGERED, AddVideo1);
+				btnPlay.removeEventListener(Event.TRIGGERED, AddVideo2);
+				
+			}
+			
+			if (btn1b.visible)
+			{
+				
+				btn1b.addChild(btnPlay);
+				btnPlay.x = 576;
+				btnPlay.y = 67;
+				btn1b.removeEventListener(Event.TRIGGERED, DeselectPageNav);
+				TweenLite.to(btn1b, 0.5, { alpha:0, width:563, height:328, x:371, y:450, onComplete: function():void{ btn1b.visible = false; btnPlay.visible = false; ReturnPlayButton(); } } );
+				
+			}
+			
+			if (btn2b.visible)
+			{
+				btn2b.addChild(btnPlay);
+				btnPlay.x = 576;
+				btnPlay.y = 67;
+				btn2b.removeEventListener(Event.TRIGGERED, DeselectPageNav);
+				TweenLite.to(btn2b, 0.5, { alpha:0, width:563, height:328, x:954, y:450, onComplete: function():void{ btn2b.visible = false; btnPlay.visible = false; ReturnPlayButton(); } } );
+				
+			}
 				
 			switch (i)
 			{
 				case -1:
-					btn1b.visible = false;
-					btn2b.visible = false;
-					btnPlay.visible = false;
+				//	btn1b.visible = false;
+				//	btn2b.visible = false;
+				//	btnPlay.visible = false;
 					break;
 				case 0:
-					btn1b.visible = true;
+					
+					btn1b.addChild(btnPlay);
+					btnPlay.x = 576;
+					btnPlay.y = 67;
 					btnPlay.visible = true;
 					btnPlay.addEventListener(Event.TRIGGERED, AddVideo1);
+					
+					btn1b.alpha = 0;
+					btn1b.visible = true;
+					TweenLite.to(btn1b, 0.5, { alpha:1, scaleX:1, scaleY:1, x:304, y:200, onComplete: function():void{ btn1b.addEventListener(Event.TRIGGERED, DeselectPageNav); ReturnPlayButton(); } } );
+					
 					break;
 				case 1:
-					btn2b.visible = true;
+					
+					btn2b.addChild(btnPlay);
+					btnPlay.x = 576;
+					btnPlay.y = 67;
 					btnPlay.visible = true;
 					btnPlay.addEventListener(Event.TRIGGERED, AddVideo2);
+					
+					btn2b.alpha = 0;
+					btn2b.visible = true;
+					TweenLite.to(btn2b, 0.5, { alpha:1, scaleX:1, scaleY:1, x:304, y:200, onComplete: function():void{ btn2b.addEventListener(Event.TRIGGERED, DeselectPageNav); ReturnPlayButton(); } } );
+
 					break;
 				default:
 					trace("ERROR THROWN: tabs.selectedIndex passed to togglePageButtons was :" + i);
@@ -357,6 +416,13 @@ package screens
 				
 			}
 			
+		}
+		
+		private function ReturnPlayButton():void
+		{
+			this.addChild(btnPlay);
+			btnPlay.x = 880;
+			btnPlay.y = 267;
 		}
 		
 		private function toggleBaseNav(e:Event):void
@@ -389,7 +455,7 @@ package screens
 			trace( "  -->selectedIndex:", tabs.selectedIndex );
 			
 			// Close any open Page Navs
-			togglePageButtons(-1);
+		//	togglePageButtons(-1);
 			
 			// Open new Page Nav
 			togglePageButtons(tabs.selectedIndex);

@@ -253,6 +253,30 @@ package screens
 			pagenav.visible = true;
 			DeselectPageNav();
 			
+			with (btn1b)
+			{
+				visible = false;
+				alpha = 0;
+				width = 341;
+				height = 328;
+			//	x = 1440;
+			//	y = 340;
+				x = 1400;
+				y = 310;
+			};
+			
+			with (btn2b)
+			{
+				visible = false;
+				alpha = 0;
+				width = 341;
+				height = 328;
+			//	x = 1440;
+			//	y = 524;
+				x = 1400;
+				y = 584;
+			};
+			
 			sidenav.visible = true;
 			DeselectSideNav();
 			
@@ -278,8 +302,8 @@ package screens
 			
 			logo.addEventListener(Event.TRIGGERED, onLogoTriggered);
 			
-			btn1b.addEventListener(Event.TRIGGERED, DeselectPageNav);
-			btn2b.addEventListener(Event.TRIGGERED, DeselectPageNav);
+		//	btn1b.addEventListener(Event.TRIGGERED, DeselectPageNav);
+		//	btn2b.addEventListener(Event.TRIGGERED, DeselectPageNav);
 			
 			basenav.addEventListener(Event.CHANGE, toggleBaseNav);
 			pagenav.addEventListener(Event.CHANGE, togglePageNav);
@@ -296,7 +320,7 @@ package screens
 		private function DeselectPageNav():void
 		{
 			pagenav.selectedIndex = -1;
-			togglePageButtons(-1);
+		//	togglePageButtons(-1);
 		}
 		
 		private function DeselectSideNav():void
@@ -307,18 +331,38 @@ package screens
 		private function togglePageButtons(i:int):void
 		{
 			
+			if (btn1b.visible)
+			{
+				
+				btn1b.removeEventListener(Event.TRIGGERED, DeselectPageNav);
+				TweenLite.to(btn1b, 0.5, { alpha:0, width:341, height:328, x:1400, y:310, onComplete: function():void{ btn1b.visible = false; } } );
+				
+			}
+			
+			if (btn2b.visible)
+			{
+				
+				btn2b.removeEventListener(Event.TRIGGERED, DeselectPageNav);
+				TweenLite.to(btn2b, 0.5, { alpha:0, width:341, height:328, x:1400, y:584, onComplete: function():void{ btn2b.visible = false; } } );
+				
+			}
+			
 			switch (i)
 			{
 				case -1:
-					btn1b.visible = false;
-					btn2b.visible = false;
+				//	btn1b.visible = false;
+				//	btn2b.visible = false;
 					break;
 				case 0:
-					btn1b.visible = true;
+					btn1b.alpha = 0;
+					btn1b.visible = !btn1b.visible;
+					TweenLite.to(btn1b, 0.5, { alpha:1, scaleX:1, scaleY:1, x:1327, y:210, onComplete: function():void{ btn1b.addEventListener(Event.TRIGGERED, DeselectPageNav); } } );
 					break;
 				case 1:
-					btn2b.visible = true;
-					break;
+					btn2b.alpha = 0;
+					btn2b.visible = !btn2b.visible;
+					TweenLite.to(btn2b, 0.5, { alpha:1, scaleX:1, scaleY:1, x:1327, y:480, onComplete: function():void{ btn2b.addEventListener(Event.TRIGGERED, DeselectPageNav); } } );
+					break;;
 				default:
 					trace("ERROR THROWN: tabs.selectedIndex passed to togglePageButtons was :" + i);
 					break;
