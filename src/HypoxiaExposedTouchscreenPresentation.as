@@ -4,7 +4,7 @@ package
 
 	import mynameiszak.Game;
 	
-	import net.hires.debug.Stats;
+//	import net.hires.debug.Stats;
 	
 	import starling.core.Starling;
 	
@@ -13,7 +13,7 @@ package
 	public class HypoxiaExposedTouchscreenPresentation extends Sprite
 	{
 		
-		private var stats:Stats;
+//		private var stats:Stats;
 		public var myStarling:Starling;
 		
 		public function HypoxiaExposedTouchscreenPresentation()
@@ -26,8 +26,8 @@ package
 		private function LaunchMain():void
 		{
 			// Launch the Hi-Res stats class for performance tracking.
-			stats = new Stats();
-			this.addChild(stats);
+//			stats = new Stats();
+//			this.addChild(stats);
 			
 			// Instantiate and start the starling framework.
 			// The Game.as class will listen for starling to instantiate and ADD_TO_STAGE

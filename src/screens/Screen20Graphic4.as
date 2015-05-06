@@ -15,10 +15,10 @@ package screens
 		private var img2:Image;
 		private var img3:Image;
 		private var img4:Image;
-		private var img5:Image;
-		private var img6:Image;
-		private var img7:Image;
-		private var img8:Image;
+	//	private var img5:Image;
+	//	private var img6:Image;
+	//	private var img7:Image;
+	//	private var img8:Image;
 		
 		private var list:Vector.<Image>;
 		
@@ -51,12 +51,15 @@ package screens
 		{
 			
 			list.push(img1 = PlaceImage( img1, "Graphic40" ) );
+	// ##################################
+			// NOTE OUT OF ORDER TO GET LAYERS CORRECT
+			list.push(img4 = PlaceImage( img4, "Graphic43" ) );
 			
 			list.push(img2 = PlaceImage( img2, "Graphic41" ) );
 			
 			list.push(img3 = PlaceImage( img3, "Graphic42" ) );
 			
-			list.push(img4 = PlaceImage( img4, "Graphic43" ) );
+			
 			
 		//	list.push(img5 = PlaceImage( img5, "Graphic44" ) );
 			

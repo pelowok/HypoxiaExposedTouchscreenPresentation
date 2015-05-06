@@ -109,8 +109,8 @@ package screens
 			btn3b.addChild(graphic3);
 			
 			graphic4 = new Screen20Graphic4();
-			graphic4.x = 1088;
-			graphic4.y = 288;
+			graphic4.x = 375;
+			graphic4.y = 312;
 			btn4b.addChild(graphic4);
 			
 			btnRef1 = new Button(Assets.getTexture("Screen20BtnRef"),"",Assets.getTexture("Screen20BtnRef"));
@@ -450,43 +450,47 @@ package screens
 		private function ToggleRef1(e:Event):void
 		{
 			//	ref1.visible = true;
-				TweenLite.to(ref1, 0.7, {alpha: 1, y: 638, onComplete: AddRefListener1});	
+			hitscreen.y = 0;
+			TweenLite.to(ref1, 0.7, {alpha: 1, y: 548, onComplete: AddRefListener1});	
 		}
 		private function ToggleRef2(e:Event):void
 		{
 			//ref2.visible = true;
-			TweenLite.to(ref2, 0.7, {alpha: 1, y: 638, onComplete: AddRefListener2});	
+			hitscreen.y = 0;
+			TweenLite.to(ref2, 0.7, {alpha: 1, y: 670, onComplete: AddRefListener2});	
 		}
 		private function ToggleRef3(e:Event):void
 		{
 			//ref3.visible = true;
-			TweenLite.to(ref3, 0.7, {alpha: 1, y: 638, onComplete: AddRefListener3});	
+			hitscreen.y = 0;
+			TweenLite.to(ref3, 0.7, {alpha: 1, y: 618, onComplete: AddRefListener3});	
 		}
 		private function ToggleRef4(e:Event):void
 		{
 			//ref4.visible = true;
-			TweenLite.to(ref4, 0.7, {alpha: 1, y: 638, onComplete: AddRefListener4});	
+			hitscreen.y = 0;
+			TweenLite.to(ref4, 0.7, {alpha: 1, y: 678, onComplete: AddRefListener4});	
 		}
 		private function AddRefListener1():void
 		{
-			ref1.addEventListener(Event.TRIGGERED, HideRef);
+			hitscreen.addEventListener(Event.TRIGGERED, HideRef);
 			
 		}
 		private function AddRefListener2():void
 		{
-			ref2.addEventListener(Event.TRIGGERED, HideRef);
+			hitscreen.addEventListener(Event.TRIGGERED, HideRef);
 			
 		}
 		private function AddRefListener3():void
 		{
 			
-			ref3.addEventListener(Event.TRIGGERED, HideRef);
+			hitscreen.addEventListener(Event.TRIGGERED, HideRef);
 			
 		}
 		private function AddRefListener4():void
 		{
 			
-			ref4.addEventListener(Event.TRIGGERED, HideRef);
+			hitscreen.addEventListener(Event.TRIGGERED, HideRef);
 			
 		}
 		
@@ -624,12 +628,12 @@ package screens
 		private function HideRef(e:Event):void
 		{
 			
-			trace(e.target + " should be a button instance, is it?");
-			
-			var btn:Button = e.target as Button;
-			
-			btn.removeEventListener(Event.TRIGGERED, HideRef);
-			TweenLite.to(btn, 0.7, {alpha: 0, y: 1080, onComplete: DeselectSideNav});
+			hitscreen.removeEventListener(Event.TRIGGERED, HideRef);
+			hitscreen.y = 1080;
+			TweenLite.to(ref1, 0.7, {alpha: 0, y: 1080, onComplete: DeselectSideNav});
+			TweenLite.to(ref2, 0.7, {alpha: 0, y: 1080, onComplete: DeselectSideNav});
+			TweenLite.to(ref3, 0.7, {alpha: 0, y: 1080, onComplete: DeselectSideNav});
+			TweenLite.to(ref4, 0.7, {alpha: 0, y: 1080, onComplete: DeselectSideNav});
 
 		}
 		
