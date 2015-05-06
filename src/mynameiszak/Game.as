@@ -1,9 +1,9 @@
 package mynameiszak
 {
 	
+	import flash.desktop.NativeApplication;
 	import flash.display.Stage;
 	import flash.utils.getQualifiedClassName;
-	import flash.desktop.NativeApplication;
 	
 	import events.NavigationEvent;
 	import events.VideoCompleteEvent;
@@ -18,6 +18,7 @@ package mynameiszak
 	import screens.ScreenRegister;
 	
 	import starling.core.Starling;
+	import starling.display.Button;
 	import starling.display.Sprite;
 	import starling.events.Event;
 	import starling.events.Touch;
@@ -127,6 +128,9 @@ package mynameiszak
 			hitscreen.y = 0;
 			hitscreen.visible = false;
 			this.addChild(hitscreen);
+			
+			hitscreen.width = 1920;
+			hitscreen.height = 1080;
 			
 			overlay = Starling.current.nativeOverlay.stage;
 			

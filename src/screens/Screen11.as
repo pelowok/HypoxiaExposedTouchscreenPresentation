@@ -150,6 +150,9 @@ package screens
 			hitscreen.visible = false;
 			this.addChild(hitscreen);
 			
+			hitscreen.width = 1920;
+			hitscreen.height = 1080;
+			
 			// Ref object has to be on top of everything
 			ref = new UnstyledButton(Assets.getTexture("Screen11Ref"),"",Assets.getTexture("Screen11Ref"));
 			ref.x = 0;

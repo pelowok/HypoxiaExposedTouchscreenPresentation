@@ -117,6 +117,9 @@ package mynameiszak
 			
 			// add components to display list in order bottom to top
 			this.addChild(hitscreen);
+			hitscreen.width = 1920;
+			hitscreen.height = 1080;
+			
 			this.addChild(titlePicker);
 			this.addChild(firstName);
 			this.addChild(surName);

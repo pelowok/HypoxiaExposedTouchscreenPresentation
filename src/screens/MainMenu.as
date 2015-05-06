@@ -11,11 +11,6 @@ package screens
 	import starling.display.Button;
 	import starling.display.Sprite;
 	import starling.events.Event;
-	import feathers.controls.ToggleButton;
-	import starling.display.Image;
-	import starling.textures.Texture;
-	import starling.textures.TextureAtlas;
-	import starling.display.MovieClip;
 		
 	public class MainMenu extends Sprite
 	{
@@ -49,14 +44,16 @@ package screens
 			// position value should be the same
 			// in drawScreen() and initialize()
 			
-			btn1 = new Button(Assets.getTexture("MainButton01a"),"",Assets.getTexture("MainButton01b"));
+			btn1 = new Button(Assets.getTexture("MainButton01a"));
 			btn1.x = 460;
 			btn1.y = 280;
+			btn1.scaleWhenDown = 0.98;
 			this.addChild(btn1);
 			
-			btn2 = new Button(Assets.getTexture("MainButton02a"),"",Assets.getTexture("MainButton02b"));
+			btn2 = new Button(Assets.getTexture("MainButton02a"));
 			btn2.x = 1010;
 			btn2.y = 280;
+			btn2.scaleWhenDown = 0.98;
 			this.addChild(btn2);
 			
 			logo = new Button(Assets.getTexture("HypoxiaExposedLogo"),"",Assets.getTexture("HypoxiaExposedLogoGlow"));

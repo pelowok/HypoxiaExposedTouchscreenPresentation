@@ -1,8 +1,9 @@
 package
 {
-	import starling.textures.Texture;
-	import flash.utils.Dictionary;
 	import flash.display.Bitmap;
+	import flash.utils.Dictionary;
+	
+	import starling.textures.Texture;
 	import starling.textures.TextureAtlas;
 
 	public class Assets
@@ -18,7 +19,8 @@ package
 		[Embed(source="../assets/footerscreen/footer.png")]
 		public static const Footer:Class;
 		
-		[Embed(source="../assets/bg/hitscreen.png")]
+	//	[Embed(source="../assets/bg/hitscreen.png")]
+		[Embed(source="../assets/bg/_blank.png")]
 		public static const HitScreen:Class;
 		
 		// Home screen assets
@@ -38,20 +40,21 @@ package
 		[Embed(source="../assets/mainmenuscreen/button01.png")]
 		public static const MainButton01a:Class;
 		
-		[Embed(source="../assets/mainmenuscreen/button01tap.png")]
-		public static const MainButton01b:Class;
+	//	[Embed(source="../assets/mainmenuscreen/button01tap.png")]
+	//	public static const MainButton01b:Class;
 		
 		[Embed(source="../assets/mainmenuscreen/button02.png")]
 		public static const MainButton02a:Class;
 		
-		[Embed(source="../assets/mainmenuscreen/button02tap.png")]
-		public static const MainButton02b:Class;
+	//	[Embed(source="../assets/mainmenuscreen/button02tap.png")]
+	//	public static const MainButton02b:Class;
 		
 		// Assets for 1.0 Tumor Hypoxia
 		[Embed(source="../assets/1-0_tumor/1-0bg.png")]
 		public static const Screen10BG:Class;
 		
-		[Embed(source="../assets/1-0_tumor/1-0ref.png")]
+	//	[Embed(source="../assets/1-0_tumor/1-0ref.png")]
+		[Embed(source="../assets/1-0_tumor/screen10ref.png")]
 		public static const Screen10Ref:Class;
 		
 		[Embed(source="../assets/1-0_tumor/navPop1a.png")]
@@ -170,6 +173,77 @@ package
 		
 		[Embed(source="../assets/2-0_insights/btnSend.png")]
 		public static const Screen20BtnSend:Class;
+		
+		// Assets for 2-0 graphics
+		
+		[Embed(source="../assets/2-0_insights/graphic1-bg.png")]
+		public static const Graphic10:Class;
+		
+		[Embed(source="../assets/2-0_insights/graphic1-1.png")]
+		public static const Graphic11:Class;
+		
+		[Embed(source="../assets/2-0_insights/graphic1-2.png")]
+		public static const Graphic12:Class;
+		
+		[Embed(source="../assets/2-0_insights/graphic1-3.png")]
+		public static const Graphic13:Class;
+		
+		[Embed(source="../assets/2-0_insights/graphic1-4.png")]
+		public static const Graphic14:Class;
+		
+		[Embed(source="../assets/2-0_insights/graphic2-bg.png")]
+		public static const Graphic20:Class;
+		
+		[Embed(source="../assets/2-0_insights/graphic2-1.png")]
+		public static const Graphic21:Class;
+		
+		[Embed(source="../assets/2-0_insights/graphic2-2.png")]
+		public static const Graphic22:Class;
+		
+		[Embed(source="../assets/2-0_insights/graphic2-3.png")]
+		public static const Graphic23:Class;
+		
+		[Embed(source="../assets/2-0_insights/graphic2-4.png")]
+		public static const Graphic24:Class;
+		
+		[Embed(source="../assets/2-0_insights/graphic3-bg.png")]
+		public static const Graphic30:Class;
+		
+		[Embed(source="../assets/2-0_insights/graphic3-1.png")]
+		public static const Graphic31:Class;
+		
+		[Embed(source="../assets/2-0_insights/graphic3-2.png")]
+		public static const Graphic32:Class;
+		
+		[Embed(source="../assets/2-0_insights/graphic3-3.png")]
+		public static const Graphic33:Class;
+		
+		[Embed(source="../assets/2-0_insights/graphic3-4.png")]
+		public static const Graphic34:Class;
+		
+		[Embed(source="../assets/2-0_insights/graphic5-bg.png")]
+		public static const Graphic40:Class;
+		
+		[Embed(source="../assets/2-0_insights/graphic5-1.png")]
+		public static const Graphic41:Class;
+		
+		[Embed(source="../assets/2-0_insights/graphic5-2.png")]
+		public static const Graphic42:Class;
+		
+		[Embed(source="../assets/2-0_insights/graphic5-3.png")]
+		public static const Graphic43:Class;
+		
+	//	[Embed(source="../assets/2-0_insights/graphic4-5.png")]
+	//	public static const Graphic44:Class;
+		
+	//	[Embed(source="../assets/2-0_insights/graphic4-6.png")]
+	//	public static const Graphic45:Class;
+		
+	//	[Embed(source="../assets/2-0_insights/graphic4-7.png")]
+	//	public static const Graphic46:Class;
+		
+	//	[Embed(source="../assets/2-0_insights/graphic4-8.png")]
+	//	public static const Graphic47:Class;
 		
 		// Assets for form
 		[Embed(source="../assets/form/formBG1.png")]

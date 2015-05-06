@@ -2,8 +2,6 @@ package screens
 {
 	import com.greensock.TweenLite;
 	
-	import flash.display.MovieClip;
-	
 	import events.NavigationEvent;
 	
 	import feathers.controls.TabBar;

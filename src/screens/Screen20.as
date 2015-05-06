@@ -5,7 +5,6 @@ package screens
 	import events.NavigationEvent;
 	
 	import feathers.controls.TabBar;
-	import feathers.controls.ToggleButton;
 	import feathers.data.ListCollection;
 	
 	import starling.display.Button;
@@ -24,10 +23,10 @@ package screens
 		private var btn3b:Button;
 		private var btn4b:Button;
 		
-		private var ref1:Button;
-		private var ref2:Button;
-		private var ref3:Button;
-		private var ref4:Button;
+		private var ref1:Image;
+		private var ref2:Image;
+		private var ref3:Image;
+		private var ref4:Image;
 		
 		private var btnSend1:Button;
 		private var btnSend2:Button;
@@ -44,6 +43,13 @@ package screens
 		
 		private var pagenav:TabBar;
 		private var sidenav:TabBar;
+		
+		private var graphic1:Screen20Graphic1;
+		private var graphic2:Screen20Graphic2;
+		private var graphic3:Screen20Graphic3;
+		private var graphic4:Screen20Graphic4;
+		
+		private var hitscreen:Button;
 		
 		public function Screen20()
 		{
@@ -76,74 +82,82 @@ package screens
 			this.addChild(AddPageNav());
 			
 			btn1b = new Button(Assets.getTexture("Screen20Nav1b"),"",Assets.getTexture("Screen20Nav1b"));
-			btn1b.x = 0;
-			btn1b.y = 0;
-			btn1b.visible = false;
 			this.addChild(btn1b);
 			
 			btn2b = new Button(Assets.getTexture("Screen20Nav2b"),"",Assets.getTexture("Screen20Nav2b"));
-			btn2b.x = 0;
-			btn2b.y = 0;
-			btn2b.visible = false;
 			this.addChild(btn2b);
 			
 			btn3b = new Button(Assets.getTexture("Screen20Nav3b"),"",Assets.getTexture("Screen20Nav3b"));
-			btn3b.x = 0;
-			btn3b.y = 0;
-			btn3b.visible = false;
 			this.addChild(btn3b);
 			
 			btn4b = new Button(Assets.getTexture("Screen20Nav4b"),"",Assets.getTexture("Screen20Nav4b"));
-			btn4b.x = 0;
-			btn4b.y = 0;
-			btn4b.visible = false;
 			this.addChild(btn4b);
 			
+			graphic1 = new Screen20Graphic1();
+			graphic1.x = 1101;
+			graphic1.y = 252;
+			btn1b.addChild(graphic1);
+			
+			graphic2 = new Screen20Graphic2();
+			graphic2.x = 1088;
+			graphic2.y = 288;
+			btn2b.addChild(graphic2);
+			
+			graphic3 = new Screen20Graphic3();
+			graphic3.x = 1110;
+			graphic3.y = 280;
+			btn3b.addChild(graphic3);
+			
+			graphic4 = new Screen20Graphic4();
+			graphic4.x = 1088;
+			graphic4.y = 288;
+			btn4b.addChild(graphic4);
+			
 			btnRef1 = new Button(Assets.getTexture("Screen20BtnRef"),"",Assets.getTexture("Screen20BtnRef"));
-			btnRef1.x = 400;
-			btnRef1.y = 850;
+			btnRef1.x = 639;
+			btnRef1.y = 856;
 			btnRef1.visible = false;
 			this.addChild(btnRef1);
 			
 			btnRef2 = new Button(Assets.getTexture("Screen20BtnRef"),"",Assets.getTexture("Screen20BtnRef"));
-			btnRef2.x = 400;
-			btnRef2.y = 850;
+			btnRef2.x = 639;
+			btnRef2.y = 828;
 			btnRef2.visible = false;
 			this.addChild(btnRef2);
 			
 			btnRef3 = new Button(Assets.getTexture("Screen20BtnRef"),"",Assets.getTexture("Screen20BtnRef"));
-			btnRef3.x = 400;
-			btnRef3.y = 850;
+			btnRef3.x = 639;
+			btnRef3.y = 818;
 			btnRef3.visible = false;
 			this.addChild(btnRef3);
 			
 			btnRef4 = new Button(Assets.getTexture("Screen20BtnRef"),"",Assets.getTexture("Screen20BtnRef"));
-			btnRef4.x = 400;
-			btnRef4.y = 850;
+			btnRef4.x = 639;
+			btnRef4.y = 872;
 			btnRef4.visible = false;
 			this.addChild(btnRef4);
 			
 			btnSend1 = new Button(Assets.getTexture("Screen20BtnSend"),"",Assets.getTexture("Screen20BtnSend"));
-			btnSend1.x = 700;
-			btnSend1.y = 850;
+			btnSend1.x = 370;
+			btnSend1.y = 856;
 			btnSend1.visible = false;
 			this.addChild(btnSend1);
 			
 			btnSend2 = new Button(Assets.getTexture("Screen20BtnSend"),"",Assets.getTexture("Screen20BtnSend"));
-			btnSend2.x = 700;
-			btnSend2.y = 850;
+			btnSend2.x = 370;
+			btnSend2.y = 828;
 			btnSend2.visible = false;
 			this.addChild(btnSend2);
 			
 			btnSend3 = new Button(Assets.getTexture("Screen20BtnSend"),"",Assets.getTexture("Screen20BtnSend"));
-			btnSend3.x = 700;
-			btnSend3.y = 850;
+			btnSend3.x = 370;
+			btnSend3.y = 818;
 			btnSend3.visible = false;
 			this.addChild(btnSend3);
 			
 			btnSend4 = new Button(Assets.getTexture("Screen20BtnSend"),"",Assets.getTexture("Screen20BtnSend"));
-			btnSend4.x = 700;
-			btnSend4.y = 850;
+			btnSend4.x = 370;
+			btnSend4.y = 872;
 			btnSend4.visible = false;
 			this.addChild(btnSend4);
 			
@@ -162,29 +176,36 @@ package screens
 			this.addChild(AddSideNav());
 			
 			// Ref object has to be on top of everything
-			ref1 = new Button(Assets.getTexture("Screen20Ref1"),"",Assets.getTexture("Screen20Ref1"));
+			ref1 = new Image(Assets.getTexture("Screen20Ref1"));
 			ref1.x = 5;
 			ref1.y = 1080;
-			ref1.visible = false;
+		//	ref1.visible = false;
 			this.addChild(ref1);
 			
-			ref2 = new Button(Assets.getTexture("Screen20Ref2"),"",Assets.getTexture("Screen20Ref2"));
+			ref2 = new Image(Assets.getTexture("Screen20Ref2"));
 			ref2.x = 5;
 			ref2.y = 1080;
-			ref2.visible = false;
+		//	ref2.visible = false;
 			this.addChild(ref2);
 			
-			ref3 = new Button(Assets.getTexture("Screen20Ref3"),"",Assets.getTexture("Screen20Ref3"));
+			ref3 = new Image(Assets.getTexture("Screen20Ref3"));
 			ref3.x = 5;
 			ref3.y = 1080;
-			ref3.visible = false;
+		//	ref3.visible = false;
 			this.addChild(ref3);
 			
-			ref4 = new Button(Assets.getTexture("Screen20Ref4"),"",Assets.getTexture("Screen20Ref4"));
+			ref4 = new Image(Assets.getTexture("Screen20Ref4"));
 			ref4.x = 5;
 			ref4.y = 1080;
-			ref4.visible = false;
+		//	ref4.visible = false;
 			this.addChild(ref4);
+			
+			hitscreen = new Button(Assets.getTexture("HitScreen"),"",Assets.getTexture("HitScreen"));
+			hitscreen.y = 1080;
+			this.addChild(hitscreen);
+			
+			hitscreen.width = 1920;
+			hitscreen.height = 1080;
 			
 		//	AddOverlay();
 			
@@ -254,6 +275,92 @@ package screens
 			
 		}
 		
+		private function SetUpBtn1b():void	
+		{
+			
+			if(btn1b.hasEventListener(Event.ADDED_TO_STAGE) )
+			{
+				
+				btn1b.removeEventListener(Event.ADDED_TO_STAGE, SetUpBtn1b);
+
+			}
+			
+			with(btn1b)
+			{
+				visible = false;
+				alpha = 0;
+				width = 340;
+				height = 352;
+				x = 176;
+				y = 507;
+			};
+			
+			graphic1.StartingPositions();
+
+		}
+
+		private function SetUpBtn2b():void	
+		{
+			if(btn2b.hasEventListener(Event.ADDED_TO_STAGE) )
+			{
+				btn2b.removeEventListener(Event.ADDED_TO_STAGE, SetUpBtn2b);
+			}
+			
+			with(btn2b)
+			{
+				visible = false;
+				alpha = 0;
+				width = 340;
+				height = 352;
+				x = 585;
+				y = 507;
+			};
+			
+			graphic2.StartingPositions();
+			
+		}
+		
+		private function SetUpBtn3b():void	
+		{
+			if(btn3b.hasEventListener(Event.ADDED_TO_STAGE) )
+			{
+				btn3b.removeEventListener(Event.ADDED_TO_STAGE, SetUpBtn3b);
+			}
+			
+			with(btn3b)
+			{
+				visible = false;
+				alpha = 0;
+				width = 563;
+				height = 328;
+				x = 371;
+				y = 450;
+			};
+			
+			graphic3.StartingPositions();
+			
+		}
+		
+		private function SetUpBtn4b():void	
+		{
+			if(btn4b.hasEventListener(Event.ADDED_TO_STAGE) )
+			{
+				btn4b.removeEventListener(Event.ADDED_TO_STAGE, SetUpBtn4b);
+			}
+			
+			with(btn4b)
+			{
+				visible = false;
+				alpha = 0;
+				width = 563;
+				height = 328;
+				x = 371;
+				y = 450;
+			};
+			
+			graphic4.StartingPositions();
+		}
+		
 		public function initialize():void{
 			
 			// Call this function each time a Screen is made active.
@@ -274,26 +381,33 @@ package screens
 
 			footer.visible = true;
 			
+			SetUpBtn1b();
+			SetUpBtn2b();
+			SetUpBtn3b();
+			SetUpBtn4b();
+			
+			trace("btn1b.x : " + btn1b.x);
+			
 			// ref can move so reset it's alpha and position
 			ref1.alpha = 0;
-			ref1.x = 0;
+			ref1.x = 5;
 			ref1.y = 1080;
-			ref1.visible = false;
+		//	ref1.visible = false;
 			
 			ref2.alpha = 0;
-			ref2.x = 0;
+			ref2.x = 5;
 			ref2.y = 1080;
-			ref2.visible = false;
+		//	ref2.visible = false;
 			
 			ref3.alpha = 0;
-			ref3.x = 0;
+			ref3.x = 5;
 			ref3.y = 1080;
-			ref3.visible = false;
+		//	ref3.visible = false;
 			
 			ref4.alpha = 0;
-			ref4.x = 0;
+			ref4.x = 5;
 			ref4.y = 1080;
-			ref4.visible = false;
+		//	ref4.visible = false;
 			
 			btnRef1.visible = false;
 			btnRef2.visible = false;
@@ -335,23 +449,23 @@ package screens
 		
 		private function ToggleRef1(e:Event):void
 		{
-				ref1.visible = true;
-				TweenLite.to(ref1, 0.7, {alpha: 1, y: 0, onComplete: AddRefListener1});	
+			//	ref1.visible = true;
+				TweenLite.to(ref1, 0.7, {alpha: 1, y: 638, onComplete: AddRefListener1});	
 		}
 		private function ToggleRef2(e:Event):void
 		{
-			ref2.visible = true;
-			TweenLite.to(ref2, 0.7, {alpha: 1, y: 0, onComplete: AddRefListener2});	
+			//ref2.visible = true;
+			TweenLite.to(ref2, 0.7, {alpha: 1, y: 638, onComplete: AddRefListener2});	
 		}
 		private function ToggleRef3(e:Event):void
 		{
-			ref3.visible = true;
-			TweenLite.to(ref3, 0.7, {alpha: 1, y: 0, onComplete: AddRefListener3});	
+			//ref3.visible = true;
+			TweenLite.to(ref3, 0.7, {alpha: 1, y: 638, onComplete: AddRefListener3});	
 		}
 		private function ToggleRef4(e:Event):void
 		{
-			ref4.visible = true;
-			TweenLite.to(ref4, 0.7, {alpha: 1, y: 0, onComplete: AddRefListener4});	
+			//ref4.visible = true;
+			TweenLite.to(ref4, 0.7, {alpha: 1, y: 638, onComplete: AddRefListener4});	
 		}
 		private function AddRefListener1():void
 		{
@@ -408,25 +522,26 @@ package screens
 			if (btn1b.visible)
 			{
 				btn1b.removeEventListener(Event.TRIGGERED, DeselectPageNav);
-				TweenLite.to(btn1b, 0.5, { alpha:0, width:563, height:328, x:371, y:450, onComplete: function():void{ btn1b.visible = false; } } );	
+				TweenLite.to(btn1b, 0.5, { alpha:0, width:340, height:352, x:176, y:507, onComplete: function():void{ btn1b.visible = false; graphic1.juggler.purge(); graphic1.StartingPositions(); } } );	
+				
 			}
 			
 			if (btn2b.visible)
 			{
 				btn2b.removeEventListener(Event.TRIGGERED, DeselectPageNav);
-				TweenLite.to(btn2b, 0.5, { alpha:0, width:563, height:328, x:371, y:450, onComplete: function():void{ btn2b.visible = false; } } );	
+				TweenLite.to(btn2b, 0.5, { alpha:0, width:340, height:352, x:585, y:507, onComplete: function():void{ btn2b.visible = false; graphic2.juggler.purge(); graphic2.StartingPositions(); } } );	
 			}
 			
 			if (btn3b.visible)
 			{
 				btn3b.removeEventListener(Event.TRIGGERED, DeselectPageNav);
-				TweenLite.to(btn3b, 0.5, { alpha:0, width:563, height:328, x:371, y:450, onComplete: function():void{ btn3b.visible = false; } } );	
+				TweenLite.to(btn3b, 0.5, { alpha:0, width:340, height:352, x:994, y:507, onComplete: function():void{ btn3b.visible = false; graphic3.juggler.purge(); graphic3.StartingPositions();  } } );	
 			}
 			
 			if (btn4b.visible)
 			{
 				btn4b.removeEventListener(Event.TRIGGERED, DeselectPageNav);
-				TweenLite.to(btn4b, 0.5, { alpha:0, width:563, height:328, x:371, y:450, onComplete: function():void{ btn4b.visible = false; } } );	
+				TweenLite.to(btn4b, 0.5, { alpha:0, width:340, height:352, x:1403, y:507, onComplete: function():void{ btn4b.visible = false; graphic4.juggler.purge(); graphic4.StartingPositions();  } } );	
 			}
 			
 			
@@ -438,25 +553,27 @@ package screens
 				//	btn3b.visible = false;
 				//	btn4b.visible = false;
 					break;
-				case 0:
+				case 0:		
 					btn1b.alpha = 0;
 					btn1b.visible = true;
-					TweenLite.to(btn1b, 0.5, { alpha:1, scaleX:1, scaleY:1, x:304, y:200, onComplete: function():void{ btn1b.addEventListener(Event.TRIGGERED, DeselectPageNav); btnRef1.visible = true; btnSend1.visible = true; } } );
+				//	TweenLite.to(btn1b, 0.5, { alpha:1, width:1920, height:1080, x:0, y:0, onComplete: function():void{ btnRef1.visible = true; btnSend1.visible = true; btn1b.addEventListener(Event.TRIGGERED, DeselectPageNav); } } ); // graphic1.Play(); } } );
+					TweenLite.to(btn1b, 0.5, { alpha:1, width:1920, height:1080, x:0, y:0, onComplete: function():void{ btnRef1.visible = true; btnSend1.visible = true; btn1b.addEventListener(Event.TRIGGERED, DeselectPageNav); graphic1.Play(); } } );
 					break;
 				case 1:
 					btn2b.alpha = 0;
 					btn2b.visible = true;
-					TweenLite.to(btn2b, 0.5, { alpha:1, scaleX:1, scaleY:1, x:304, y:200, onComplete: function():void{ btn2b.addEventListener(Event.TRIGGERED, DeselectPageNav); btnRef2.visible = true; btnSend2.visible = true; } } );
+				//	TweenLite.to(btn2b, 0.5, { alpha:1, scaleX:1, scaleY:1, x:0, y:0, onComplete: function():void{ btn2b.addEventListener(Event.TRIGGERED, DeselectPageNav); btnRef2.visible = true; btnSend2.visible = true; } } );
+					TweenLite.to(btn2b, 0.5, { alpha:1, width:1920, height:1080, x:0, y:0, onComplete: function():void{ btnRef2.visible = true; btnSend2.visible = true; btn2b.addEventListener(Event.TRIGGERED, DeselectPageNav); graphic2.Play(); } } );
 					break;
 				case 2:
 					btn3b.alpha = 0;
 					btn3b.visible = true;
-					TweenLite.to(btn3b, 0.5, { alpha:1, scaleX:1, scaleY:1, x:304, y:200, onComplete: function():void{ btn3b.addEventListener(Event.TRIGGERED, DeselectPageNav); btnRef3.visible = true; btnSend3.visible = true; } } );
+					TweenLite.to(btn3b, 0.5, { alpha:1, width:1920, height:1080, x:0, y:0, onComplete: function():void{ btnRef3.visible = true; btnSend3.visible = true; btn3b.addEventListener(Event.TRIGGERED, DeselectPageNav); graphic3.Play(); } } );
 					break;
 				case 3:
 					btn4b.alpha = 0;
 					btn4b.visible = true;
-					TweenLite.to(btn4b, 0.5, { alpha:1, scaleX:1, scaleY:1, x:304, y:200, onComplete: function():void{ btn4b.addEventListener(Event.TRIGGERED, DeselectPageNav); btnRef4.visible = true; btnSend4.visible = true; } } );
+					TweenLite.to(btn4b, 0.5, { alpha:1, width:1920, height:1080, x:0, y:0, onComplete: function():void{ btnRef4.visible = true; btnSend4.visible = true; btn4b.addEventListener(Event.TRIGGERED, DeselectPageNav); graphic4.Play(); } } );
 					break;
 				default:
 					trace("ERROR THROWN: tabs.selectedIndex passed to togglePageButtons was :" + i);

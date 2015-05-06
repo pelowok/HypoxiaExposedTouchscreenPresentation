@@ -24,13 +24,15 @@ package screens
 		
 		private var btnNext:Button;
 
-		private var ref:Button;
+		private var ref:Image;
 		private var footer:Image;
 		private var logo:Button;
 		
 		private var basenav:TabBar;
 		private var pagenav:TabBar;
 		private var sidenav:TabBar;
+		
+		private var hitscreen:Button;
 		
 		public function Screen10()
 		{
@@ -104,11 +106,19 @@ package screens
 			this.addChild(AddSideNav());
 			
 			// Ref object has to be on top of everything
-			ref = new Button(Assets.getTexture("Screen10Ref"),"",Assets.getTexture("Screen10Ref"));
+			ref = new Image(Assets.getTexture("Screen10Ref") );
 			ref.x = 5;
 			ref.y = 1080;
-			ref.visible = false;
 			this.addChild(ref);
+			
+			hitscreen = new Button(Assets.getTexture("HitScreen"),"",Assets.getTexture("HitScreen"));
+			hitscreen.y = 1080;
+			this.addChild(hitscreen);
+			
+			hitscreen.width = 1920;
+			hitscreen.height = 1080;
+			
+						
 		
 		//	AddOverlay();
 			
@@ -266,9 +276,9 @@ package screens
 			
 			// ref can move so reset it's alpha and position
 			ref.alpha = 0;
-			ref.x = 0;
-			ref.y = 1040;
-			ref.visible = false;
+			ref.x = 5;
+			ref.y = 1080;
+		//	ref.visible = false;
 				
 			// Start listening to events
 		//	this.addEventListener(Event.ENTER_FRAME, screenAnimation);
@@ -413,8 +423,10 @@ package screens
 				break;
 				case 1:
 					
-					ref.visible = true;
-					TweenLite.to(ref, 0.7, {alpha: 1, y: 0, onComplete: AddRefListener});
+				//	ref.visible = true;
+				//	TweenLite.to(ref, 0.7, {alpha: 1, y: 0, onComplete: AddRefListener});
+					hitscreen.y = 0;
+					TweenLite.to(ref, 0.7, {alpha: 1, y: 638, onComplete: AddRefListener});
 
 				break;
 				case 2:
@@ -430,13 +442,15 @@ package screens
 		}
 		
 		private function AddRefListener():void{
-			ref.addEventListener(Event.TRIGGERED, HideRef);
+			hitscreen.addEventListener(Event.TRIGGERED, HideRef);
 		}
 		
 		private function HideRef(e:Event):void
 		{
 			
-			ref.removeEventListener(Event.TRIGGERED, HideRef);
+			hitscreen.removeEventListener(Event.TRIGGERED, HideRef);
+			hitscreen.y = 1080;
+			
 			TweenLite.to(ref, 0.7, {alpha: 0, y: 1080, onComplete: DeselectSideNav});
 
 		}
@@ -488,6 +502,11 @@ package screens
 				
 				logo.removeEventListener(Event.TRIGGERED, onLogoTriggered);
 				
+			}
+			
+			if(hitscreen.hasEventListener(Event.TRIGGERED))
+			{
+				hitscreen.removeEventListener(Event.TRIGGERED, HideRef);
 			}
 		}
 	}

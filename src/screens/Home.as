@@ -8,7 +8,6 @@ package screens
 	import starling.display.Button;
 	import starling.display.Sprite;
 	import starling.events.Event;
-	import starling.filters.BlurFilter;
 	
 	public class Home extends Sprite
 	{
@@ -58,6 +57,9 @@ package screens
 			
 			hitscreen = new Button(Assets.getTexture("HitScreen"));
 			this.addChild(hitscreen);
+			
+			hitscreen.width = 1920;
+			hitscreen.height = 1080;
 			
 			// This class extends starling.Sprite, and is the parent to 
 			//    title2 starling.Button class instance. Button TRIGGERED events
