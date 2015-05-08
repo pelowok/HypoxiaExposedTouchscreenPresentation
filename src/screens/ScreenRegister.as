@@ -141,8 +141,8 @@ package screens
 					},
 				]);
 			
-			sidenav.x = 1800;
-			sidenav.y = 10;
+			sidenav.x = 1733;
+			sidenav.y = 50;
 			sidenav.gap = 2;
 			
 			return(sidenav);

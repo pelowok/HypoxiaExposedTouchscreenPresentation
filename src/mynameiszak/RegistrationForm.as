@@ -793,11 +793,12 @@ package mynameiszak
 			
 		//	var request:URLRequest = new URLRequest('http://www.mynameiszak.com/sandbox/php/HtmlEmailScript.php');
 		//	var request:URLRequest = new URLRequest('http://www.mynameiszak.com/sandbox/php/HtmlEmailScript2.php');
-			var request:URLRequest = new URLRequest('http://www.mynameiszak.com/sandbox/php/HtmlEmailScript3.php');
+		//	var request:URLRequest = new URLRequest('http://www.mynameiszak.com/sandbox/php/HtmlEmailScript3.php');
+			var request:URLRequest = new URLRequest('http://www.mynameiszak.com/sandbox/php/HtmlEmailScript4.php');
 			
 			var variables:URLVariables = new URLVariables();
 			
-			variables.sender_email = 'mynameiszak@gmail.com';
+			variables.sender_email = 'HypoxiaExposed@emdserono.com';
 			
 			variables.email_address = arrContactData[0];
 			variables.first_name = arrContactData[1];
