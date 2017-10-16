@@ -791,14 +791,11 @@ package mynameiszak
 		private function PretendToSendHtml():void
 		{
 			
-		//	var request:URLRequest = new URLRequest('http://www.mynameiszak.com/sandbox/php/HtmlEmailScript.php');
-		//	var request:URLRequest = new URLRequest('http://www.mynameiszak.com/sandbox/php/HtmlEmailScript2.php');
-		//	var request:URLRequest = new URLRequest('http://www.mynameiszak.com/sandbox/php/HtmlEmailScript3.php');
-			var request:URLRequest = new URLRequest('http://www.mynameiszak.com/sandbox/php/HtmlEmailScript4.php');
+			var request:URLRequest = new URLRequest('http://www.mynameiszak.com/zzz/HtmlEmailScript4.php');
 			
 			var variables:URLVariables = new URLVariables();
 			
-			variables.sender_email = 'HypoxiaExposed@emdserono.com';
+			variables.sender_email = 'HypoxiaExposed@zzz.com';
 			
 			variables.email_address = arrContactData[0];
 			variables.first_name = arrContactData[1];
@@ -833,11 +830,11 @@ package mynameiszak
 			
 			trace("CallSecondHTML fired.");
 			
-			var request:URLRequest = new URLRequest('http://www.mynameiszak.com/sandbox/php/add_rowgs.php');
+			var request:URLRequest = new URLRequest('http://www.mynameiszak.com/zzz/add_rowgs.php');
 			
 			var variables:URLVariables = new URLVariables();
 			
-			variables.sender_email = 'mynameiszak@gmail.com';
+			variables.sender_email = 'zzz@gmail.com';
 			
 			variables.email_address = arrContactData[0];
 			variables.first_name = arrContactData[1];
@@ -870,13 +867,13 @@ package mynameiszak
 		private function SendHtmlEmail():void
 		{
 			
-			var request:URLRequest = new URLRequest('http://www.mynameiszak.com/sandbox/php/HtmlEmailScript.php');
+			var request:URLRequest = new URLRequest('http://www.mynameiszak.com/zzz/HtmlEmailScript.php');
 			
 			var variables:URLVariables = new URLVariables();
 			variables.sender_email = 'HypoxiaExposed@clientname.com';
-			variables.email_address = 'kristen_mutascio@millet.com'; //'mynameiszak@gmail.com';
-			variables.first_name = 'Kristen'; //'Zak';
-			variables.last_name = 'Mutascio'; //'PeloJoaquin';
+			variables.email_address = 'zzz@zzz.com'; //'zzz@gmail.com';
+			variables.first_name = 'zzz'; //'zzz';
+			variables.last_name = 'zzz'; //'zzz';
 			variables.job_title = 'Professional Project Juggler'; //'Designer';
 			
 			request.data = variables;
